@@ -1,5 +1,13 @@
 package projlab.skeleton;
 
-public class Field {
+import java.util.ArrayList;
 
+public class Field {
+	
+	private ArrayList<Entity> entities;
+	private ArrayList<Field> neighbors;
+	
+	
+	
+	
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Asteroid extends Field {
 	
-	private ArrayList<Entity> entities;
+	
 	private Resource resource;
 	
 	
