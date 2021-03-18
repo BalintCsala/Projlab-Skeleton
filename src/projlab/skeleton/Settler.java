@@ -1,12 +1,12 @@
 package projlab.skeleton;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class Settler {
+public class Settler extends Entity {
 
 	
-	private List<Resource> inventory;
-	private List<TeleportGate> teleports;
+	private ArrayList<Resource> inventory;
+	private ArrayList<TeleportGate> teleports;
 	private BillOfResources robotBill;
 	private BillOfResources teleportBill;
 	

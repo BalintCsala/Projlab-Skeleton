@@ -2,7 +2,7 @@ package projlab.skeleton;
 
 
 
-public class Robot {
+public class Robot extends Entity {
 
 	
 	
