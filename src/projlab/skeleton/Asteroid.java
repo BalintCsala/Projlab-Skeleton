@@ -53,12 +53,30 @@ public class Asteroid extends Field {
    }
    public void digLayer() {  //if 
 	   FunctionPrinter.enter("Asteroid", "diglayer");
-	    resource.reaction();
+	   FunctionPrinter.msg("Napközelben vagyunk és a réteg 0?(I/N)");
+	   String choice = System.console().readLine();
+	   
+	   switch(choice) 
+       { 
+           case "I": 
+        	   resource.reaction(this);
+               break; 
+           case "N": 
+        	   
+               break; 
+           default: 
+               System.out.println("no match"); 
+       } 
+	    
 	   
    }
-   public boolean checkEnoughResources(BillOfResources winBill) {
+   public boolean checkEnoughResources(BillOfResources winBill) {   //milegyen telepes és robot megkülönböztetés
 	   FunctionPrinter.enter("Asteroid", "checkEnoughResources");
 	   
 	   //return
+   }
+   public void setResource(Resource res) {  // ezt sem írom ki
+	   resource= res;
+	   
    }
 }

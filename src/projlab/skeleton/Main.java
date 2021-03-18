@@ -11,6 +11,7 @@ public class Main {
         FunctionPrinter.enter("Main", "testFunc");
         FunctionPrinter.msg("Uzenet a fuggvenyen belul");
         FunctionPrinter.exit();
+        
     }
 
 }
