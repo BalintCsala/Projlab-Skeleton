@@ -5,7 +5,5 @@ public class Plutonium extends Radioactive {
 	
 	
 	
-	public void reaction() {
-		
-	}
+	
 }

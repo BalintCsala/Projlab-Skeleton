@@ -4,8 +4,8 @@ public class Resource {
 
 	
 	
-	public void reaction() {
-		
+	public void reaction(Asteroid a) {
+		// nem kell ide semmi
 		
 	}
 }
