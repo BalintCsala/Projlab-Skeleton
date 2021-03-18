@@ -1,6 +1,6 @@
 package projlab.skeleton;
 
-public class TeleportGate {
+public class TeleportGate extends Field {
 
 	
 	private TeleportGate pair;
