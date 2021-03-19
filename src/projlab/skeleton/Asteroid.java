@@ -1,6 +1,7 @@
 package projlab.skeleton;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Asteroid extends Field {
 	
@@ -12,8 +13,9 @@ public class Asteroid extends Field {
    public void solarFlare() {
 	   FunctionPrinter.enter("Asteroid", "solarFlare");
 	   FunctionPrinter.msg("El lehet rajtam bújni?(I/N)");
-	   String choice = System.console().readLine();
-	   
+	   Scanner scan = new Scanner(System.in);
+	   String choice= scan.nextLine();
+	   scan.close();
 	   switch(choice) 
        { 
            case "I": 
@@ -70,11 +72,11 @@ public class Asteroid extends Field {
 	    
 	   
    }
-   public boolean checkEnoughResources(BillOfResources winBill) {   //milegyen telepes és robot megkülönböztetés
+  /* public boolean checkEnoughResources(BillOfResources winBill) {   //milegyen telepes és robot megkülönböztetés
 	   FunctionPrinter.enter("Asteroid", "checkEnoughResources");
 	   
 	   //return
-   }
+   }*/
    public void setResource(Resource res) {  // ezt sem írom ki
 	   resource= res;
 	   

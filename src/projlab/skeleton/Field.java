@@ -7,6 +7,11 @@ public class Field {
 	protected ArrayList<Entity> entities;
 	protected ArrayList<Field> neighbors;
 	
+	public Field() {
+		entities = new ArrayList<Entity>();
+		neighbors = new ArrayList<Field>();
+	}
+	
 	public void addNeighbor(Field f) {
 		 FunctionPrinter.enter("Field", "addNeighbor");
 		 neighbors.add(f);
