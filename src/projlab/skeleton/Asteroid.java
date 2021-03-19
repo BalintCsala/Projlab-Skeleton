@@ -31,6 +31,7 @@ public class Asteroid extends Field {
                System.out.println("no match"); 
        } 
 	   //kiir kerdes konzolra switch case  if(resource != null)
+	   FunctionPrinter.exit();
 	   
    }
    public void explode() {
@@ -46,11 +47,13 @@ public class Asteroid extends Field {
 		   neighbors.get(i).explodeReaction();
 		   
 	   }
+	   FunctionPrinter.exit();
    }
    public Resource mineResource() {
 	   FunctionPrinter.enter("Asteroid", "mineResource");
 	   Resource res = resource;
 	   resource = null;
+	   FunctionPrinter.exit();
 	   return res;
    }
    public void digLayer() {  //if 
@@ -67,16 +70,23 @@ public class Asteroid extends Field {
         	   
                break; 
            default: 
-               System.out.println("no match"); 
+               System.out.println("no match"); //repeatelni kellene?
        } 
 	    
+	   FunctionPrinter.exit();
+   }
+   public boolean checkEnoughResources(BillOfResources winBill) {   //milegyen telepes és robot megkülönböztetés
+	   FunctionPrinter.enter("Asteroid", "checkEnoughResources");
+	   ArrayList<Resource> collectedResources = new ArrayList<Resource>();
+	   for(int i =0; i< entities.size();i++) {//ha nullal tér vissza  a akkor robotgetinventoryja le kell kezelni gondolom így lesz
+		  if(entities.get(i).getInventory()!= null) {
+		   collectedResources.addAll(entities.get(i).getInventory());
+		  }
+	   }
+	   FunctionPrinter.exit();
+	   return winBill.isCompleted(collectedResources);
 	   
    }
-  /* public boolean checkEnoughResources(BillOfResources winBill) {   //milegyen telepes és robot megkülönböztetés
-	   FunctionPrinter.enter("Asteroid", "checkEnoughResources");
-	   
-	   //return
-   }*/
    public void setResource(Resource res) {  // ezt sem írom ki
 	   resource= res;
 	   
