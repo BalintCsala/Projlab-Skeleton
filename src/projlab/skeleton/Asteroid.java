@@ -12,16 +12,16 @@ public class Asteroid extends Field {
 	
    public void solarFlare() {
 	   FunctionPrinter.enter("Asteroid", "solarFlare");
-	   FunctionPrinter.msg("El lehet rajtam bújni?(I/N)");
+	   FunctionPrinter.msg("El lehet rajtam bújni?(true/false)");
 	   Scanner scan = new Scanner(System.in);
 	   String choice= scan.nextLine();
 	   scan.close();
 	   switch(choice) 
        { 
-           case "I": 
+           case "true": 
                 
                break; 
-           case "N": 
+           case "false": 
         	   for(int i =0; i< entities.size();i++) {
         		   entities.get(i).die();
         		   
