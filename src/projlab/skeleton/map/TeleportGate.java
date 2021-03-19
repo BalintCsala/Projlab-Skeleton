@@ -43,7 +43,7 @@ public class TeleportGate extends Field {
 
 	public boolean getActive() {
 		FunctionPrinter.enter("TeleportGate", "getActive");
-		FunctionPrinter.msg("Aktiv a teleport?");
+		FunctionPrinter.msg("Aktiv a teleport? (I/N)");
 		boolean active = new Scanner(System.in).next().equals("I");
 		FunctionPrinter.exit();
 		return active;
