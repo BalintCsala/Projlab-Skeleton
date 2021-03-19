@@ -6,12 +6,4 @@ public class Main {
         System.out.println("Hello World!");
     }
 
-    // FunctionPrinter használat
-    public void testFunc() {
-        FunctionPrinter.enter("Main", "testFunc");
-        FunctionPrinter.msg("Uzenet a fuggvenyen belul");
-        FunctionPrinter.exit();
-        
-    }
-
 }

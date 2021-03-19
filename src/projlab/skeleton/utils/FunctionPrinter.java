@@ -1,4 +1,4 @@
-package projlab.skeleton;
+package projlab.skeleton.utils;
 
 import java.util.ArrayList;
 
