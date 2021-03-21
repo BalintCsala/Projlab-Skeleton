@@ -11,7 +11,7 @@ public class AI extends Participant {
 
     private final ArrayList<Robot> robots = new ArrayList<>();
 
-    public AI() { }
+    private AI() { }
 
     public static AI getInstance() {
         if (instance == null)
