@@ -1,5 +1,9 @@
 package projlab.skeleton.resources;
+<<<<<<< HEAD
 import projlab.skeleton.resources.Resource;
+=======
+
+>>>>>>> refs/remotes/origin/Bogi
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.utils.FunctionPrinter;
 

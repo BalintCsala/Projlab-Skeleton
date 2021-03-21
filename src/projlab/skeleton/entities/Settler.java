@@ -72,4 +72,12 @@ public class Settler extends Entity {
 	    FunctionPrinter.exit();
 	}
 
+	public void addResource(Resource resource) {
+		FunctionPrinter.enter("Settler", "addResource");
+		if (inventory.size() < 10) {
+			inventory.add(resource);
+		}
+		FunctionPrinter.exit();
+	}
+
 }

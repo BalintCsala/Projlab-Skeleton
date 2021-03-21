@@ -1,7 +1,6 @@
 package projlab.skeleton.map;
 
 import projlab.skeleton.entities.Entity;
-import projlab.skeleton.map.Field;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.BillOfResources;
 import projlab.skeleton.utils.FunctionPrinter;
