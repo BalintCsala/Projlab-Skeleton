@@ -16,7 +16,7 @@ public class Game {
 
     private static Game instance;
 
-    private Game() { }
+    Game() { }
 
     public static Game getInstance() {
         if (instance == null)
