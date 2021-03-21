@@ -1,6 +1,6 @@
 package projlab.skeleton.entities;
 
-import projlab.skeleton.Asteroid;
+import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.TeleportGate;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.BillOfResources;

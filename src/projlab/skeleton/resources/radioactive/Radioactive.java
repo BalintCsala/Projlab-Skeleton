@@ -1,6 +1,6 @@
 package projlab.skeleton.resources.radioactive;
 
-import projlab.skeleton.Asteroid;
+import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.FunctionPrinter;
 

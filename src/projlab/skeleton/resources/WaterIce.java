@@ -1,6 +1,6 @@
 package projlab.skeleton.resources;
 
-import projlab.skeleton.Asteroid;
+import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.utils.FunctionPrinter;
 
 public class WaterIce extends Resource {
