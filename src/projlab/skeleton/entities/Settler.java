@@ -1,6 +1,6 @@
 package projlab.skeleton.entities;
 
-import projlab.skeleton.Asteroid;
+import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.TeleportGate;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.BillOfResources;
@@ -70,6 +70,12 @@ public class Settler extends Entity {
 			resource.reaction(getLocation());
 		}
 	    FunctionPrinter.exit();
+	}
+
+	public void addResource(Resource resource) {
+		if (inventory.size() < 10) {
+			inventory.add(resource);
+		}
 	}
 
 }

@@ -1,6 +1,6 @@
 package projlab.skeleton.entities;
 
-import projlab.skeleton.Asteroid;
+import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
 import projlab.skeleton.utils.FunctionPrinter;
 
