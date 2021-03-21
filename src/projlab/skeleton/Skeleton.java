@@ -1,6 +1,6 @@
 package projlab.skeleton;
 
-import projlab.skeleton.Asteroid;
+import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.entities.Settler;
 import projlab.skeleton.resources.Iron;
 import projlab.skeleton.resources.Resource;
@@ -19,6 +19,10 @@ public class Skeleton {
         Settler settler= new Settler();
         Asteroid asteroid= new Asteroid();
         asteroid.addEntity(settler);
+        settler.addResource(resource);
+    }
+
+    public void placeDownTeleportGate(){
 
     }
 }
