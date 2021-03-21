@@ -1,4 +1,4 @@
-package projlab.skeleton;
+package projlab.skeleton.map;
 
 import projlab.skeleton.entities.Entity;
 import projlab.skeleton.map.Field;
