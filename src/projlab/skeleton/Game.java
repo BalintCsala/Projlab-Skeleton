@@ -70,4 +70,10 @@ public class Game {
         FunctionPrinter.exit();
     }
 
+    public void addParticipant (Participant participant){
+        FunctionPrinter.enter("Game", "addParticipant");
+        participants.add(participant);
+        FunctionPrinter.exit();
+    }
+
 }

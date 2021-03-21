@@ -4,6 +4,7 @@ import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.entities.Settler;
 import projlab.skeleton.map.TeleportGate;
 import projlab.skeleton.participants.AI;
+import projlab.skeleton.participants.Player;
 import projlab.skeleton.resources.Coal;
 import projlab.skeleton.resources.Iron;
 import projlab.skeleton.resources.WaterIce;
@@ -82,5 +83,22 @@ public class Skeleton {
         settler.addResource(iron2);
         settler.addResource(waterIce);
         settler.addResource(uran);
+    }
+
+    public void pass(){
+        Player p = new Player();
+    }
+
+    public void giveUp(){
+        Player player = new Player();
+        Game game = new Game();
+        Settler settler= new Settler();
+        Asteroid asteroid= new Asteroid();
+
+        game.addParticipant(player);
+        player.setSettler(settler);
+        asteroid.addEntity(settler);
+
+
     }
 }
