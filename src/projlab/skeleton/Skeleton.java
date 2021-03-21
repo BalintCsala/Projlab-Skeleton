@@ -19,6 +19,8 @@ public class Skeleton {
         Asteroid asteroid= new Asteroid();
         asteroid.addEntity(settler);
         asteroid.setResource(resource);
+
+        settler.mine();
     }
 
     public void placeDownNotRadioactiveOrWatericeResource(){
@@ -27,6 +29,8 @@ public class Skeleton {
         Asteroid asteroid= new Asteroid();
         asteroid.addEntity(settler);
         settler.addResource(resource);
+
+        settler.placeDownResource(resource);
     }
 
     public void placeDownTeleportGate(){
@@ -35,6 +39,8 @@ public class Skeleton {
         Asteroid asteroid= new Asteroid();
         Game game= new Game();
         asteroid.addEntity(settler);
+
+        settler.placeDownTeleport(asteroid);
     }
 
     public void buildRobot(){
@@ -58,9 +64,10 @@ public class Skeleton {
         settler.addResource(coal2);
         settler.addResource(uran2);
 
+        settler.buildRobot();
     }
 
-    public void buildTeleportgate (){
+    public void buildTeleportGate (){
         Iron iron1 = new Iron();
         Iron iron2 = new Iron();
         WaterIce waterIce = new WaterIce();
@@ -83,10 +90,14 @@ public class Skeleton {
         settler.addResource(iron2);
         settler.addResource(waterIce);
         settler.addResource(uran);
+
+        settler.buildTeleport();
     }
 
     public void pass(){
         Player p = new Player();
+
+        p.pass();
     }
 
     public void giveUp(){
@@ -99,6 +110,6 @@ public class Skeleton {
         player.setSettler(settler);
         asteroid.addEntity(settler);
 
-
+        player.giveUp();
     }
 }
