@@ -20,4 +20,7 @@ public class Player extends Participant {
         FunctionPrinter.exit();
     }
 
+    public void setSettler(Settler settler) {
+        this.settler = settler;
+    }
 }

@@ -16,7 +16,7 @@ public class Game {
 
     private static Game instance;
 
-    private Game() { }
+    Game() { }
 
     public static Game getInstance() {
         if (instance == null)
@@ -67,6 +67,12 @@ public class Game {
     public void removeParticipant(Participant participant) {
         FunctionPrinter.enter("Game", "removeParticipant");
         participants.remove(participant);
+        FunctionPrinter.exit();
+    }
+
+    public void addParticipant (Participant participant){
+        FunctionPrinter.enter("Game", "addParticipant");
+        participants.add(participant);
         FunctionPrinter.exit();
     }
 
