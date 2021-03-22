@@ -20,13 +20,13 @@ public class AI extends Participant {
     }
 
     public void addRobot(Robot robot) {
-        FunctionPrinter.enter("AI", "addRobot");
+        FunctionPrinter.enter("AI", "addRobot", this, robot);
         robots.add(robot);
         FunctionPrinter.exit();
     }
 
     public void removeRobot(Robot robot) {
-        FunctionPrinter.enter("AI", "removeRobot");
+        FunctionPrinter.enter("AI", "removeRobot", this, robot);
         robots.remove(robot);
         FunctionPrinter.exit();
     }

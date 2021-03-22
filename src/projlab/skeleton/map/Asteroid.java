@@ -6,6 +6,7 @@ import projlab.skeleton.utils.BillOfResources;
 import projlab.skeleton.utils.FunctionPrinter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Asteroid extends Field {
@@ -15,12 +16,14 @@ public class Asteroid extends Field {
 
     @Override
     public void solarFlare() {
-        FunctionPrinter.enter("Asteroid", "solarFlare");
-        FunctionPrinter.msg("El lehet rajtam bujni? (I/N)");
+        FunctionPrinter.enter("Asteroid", "solarFlare", this);
+        FunctionPrinter.ask("El lehet rajtam bujni? (I/N)");
         boolean hollow = new Scanner(System.in).next().equals("I");
         if (!hollow) {
-            for (Entity entity : entities) {
+            ArrayList<Entity> temp = new ArrayList<>(entities);
+            for (Entity entity : temp) {
                 entity.die();
+                entities.remove(entity);
             }
         }
 
@@ -28,14 +31,14 @@ public class Asteroid extends Field {
     }
 
     public void explode() {
-        FunctionPrinter.enter("Asteroid", "explode");
+        FunctionPrinter.enter("Asteroid", "explode", this);
 
-        for (Entity entity : entities) {
+        ArrayList<Entity> temp = new ArrayList<>(entities);
+        for (Entity entity : temp) {
             entity.explode();
-            removeEntity(entity);
         }
 
-        for (Field neighbor : getNeighbors()) {
+        for (Field neighbor : neighbors) {
             neighbor.removeNeighbor(this);
             neighbor.explodeReaction();
         }
@@ -44,7 +47,7 @@ public class Asteroid extends Field {
     }
 
     public Resource mineResource() {
-        FunctionPrinter.enter("Asteroid", "mineResource");
+        FunctionPrinter.enter("Asteroid", "mineResource", this);
         if (getLayerDepth() != 0)
             return null;
 
@@ -55,8 +58,8 @@ public class Asteroid extends Field {
     }
 
     public void digLayer() {  //if
-        FunctionPrinter.enter("Asteroid", "diglayer");
-        FunctionPrinter.msg("Napközelben vagyunk és a réteg 0? (I/N)");
+        FunctionPrinter.enter("Asteroid", "diglayer", this);
+        FunctionPrinter.ask("Napkozelben vagyunk es a reteg 0? (I/N)");
         String choice = new Scanner(System.in).next();
         if (choice.equals("I")) {
             resource.reaction(this);
@@ -66,49 +69,50 @@ public class Asteroid extends Field {
     }
 
     public boolean checkEnoughResources(BillOfResources winBill) {
-        FunctionPrinter.enter("Asteroid", "checkEnoughResources");
-        FunctionPrinter.msg("Van eleg nyersanyag az aszteroidan? (I/N)");
+        FunctionPrinter.enter("Asteroid", "checkEnoughResources", this, winBill);
+        FunctionPrinter.ask("Van eleg nyersanyag az aszteroidan? (I/N)");
         boolean enough = new Scanner(System.in).next().equals("I");
         FunctionPrinter.exit();
         return enough;
     }
 
     public void removeEntity(Entity entity) {
-        FunctionPrinter.enter("Asteroid", "removeEntity");
+        FunctionPrinter.enter("Asteroid", "removeEntity", this, entity);
         entities.remove(entity);
         FunctionPrinter.exit();
     }
 
     @Override
     public void addEntity(Entity entity) {
-        FunctionPrinter.enter("Asteroid", "addEntity");
+        FunctionPrinter.enter("Asteroid", "addEntity", this, entity);
         entities.add(entity);
         entity.setLocation(this);
         FunctionPrinter.exit();
     }
 
     public Resource getResource() {
-        FunctionPrinter.enter("Asteroid", "getResource");
+        FunctionPrinter.enter("Asteroid", "getResource", this);
         FunctionPrinter.exit();
         return resource;
     }
 
     public void setResource(Resource res) {
-        FunctionPrinter.enter("Asteroid", "setResource");
+        FunctionPrinter.enter("Asteroid", "setResource", this, res);
         resource = res;
         FunctionPrinter.exit();
     }
 
     public int getLayerDepth() {
-        FunctionPrinter.enter("Asteroid", "getLayerDepth");
-        FunctionPrinter.msg("Milyen vastag legyen az aszteroida kerge?");
+        FunctionPrinter.enter("Asteroid", "getLayerDepth", this);
+        FunctionPrinter.ask("Milyen vastag legyen az aszteroida kerge?");
         int depth = (new Scanner(System.in)).nextInt();
         FunctionPrinter.exit();
         return depth;
     }
 
     public boolean getIsNearSun() {
-        FunctionPrinter.enter("Asteroid", "getIsNearSun");
+        FunctionPrinter.enter("Asteroid", "getIsNearSun", this);
+        FunctionPrinter.ask("Kozel van az aszteroida a naphoz? (I/N)");
         boolean nearSun = new Scanner(System.in).next().equals("I");
         FunctionPrinter.exit();
         return nearSun;

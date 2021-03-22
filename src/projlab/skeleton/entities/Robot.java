@@ -9,14 +9,15 @@ import java.util.ArrayList;
 public class Robot extends Entity {
 
 	public Robot() {
-		FunctionPrinter.enter("Robot", "<<create>>");
+		FunctionPrinter.enter("Robot", "<<create>>", this);
+		FunctionPrinter.register(this, "robot");
 		AI.getInstance().addRobot(this);
 		FunctionPrinter.exit();
 	}
 
 	public void explode() {
-	    FunctionPrinter.enter("Robot", "explode");
-		ArrayList<Field> neighbors = getLocation().getNeighbors();
+	    FunctionPrinter.enter("Robot", "explode", this);
+		ArrayList<Field> neighbors = location.getNeighbors();
 	    if (neighbors.isEmpty()) {
 	    	die();
 		} else {

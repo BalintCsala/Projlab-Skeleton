@@ -6,7 +6,7 @@ import projlab.skeleton.utils.FunctionPrinter;
 public abstract class Resource {
 
 	public void reaction(Asteroid a) {
-		FunctionPrinter.enter("Resource", "reaction");
+		FunctionPrinter.enter("Resource", "reaction", this, a);
 		FunctionPrinter.exit();
 	}
 }

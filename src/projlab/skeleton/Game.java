@@ -25,33 +25,33 @@ public class Game {
     }
 
     public void startGame() {
-        FunctionPrinter.enter("Game", "startGame");
+        FunctionPrinter.enter("Game", "startGame", this);
         FunctionPrinter.exit();
     }
 
     public void endGame() {
-        FunctionPrinter.enter("Game", "endGame");
+        FunctionPrinter.enter("Game", "endGame", this);
         FunctionPrinter.exit();
     }
 
     public boolean checkGameEnd() {
-        FunctionPrinter.enter("Game", "checkGameEnd");
-        FunctionPrinter.msg("Vege a jateknak? (I/N)");
+        FunctionPrinter.enter("Game", "checkGameEnd", this);
+        FunctionPrinter.ask("Vege a jateknak? (I/N)");
         boolean end = new Scanner(System.in).next().equals("I");
         FunctionPrinter.exit();
         return end;
     }
 
     public boolean checkEnoughResources() {
-        FunctionPrinter.enter("Game", "checkEnoughResources");
-        FunctionPrinter.msg("Van eleg nyersanyag? (I/N)");
+        FunctionPrinter.enter("Game", "checkEnoughResources", this);
+        FunctionPrinter.ask("Van eleg nyersanyag? (I/N)");
         boolean enough = new Scanner(System.in).next().equals("I");
         FunctionPrinter.exit();
         return enough;
     }
 
     public void solarFlare() {
-        FunctionPrinter.enter("Game", "solarFlare");
+        FunctionPrinter.enter("Game", "solarFlare", this);
         for (Field field : fields) {
             field.solarFlare();
         }
@@ -59,19 +59,19 @@ public class Game {
     }
 
     public void addField(Field field) {
-        FunctionPrinter.enter("Game", "addField");
+        FunctionPrinter.enter("Game", "addField", this, field);
         fields.add(field);
         FunctionPrinter.exit();
     }
 
     public void removeParticipant(Participant participant) {
-        FunctionPrinter.enter("Game", "removeParticipant");
+        FunctionPrinter.enter("Game", "removeParticipant", this, participant);
         participants.remove(participant);
         FunctionPrinter.exit();
     }
 
     public void addParticipant (Participant participant){
-        FunctionPrinter.enter("Game", "addParticipant");
+        FunctionPrinter.enter("Game", "addParticipant", this, participant);
         participants.add(participant);
         FunctionPrinter.exit();
     }

@@ -6,41 +6,41 @@ import projlab.skeleton.utils.FunctionPrinter;
 
 public abstract class Entity {
 
-	private Asteroid location;
+	protected Asteroid location;
 	
 	public void dig() {
-	    FunctionPrinter.enter("Entity", "dig");
+	    FunctionPrinter.enter("Entity", "dig", this);
 		location.digLayer();
 	    FunctionPrinter.exit();
 	}
 
 	public void move(Field field) {
-	    FunctionPrinter.enter("Entity", "move");
+	    FunctionPrinter.enter("Entity", "move", this, field);
 		location.removeEntity(this);
 		field.addEntity(this);
 	    FunctionPrinter.exit();
 	}
 
 	public void die() {
-	    FunctionPrinter.enter("Entity", "die");
-		getLocation().removeEntity(this);
+	    FunctionPrinter.enter("Entity", "die", this);
+	    location.removeEntity(this);
 	    FunctionPrinter.exit();
 	}
 
 	public void explode() {
-	    FunctionPrinter.enter("Entity", "explode");
+	    FunctionPrinter.enter("Entity", "explode", this);
 
 	    FunctionPrinter.exit();
 	}
 
 	public Asteroid getLocation() {
-	    FunctionPrinter.enter("Entity", "getLocation");
+	    FunctionPrinter.enter("Entity", "getLocation", this);
 	    FunctionPrinter.exit();
 	    return location;
 	}
 
 	public void setLocation(Asteroid field) {
-	    FunctionPrinter.enter("Entity", "setLocation");
+	    FunctionPrinter.enter("Entity", "setLocation", this, field);
 	    this.location = field;
 	    FunctionPrinter.exit();
 	}

@@ -8,7 +8,7 @@ public abstract class Radioactive extends Resource {
 
 	@Override
 	public void reaction(Asteroid a) {
-		FunctionPrinter.enter("Radioactive", "reaction");
+		FunctionPrinter.enter("Radioactive", "reaction", this, a);
 		a.explode();
 		FunctionPrinter.exit();
 	}
