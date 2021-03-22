@@ -15,8 +15,13 @@ import projlab.skeleton.utils.FunctionPrinter;
 
 import java.util.ArrayList;
 
+/**
+ * A program szenárióit kezelő osztály
+ */
 public class Skeleton {
-
+    /**
+     *
+     */
     public void settlerMines() {
         System.out.println("settlerMines");
         Settler settler = new Settler(null, null);
