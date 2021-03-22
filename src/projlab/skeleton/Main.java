@@ -2,16 +2,24 @@ package projlab.skeleton;
 
 import java.util.Scanner;
 
+/**
+ * A program kezdőosztálya
+ */
 public class Main {
 
+
     public static void main(String[] args) {
+        // Hozzunk létre egy skeleton modellt, majd kérdezzük meg a felhasználótól a választandó szcenárió id-jét
+        Skeleton skeleton = new Skeleton();
+
         System.out.println("Kerlek valassz szcenariot (1-20):");
         Scanner scanner = new Scanner(System.in);
-        Skeleton skeleton = new Skeleton();
 
         int scenario = scanner.nextInt();
         System.out.print("Title: ");
 
+
+        // Alakítsuk át a megadott indexet egy szcenárióvá
         switch (scenario) {
             case 1:
                 skeleton.settlerMoveAsteroid();
@@ -75,5 +83,4 @@ public class Main {
                 break;
         }
     }
-
 }

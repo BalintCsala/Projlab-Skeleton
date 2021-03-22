@@ -6,7 +6,6 @@ import projlab.skeleton.utils.BillOfResources;
 import projlab.skeleton.utils.FunctionPrinter;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Asteroid extends Field {
