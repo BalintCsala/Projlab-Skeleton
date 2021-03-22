@@ -20,7 +20,8 @@ import java.util.ArrayList;
  */
 public class Skeleton {
     /**
-     *
+     * 5.3.3-as szekvencia és 5.4.3-as kommunikációs diagram írja le
+     * A telepes bányászását modellezi le
      */
     public void settlerMines() {
         System.out.println("settlerMines");
@@ -36,6 +37,10 @@ public class Skeleton {
         settler.mine();
     }
 
+    /**
+     * 5.3.7-es szekvencia és 5.4.7-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes nem radioaktív vagy vízjég nyersanyagot helyez le egy aszteroidába
+     */
     public void placeDownNotRadioactiveOrWatericeResource() {
         System.out.println("placeDownNotRadioactiveOrWatericeResource");
         Iron resource = new Iron();
@@ -50,6 +55,10 @@ public class Skeleton {
         settler.placeDownResource(resource);
     }
 
+    /**
+     * 5.3.6-os szekvencia és 5.4.6-os kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes lehelyez egy teleport kaput
+     */
     public void placeDownTeleportGate() {
         System.out.println("placeDownTeleportGate");
         TeleportGate teleport1 = new TeleportGate();
@@ -72,6 +81,10 @@ public class Skeleton {
         settler.placeDownTeleport(asteroid);
     }
 
+    /**
+     * 5.3.4-es szekvencia és a 5.4.4-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes épít egy robotot
+     */
     public void buildRobot() {
         System.out.println("buildRobot");
         Iron iron = new Iron();
@@ -106,6 +119,10 @@ public class Skeleton {
         settler.buildRobot();
     }
 
+    /**
+     * 5.3.5-ös szekvencia és a 5.4.5-ös kommunikációs diagram írja le
+     *  Azt modellezi le, hogy egy telepes épít egy teleportkapu párt
+     */
     public void buildTeleportGate() {
         System.out.println("buildTeleportGate");
         Iron iron1 = new Iron();
@@ -144,6 +161,10 @@ public class Skeleton {
         settler.buildTeleport();
     }
 
+    /**
+     * 5.3.20-as szekvencia és a 5.4.20-as kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy játékos passzol
+     */
     public void pass() {
         System.out.println("pass");
         Player player = new Player();
@@ -152,6 +173,10 @@ public class Skeleton {
         player.pass();
     }
 
+    /**
+     * 5.3.19-es szekvencia és a 5.4.19-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy játékos feladja a játékot
+     */
     public void giveUp() {
         System.out.println("giveUp");
         Player player = new Player();
@@ -170,7 +195,10 @@ public class Skeleton {
         player.giveUp();
     }
 
-    //Settler moves to Asteroid
+    /**
+     * 5.3.1-es szekvencia és a 5.4.1-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes mozog egy aszteroidára át
+     */
     public void settlerMoveAsteroid() {
         System.out.println("settlerMoveAsteroid");
         Asteroid a1 = new Asteroid();
@@ -186,7 +214,10 @@ public class Skeleton {
         s1.move(a2);
     }
 
-    //Settler moves Teleportgate
+    /**
+     * 5.3.2-es szekvencia és a 5.4.2-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes egy teleport kapura mozog át
+     */
     public void settlerMoveTeleportGate() {
         System.out.println("settlerMoveTeleportGate");
         Asteroid asteroid1 = new Asteroid();
@@ -211,7 +242,10 @@ public class Skeleton {
         settler.move(teleportGate1);
     }
 
-    //Robot moves to Asteroid
+    /**
+     * 5.3.10-es szekvencia és a 5.4.10-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy robot egy aszteroidára mozog át
+     */
     public void robotMove() {
         System.out.println("robotMove");
         Asteroid asteroid1 = new Asteroid();
@@ -227,7 +261,10 @@ public class Skeleton {
         robot.move(asteroid2);
     }
 
-    //Robot moves Teleportgate
+    /**
+     * 5.3.11-es szekvencia és a 5.4.11-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy robot egy teleport kapura mozog át
+     */
     public void robotMoveTeleportGate() {
         System.out.println("robotMoveTeleportGate");
         FunctionPrinter.register(AI.getInstance(), "ai");
@@ -253,7 +290,10 @@ public class Skeleton {
         robot.move(teleportGate1);
     }
 
-    //SolarFlare
+    /**
+     * 5.3.18-as szekvencia és a 5.4.18-as kommunikációs diagram írja le
+     * Azt modellezi le, hogy napvihar ér el egy aszteroidát és az azon tartózkodó entityket
+     */
     public void solarFlare() {
         System.out.println("solarFlare");
         Game game = Game.getInstance();
@@ -274,7 +314,10 @@ public class Skeleton {
 
     }
 
-    //Place down waterice
+    /**
+     * 5.3.9-es szekvencia és a 5.4.9-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes vízjég nyersanyagot helyez le egy aszteroidába
+     */
     public void placeDownWaterIce() {
         System.out.println("placeDownWaterIce");
         Asteroid asteroid = new Asteroid();
@@ -290,7 +333,10 @@ public class Skeleton {
         settler.placeDownResource(resource);
     }
 
-    // place down radioactive
+    /**
+     * 5.3.8-as szekvencia és a 5.4.8-as kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes radioaktív nyersanyagot helyez le egy aszteroidába
+     */
     public void placeDownRadioactive() {
         System.out.println("placeDownRadioactive");
         Asteroid asteroid = new Asteroid();
@@ -305,7 +351,10 @@ public class Skeleton {
         settler.placeDownResource(resource);
     }
 
-
+    /**
+     * 5.3.17-es szekvencia és a 5.4.17-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy robot nem radioaktív vagy vízjég nyersanyagot tartalmazó aszteroidát fúr
+     */
     public void robotDiggingNotRadioactiveOrWatericeAsteroid() {
         System.out.println("robotDiggingNotRadioactiveOrWatericeAsteroid");
         FunctionPrinter.register(AI.getInstance(), "ai");
@@ -320,6 +369,10 @@ public class Skeleton {
         robot.dig();
     }
 
+    /**
+     * 5.3.16-os szekvencia és a 5.4.16-os kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy robot radioaktív nyersanyagot tartalmazó aszteroidát fúr
+     */
     public void robotDiggingRadioactiveAsteroid() {
         System.out.println("robotDiggingRadioactiveAsteroid");
         FunctionPrinter.register(AI.getInstance(), "ai");
@@ -334,6 +387,10 @@ public class Skeleton {
         robot.dig();
     }
 
+    /**
+     * 5.3.15-ös szekvencia és a 5.4.15-ös kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy robot vízjeget tartalmazó aszteroidát fúr
+     */
     public void robotDiggingWatericeAsteroid() {
         System.out.println("robotDiggingWatericeAsteroid");
         FunctionPrinter.register(AI.getInstance(), "ai");
@@ -348,6 +405,10 @@ public class Skeleton {
         robot.dig();
     }
 
+    /**
+     * 5.3.14-es szekvencia és a 5.4.14-es kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes nem radioaktív vagy vízjég nyersanyagot tartalmazó aszteroidát fúr
+     */
     public void settlerDiggingNotRadioactiveOrWatericeAsteroid() {
         System.out.println("settlerDiggingNotRadioactiveOrWatericeAsteroid");
         Settler settler = new Settler(null, null);
@@ -361,6 +422,10 @@ public class Skeleton {
         settler.dig();
     }
 
+    /**
+     * 5.3.13-as szekvencia és a 5.4.13-as kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes radioaktív nyersanyagot tartalmazó aszteroidát fúr
+     */
     public void settlerDiggingRadioactiveAsteroid() {
         System.out.println("settlerDiggingRadioactiveAsteroid");
         Settler settler = new Settler(null, null);
@@ -374,6 +439,10 @@ public class Skeleton {
         settler.dig();
     }
 
+    /**
+     * 5.3.15-ös szekvencia és a 5.4.15-ös kommunikációs diagram írja le
+     * Azt modellezi le, hogy egy telepes vízjég nyersanyagot tartalmazó aszteroidát fúr
+     */
     public void settlerDiggingWatericeAsteroid() {
         System.out.println("settlerDiggingWatericeAsteroid");
         Asteroid asteroid = new Asteroid();
