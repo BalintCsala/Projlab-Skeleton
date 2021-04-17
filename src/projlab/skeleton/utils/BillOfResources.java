@@ -22,17 +22,21 @@ public class BillOfResources {
         resources.add(resource);
     }
 
-    /**
-     * Ellenőrzi, hogy a megadott lista teljesíti-e a követelményeket
-     * @param incomingResources A meglévő nyersanyagok listája
-     * @return Teljesíti-e a követelményeket a megadott lista
-     */
-    public boolean isCompleted(ArrayList<Resource> incomingResources) {
-		/*ArrayList<Resource> res=resources;
-		for (Resource own: res){
-			for
+	/**
+	 * Ellenőrzi, hogy a megadott lista teljesíti-e a követelményeket
+	 * @param incomingResources A meglévő nyersanyagok listája
+	 * @return Teljesíti-e a követelményeket a megadott lista
+	 */
+	public boolean isCompleted(ArrayList<Resource> incomingResources) {
+		ArrayList<Resource> res=resources;
+		for (Resource inRes: incomingResources) {
+			for (int i = 0; i < res.size(); i++) {
+				if (inRes.getClass() == res.get(i).getClass()) {
+					res.remove(i);
+					break;
+				}
+			}
 		}
-		*/
-        return false;
-    }
+	    return res.size()==0;
+	}
 }
