@@ -36,7 +36,6 @@ public class Settler extends MovingEntity implements MiningEntity {
 
     /**
      * A settler konstruktora
-     *
      * @param robotBill    A robothoz szükséges nyersamyagok
      * @param teleportBill A teleportokhoz szükséges nyersanyagok
      */
@@ -134,7 +133,6 @@ public class Settler extends MovingEntity implements MiningEntity {
 
     /**
      * A nyersanyag visszahelyezés parancsot implementáló metódus
-     *
      * @param resource A lehelyezendő nyersanyag
      */
     public void placeDownResource(Resource resource) {
@@ -153,7 +151,6 @@ public class Settler extends MovingEntity implements MiningEntity {
 
     /**
      * Hozzáad egy nyersanyagot a telepes hátizsákjához
-     *
      * @param resource A hozzáadandó nyersanyag
      */
     public void addResource(Resource resource) {
@@ -165,7 +162,6 @@ public class Settler extends MovingEntity implements MiningEntity {
 
     /**
      * Távolítsunk el egy nyersanyagot a teleps hátizsákjából
-     *
      * @param resource Az eltávolítandó nyersanyag
      */
     public void removeResource(Resource resource) {
@@ -174,7 +170,6 @@ public class Settler extends MovingEntity implements MiningEntity {
 
     /**
      * Beállítja a telepesnél lévő teleportkapukat tesztelés célből
-     *
      * @param teleport1 Az első teleportkapu
      * @param teleport2 A második teleportkapu
      */

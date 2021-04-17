@@ -38,7 +38,6 @@ public class Game {
 
     /**
      * Visszaadja az osztály singleton instance-ét
-     *
      * @return Az osztály singleton instance-e
      */
     public static Game getInstance() {
@@ -61,7 +60,6 @@ public class Game {
 
     /**
      * Leellenőrzi, hogy a játék véget ért-e
-     *
      * @return Véget ért-e a játék
      */
     public boolean checkGameEnd() {
@@ -71,7 +69,6 @@ public class Game {
 
     /**
      * Leellenőrzi, hogy van-e elég nyersanyag a játék megnyeréséhez
-     *
      * @return Van-e elég nyersanyag a játék megnyeréséhez
      */
     public boolean checkEnoughResources() {
@@ -91,7 +88,6 @@ public class Game {
 
     /**
      * Hozzáad egy mezőt a játékpályához
-     *
      * @param field A hozzáadandó metódus
      */
     public void addField(Field field) {
@@ -100,7 +96,6 @@ public class Game {
 
     /**
      * Eltávolít egy résztvevőt a játékból
-     *
      * @param participant Az eltávolítandó résztvevő
      */
     public void removeParticipant(Participant participant) {
@@ -109,7 +104,6 @@ public class Game {
 
     /**
      * Hozzáad egy résztvevőt a játékjoz
-     *
      * @param participant A hozzáadandó résztvevő
      */
     public void addParticipant(Participant participant) {

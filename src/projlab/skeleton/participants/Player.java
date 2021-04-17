@@ -31,7 +31,6 @@ public class Player extends Participant {
 
     /**
      * Beállítja a játékos telepesét
-     *
      * @param settler A beállítandó telepes
      */
     public void setSettler(Settler settler) {

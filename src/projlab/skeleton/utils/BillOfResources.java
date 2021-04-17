@@ -16,7 +16,6 @@ public class BillOfResources {
 
     /**
      * Hozzáad egy nyersanyagot a listához
-     *
      * @param resource A hozzáadandó nyersanyag
      */
     public void addResource(Resource resource) {
@@ -25,7 +24,6 @@ public class BillOfResources {
 
     /**
      * Ellenőrzi, hogy a megadott lista teljesíti-e a követelményeket
-     *
      * @param incomingResources A meglévő nyersanyagok listája
      * @return Teljesíti-e a követelményeket a megadott lista
      */

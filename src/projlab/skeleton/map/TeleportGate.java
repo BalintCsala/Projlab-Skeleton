@@ -35,7 +35,6 @@ public class TeleportGate extends Field {
 
     /**
      * Az teleportkapura entitás érkezik
-     *
      * @param entity az érkező entitás
      */
     @Override
@@ -47,7 +46,6 @@ public class TeleportGate extends Field {
 
     /**
      * A teleportkapu párjára való átteleportálás
-     *
      * @param entity a teleportkaput használó entitás
      */
     private void teleportToPair(MovingEntity entity) {
@@ -57,7 +55,6 @@ public class TeleportGate extends Field {
 
     /**
      * Beállítja a teleportkapu párját
-     *
      * @param teleport a teleportkapu párja
      */
     public void setPair(TeleportGate teleport) {
@@ -66,7 +63,6 @@ public class TeleportGate extends Field {
 
     /**
      * Megadja, hogy aktiv-e a teleportkapu
-     *
      * @return aktívság
      */
     public boolean isActive() {
@@ -75,7 +71,6 @@ public class TeleportGate extends Field {
 
     /**
      * Beállítjuk a teleportkapu aktívságát
-     *
      * @param active a teleportkapu aktívsága
      */
     public void setActive(boolean active) {
@@ -94,6 +89,9 @@ public class TeleportGate extends Field {
         crazy = true;
     }
 
+    /**
+     * Megmozgatja a teleportot, ha az megőrült
+     */
     public void crazyMove() {
         if (crazy) {
             for (Field f : asteroid.getNeighbors()) {

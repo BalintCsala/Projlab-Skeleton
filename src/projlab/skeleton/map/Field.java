@@ -15,7 +15,6 @@ public abstract class Field {
 
     /**
      * Szomszédos Field hozzáadása
-     *
      * @param f a szomszéd
      */
     public void addNeighbor(Field f) {
@@ -24,8 +23,7 @@ public abstract class Field {
 
     /**
      * Szomszédos Field kivétele a szomszédok közül
-     *
-     * @param f a szomsz�d
+     * @param f a szomszed
      */
     public void removeNeighbor(Field f) {
         neighbors.remove(f);
@@ -51,7 +49,6 @@ public abstract class Field {
 
     /**
      * Visszaadja a Field szomszédjait
-     *
      * @return a szomszédok
      */
     public ArrayList<Field> getNeighbors() {

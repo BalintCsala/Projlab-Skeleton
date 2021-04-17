@@ -19,7 +19,6 @@ public abstract class MovingEntity {
 
     /**
      * Az entitás mozgás parancsát implementáló metódus
-     *
      * @param field A mező, amire szeretnénk, hogy az entitás lépjen
      */
     public void move(Field field) {
@@ -42,7 +41,6 @@ public abstract class MovingEntity {
 
     /**
      * Visszaadja az aszteroidát, amin az entitás jelenleg tartózkodik
-     *
      * @return Az entitás tartózkodási helye
      */
     public Asteroid getLocation() {
@@ -51,7 +49,6 @@ public abstract class MovingEntity {
 
     /**
      * Beállítja az aszteroidát, amin a telepes jelenleg tartózkodik
-     *
      * @param field Az entitás új tartózkodási helye
      */
     public void setLocation(Asteroid field) {

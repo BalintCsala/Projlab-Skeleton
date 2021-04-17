@@ -69,7 +69,6 @@ public class Asteroid extends Field {
     /**
      * Az aszteroida bányászása amennyiben nincs több rétege,
      * bányászható és visszaadja az aszteroida nyersanyagát
-     *
      * @return Resource
      */
     public Resource mineResource() {
@@ -98,7 +97,6 @@ public class Asteroid extends Field {
 
     /**
      * Gyõzelem  vizsgálata aszteroidán
-     *
      * @param winBill a gyõzelemhez szükséges nyersanyagok
      * @return visszaadja, hogy van-e elég nyersanyag az aszteroidán a gyõzelemhez
      */
@@ -111,7 +109,6 @@ public class Asteroid extends Field {
 
     /**
      * Egy entitás eltávozása az aszteroidáról
-     *
      * @param entity az eltávozó entitás
      */
     public void removeEntity(MovingEntity entity) {
@@ -120,7 +117,6 @@ public class Asteroid extends Field {
 
     /**
      * Az aszteroidára entitás érkezik
-     *
      * @param entity az érkezõ entitás
      */
     @Override
@@ -131,7 +127,6 @@ public class Asteroid extends Field {
 
     /**
      * Visszaadja az aszteroida nyersanyagát
-     *
      * @return resource az aszteroida nyersanyaga
      */
     public Resource getResource() {
@@ -140,7 +135,6 @@ public class Asteroid extends Field {
 
     /**
      * Az aszteroida nyersanyagának beállítása
-     *
      * @param res a beállítandó nyersanyag
      */
     public void setResource(Resource res) {
@@ -149,7 +143,6 @@ public class Asteroid extends Field {
 
     /**
      * az aszteroida rétegének visszaadása
-     *
      * @return az aszteroida rétege
      */
     public int getDepth() {
@@ -158,7 +151,6 @@ public class Asteroid extends Field {
 
     /**
      * Visszaadja azt, hogy az aszteroida Napközelben van-e
-     *
      * @return napközelben vagy sem
      */
     public boolean getIsNearSun() {

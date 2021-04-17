@@ -29,7 +29,6 @@ public class AI extends Participant {
 
     /**
      * A singleton design pattern getInstance metódusa
-     *
      * @return Az osztály singleton instance-e
      */
     public static AI getInstance() {
@@ -40,7 +39,6 @@ public class AI extends Participant {
 
     /**
      * Hozzáad egy robotot a robotok listájához
-     *
      * @param robot A hozzáadandó robot
      */
     public void addRobot(Robot robot) {
@@ -49,7 +47,6 @@ public class AI extends Participant {
 
     /**
      * Eltávolít egy robotot a robotok listájából
-     *
      * @param robot Az eltávolítandó robot
      */
     public void removeRobot(Robot robot) {
@@ -58,7 +55,6 @@ public class AI extends Participant {
 
     /**
      * Hozzáad egy ufot az AI-hoz
-     *
      * @param ufo A hozzáadandó ufo
      */
     public void addUfo(Ufo ufo) {
@@ -67,7 +63,6 @@ public class AI extends Participant {
 
     /**
      * Eltávolít egy ufo-t az AI-ból
-     *
      * @param ufo Az eltávolítandó ufo
      */
     public void removeUfo(Ufo ufo) {
