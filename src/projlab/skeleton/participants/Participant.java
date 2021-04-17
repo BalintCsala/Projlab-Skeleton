@@ -5,4 +5,6 @@ package projlab.skeleton.participants;
  */
 public abstract class Participant {
 
+    private boolean isPlaying = false;
+
 }

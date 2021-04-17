@@ -1,7 +1,7 @@
 package projlab.skeleton.participants;
 
 import projlab.skeleton.entities.Robot;
-import projlab.skeleton.utils.FunctionPrinter;
+import projlab.skeleton.entities.Ufo;
 
 import java.util.ArrayList;
 
@@ -19,14 +19,17 @@ public class AI extends Participant {
      * Az AI robotjai
      */
     private final ArrayList<Robot> robots = new ArrayList<>();
+    private final ArrayList<Ufo> ufos = new ArrayList<>();
 
     /**
      * Privát konstruktor a singletonság kedvéért
      */
-    private AI() { }
+    private AI() {
+    }
 
     /**
      * A singleton design pattern getInstance metódusa
+     *
      * @return Az osztály singleton instance-e
      */
     public static AI getInstance() {
@@ -37,22 +40,38 @@ public class AI extends Participant {
 
     /**
      * Hozzáad egy robotot a robotok listájához
+     *
      * @param robot A hozzáadandó robot
      */
     public void addRobot(Robot robot) {
-        FunctionPrinter.enter("AI", "addRobot", this, robot);
         robots.add(robot);
-        FunctionPrinter.exit();
     }
 
     /**
      * Eltávolít egy robotot a robotok listájából
+     *
      * @param robot Az eltávolítandó robot
      */
     public void removeRobot(Robot robot) {
-        FunctionPrinter.enter("AI", "removeRobot", this, robot);
         robots.remove(robot);
-        FunctionPrinter.exit();
+    }
+
+    /**
+     * Hozzáad egy ufot az AI-hoz
+     *
+     * @param ufo A hozzáadandó ufo
+     */
+    public void addUfo(Ufo ufo) {
+        ufos.add(ufo);
+    }
+
+    /**
+     * Eltávolít egy ufo-t az AI-ból
+     *
+     * @param ufo Az eltávolítandó ufo
+     */
+    public void removeUfo(Ufo ufo) {
+        ufos.remove(ufo);
     }
 
 }

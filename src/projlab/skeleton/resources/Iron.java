@@ -1,4 +1,5 @@
 package projlab.skeleton.resources;
+
 /**
  * A vas nyersanyagot jelképező osztály
  */

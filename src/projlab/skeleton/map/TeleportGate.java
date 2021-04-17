@@ -1,9 +1,6 @@
 package projlab.skeleton.map;
 
-import projlab.skeleton.entities.Entity;
-import projlab.skeleton.utils.FunctionPrinter;
-
-import java.util.Scanner;
+import projlab.skeleton.entities.MovingEntity;
 
 /**
  * Teleportkapuk megtestesítése
@@ -13,15 +10,15 @@ public class TeleportGate extends Field {
      * A teleportkapu párja
      */
     private TeleportGate pair;
-    private boolean active=false;
-    private boolean crazy=false;
+    private boolean active = false;
+    private boolean crazy = false;
     private Asteroid asteroid;
 
     /**
      * Mmegszűnik létezni a teleportkapu
      */
     public void die() {
-        active=false;
+        active = false;
         for (Field neighbor : neighbors) {
             neighbor.removeNeighbor(this);
         }
@@ -38,11 +35,12 @@ public class TeleportGate extends Field {
 
     /**
      * Az teleportkapura entitás érkezik
+     *
      * @param entity az érkező entitás
      */
     @Override
-    public void addEntity(Entity entity) {
-        if (active){
+    public void addEntity(MovingEntity entity) {
+        if (active) {
             teleportToPair(entity);
         }
     }
@@ -52,7 +50,7 @@ public class TeleportGate extends Field {
      *
      * @param entity a teleportkaput használó entitás
      */
-    private void teleportToPair(Entity entity) {
+    private void teleportToPair(MovingEntity entity) {
         //TODO ezt már nem így működtetjük, nem stimmel. Honnét tudjuk mikor adjuk asteroidának és mikor a teleportpárnak
         neighbors.get(0).addEntity(entity);
     }
@@ -92,13 +90,13 @@ public class TeleportGate extends Field {
     }
 
     @Override
-    public void solarFlare(){
-        crazy=true;
+    public void solarFlare() {
+        crazy = true;
     }
 
-    public void crazyMove(){
+    public void crazyMove() {
         //TODO hogyan kapja meg a teleport az egyik szomszédos ASTEROIDÁT
-        if (crazy){
+        if (crazy) {
             //asteroid=getNeighbors().get(0);
         }
     }
