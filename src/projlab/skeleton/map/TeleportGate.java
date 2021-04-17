@@ -1,6 +1,6 @@
 package projlab.skeleton.map;
 
-import projlab.skeleton.entities.Entity;
+import projlab.skeleton.entities.MovingEntity;
 import projlab.skeleton.utils.FunctionPrinter;
 
 import java.util.Scanner;
@@ -38,7 +38,7 @@ public class TeleportGate extends Field {
      * @param entity az érkező entitás
      */
     @Override
-    public void addEntity(Entity entity) {
+    public void addEntity(MovingEntity entity) {
         FunctionPrinter.enter("TeleportGate", "addEntity", this, entity);
         teleportToPair(entity);
         FunctionPrinter.exit();
@@ -49,7 +49,7 @@ public class TeleportGate extends Field {
      *
      * @param entity a teleportkaput használó entitás
      */
-    private void teleportToPair(Entity entity) {
+    private void teleportToPair(MovingEntity entity) {
         FunctionPrinter.enter("TeleportGate", "teleportToPair", this, entity);
         neighbors.get(0).addEntity(entity);
         FunctionPrinter.exit();

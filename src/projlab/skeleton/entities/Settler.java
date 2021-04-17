@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * A telepeseket jelképező osztály
  */
-public class Settler extends Entity {
+public class Settler extends MovingEntity {
 
 	/**
 	 * A telepes hátizsákjában lévő nyersanyagok
@@ -29,20 +29,20 @@ public class Settler extends Entity {
 	/**
 	 * Az egy robot megépítéséhez szükséges nyersanyagokat tároló objektum
 	 */
-	private BillOfResources robotBill;
+	private static BillOfResources robotBill;
 	/**
 	 * A teleportkapuk építéséhez szükséges nyersanyagokat tároló objektum
 	 */
-	private BillOfResources teleportBill;
+	private static BillOfResources teleportBill;
 
 	/**
 	 * A settler konstruktora
 	 * @param robotBill A robothoz szükséges nyersamyagok
 	 * @param teleportBill A teleportokhoz szükséges nyersanyagok
 	 */
-	public Settler(BillOfResources robotBill, BillOfResources teleportBill) {
-		this.robotBill = robotBill;
-		this.teleportBill = teleportBill;
+	public Settler(BillOfResources robotBill, BillOfResources teleportBill) {//param n�lk�li konstr kellene
+		Settler.robotBill = robotBill;
+		Settler.teleportBill = teleportBill;
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class Settler extends Entity {
 			// Ha van még hely a telepes hátizsákjában és nem null az aszteroida nyersanyaga,
 			// akkor adjuk hozzá azt a hátizsákhoz
 			if (resource != null)
-				inventory.add(resource);
+				inventory.add(resource);    //k�r�k v�g�n n�zz�k a gy�zelmet vagy m�r itt is
 		}
 	    FunctionPrinter.exit();
 	}
@@ -77,7 +77,7 @@ public class Settler extends Entity {
 	public void buildTeleport() {
 	    FunctionPrinter.enter("Settler", "buildTeleport", this);
 	    // Ha van elég nyersanyagunk hozzá, építsük meg a teleport kapukat
-		if (teleportBill.isCompleted(inventory) && teleports.size() == 0) {
+		if (teleportBill.isCompleted(inventory) && teleports.size() <2) {//felt�tel �t�rva
 			// Hozzunk létre két teleportkaput
 			TeleportGate teleport1 = new TeleportGate();
 			FunctionPrinter.register(teleport1, "teleport1");
@@ -142,9 +142,9 @@ public class Settler extends Entity {
 			TeleportGate teleport = teleports.get(0);
 			asteroid.addNeighbor(teleport);
 			FunctionPrinter.ask("Le van rakva a teleport parja? (I/N)");
-			boolean placedDown = new Scanner(System.in).next().equals("I");
+			boolean placedDown = new Scanner(System.in).next().equals("I");// nem kell
 			// Ha már mindkét teleportkapu le van rakva, aktiváluk őket
-			if (placedDown) {
+			if (placedDown) {//l�trehoz ilyen attrib�tum
 				teleport.setActive(true);
 			}
 			teleports.remove(0);
@@ -159,9 +159,9 @@ public class Settler extends Entity {
 	public void placeDownResource(Resource resource) {
 	    FunctionPrinter.enter("Settler", "placeDownResource", this, resource);
 	    FunctionPrinter.ask("Le lehet helyezni a nyersanyagot (ki van banyaszva es ureges)? (I/N)");
-	    boolean canPlace = new Scanner(System.in).next().equals("I");
+	    boolean canPlace = new Scanner(System.in).next().equals("I");//nem kell
 	    // Ha lehelyezhető a nyersanyag, rakjuk le és vegyük ki a hátizsákból
-		if (canPlace) {
+		if (canPlace) {// megn�z �res-e mine nem ad vissza semmit
 			location.setResource(resource);
 			inventory.remove(resource);
 			// Ha napközelben vagyunk, indítsuk el a nyersanyag reakcióját

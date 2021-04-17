@@ -7,7 +7,7 @@ import projlab.skeleton.utils.FunctionPrinter;
 /**
  * Az entitásokat jelképező absztrakt ősosztály
  */
-public abstract class Entity {
+public abstract class MovingEntity {
 
 	protected Asteroid location;
 
@@ -15,7 +15,7 @@ public abstract class Entity {
 	 * Az entitás ásás parancsát implementáló metódus
 	 */
 	public void dig() {
-	    FunctionPrinter.enter("Entity", "dig", this);
+	    FunctionPrinter.enter("MovingEntity", "dig", this);
 		location.digLayer();
 	    FunctionPrinter.exit();
 	}
@@ -25,7 +25,7 @@ public abstract class Entity {
 	 * @param field A mező, amire szeretnénk, hogy az entitás lépjen
 	 */
 	public void move(Field field) {
-	    FunctionPrinter.enter("Entity", "move", this, field);
+	    FunctionPrinter.enter("MovingEntity", "move", this, field);
 	    // Távolítsuk el az entitást a mostani helyéről és rakjuk át a másikra
 		location.removeEntity(this);
 		field.addEntity(this);
@@ -36,7 +36,7 @@ public abstract class Entity {
 	 * Az entitás halálát elvégző művelet
 	 */
 	public void die() {
-	    FunctionPrinter.enter("Entity", "die", this);
+	    FunctionPrinter.enter("MovingEntity", "die", this);
 	    location.removeEntity(this);
 	    FunctionPrinter.exit();
 	}
@@ -51,7 +51,7 @@ public abstract class Entity {
 	 * @return Az entitás tartózkodási helye
 	 */
 	public Asteroid getLocation() {
-	    FunctionPrinter.enter("Entity", "getLocation", this);
+	    FunctionPrinter.enter("MovingEntity", "getLocation", this);
 	    FunctionPrinter.exit();
 	    return location;
 	}
@@ -61,7 +61,7 @@ public abstract class Entity {
 	 * @param field Az entitás új tartózkodási helye
 	 */
 	public void setLocation(Asteroid field) {
-	    FunctionPrinter.enter("Entity", "setLocation", this, field);
+	    FunctionPrinter.enter("MovingEntity", "setLocation", this, field);
 	    this.location = field;
 	    FunctionPrinter.exit();
 	}

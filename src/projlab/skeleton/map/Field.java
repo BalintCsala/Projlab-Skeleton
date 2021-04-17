@@ -1,6 +1,6 @@
 package projlab.skeleton.map;
 
-import projlab.skeleton.entities.Entity;
+import projlab.skeleton.entities.MovingEntity;
 import projlab.skeleton.utils.FunctionPrinter;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public abstract class Field {
  * Entitások érkezése
  * @param entity az érkező entitás
  */
-    public abstract void addEntity(Entity entity);
+    public abstract void addEntity(MovingEntity entity);
 /**
  * Napvihar hatása a Fieldekre
  */

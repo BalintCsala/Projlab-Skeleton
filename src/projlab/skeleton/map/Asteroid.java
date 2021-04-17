@@ -1,6 +1,6 @@
 package projlab.skeleton.map;
 
-import projlab.skeleton.entities.Entity;
+import projlab.skeleton.entities.MovingEntity;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.BillOfResources;
 import projlab.skeleton.utils.FunctionPrinter;
@@ -20,7 +20,7 @@ public class Asteroid extends Field {
     /**
      * az aszteroidán tartózkodó entitások
      */
-    private final ArrayList<Entity> entities = new ArrayList<>();
+    private final ArrayList<MovingEntity> entities = new ArrayList<>();
     /**
      * Napvihar hatása az aszteroidára, amennyiben nem lehet elbújni az aszteroidán,
      *  a rajta tartózkodó entitások meghalnak
@@ -31,8 +31,8 @@ public class Asteroid extends Field {
         FunctionPrinter.ask("El lehet rajtam bujni? (I/N)");
         boolean hollow = new Scanner(System.in).next().equals("I");
         if (!hollow) {
-            ArrayList<Entity> temp = new ArrayList<>(entities);
-            for (Entity entity : temp) {
+            ArrayList<MovingEntity> temp = new ArrayList<>(entities);
+            for (MovingEntity entity : temp) {
                 entity.die();
                 entities.remove(entity);
             }
@@ -48,8 +48,8 @@ public class Asteroid extends Field {
     public void explode() {
         FunctionPrinter.enter("Asteroid", "explode", this);
 
-        ArrayList<Entity> temp = new ArrayList<>(entities);
-        for (Entity entity : temp) {
+        ArrayList<MovingEntity> temp = new ArrayList<>(entities);
+        for (MovingEntity entity : temp) {
             entity.explode();
         }
 
@@ -106,7 +106,7 @@ public class Asteroid extends Field {
  * Egy entitás eltávozása az aszteroidáról
  * @param entity az eltávozó entitás
  */
-    public void removeEntity(Entity entity) {
+    public void removeEntity(MovingEntity entity) {
         FunctionPrinter.enter("Asteroid", "removeEntity", this, entity);
         entities.remove(entity);
         FunctionPrinter.exit();
@@ -116,7 +116,7 @@ public class Asteroid extends Field {
  * @param entity  az érkezõ entitás
  */
     @Override
-    public void addEntity(Entity entity) {
+    public void addEntity(MovingEntity entity) {
         FunctionPrinter.enter("Asteroid", "addEntity", this, entity);
         entities.add(entity);
         entity.setLocation(this);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * A robot entitást jelképező
  */
-public class Robot extends Entity {
+public class Robot extends MovingEntity {
 
 	/**
 	 * A robot konstruktora
