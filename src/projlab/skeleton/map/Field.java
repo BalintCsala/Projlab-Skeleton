@@ -20,18 +20,14 @@ public abstract class Field {
      * @param f a szomszéd
      */
     public void addNeighbor(Field f) {
-        FunctionPrinter.enter("Field", "addNeighbor", this, f);
         neighbors.add(f);
-        FunctionPrinter.exit();
     }
 /**
  * Szomszédos Field kivétele a szomszédok közül
  * @param f a szomsz�d
  */
     public void removeNeighbor(Field f) {
-        FunctionPrinter.enter("Field", "removeNeighbor", this, f);
         neighbors.remove(f);
-        FunctionPrinter.exit();
     }
 /**
  * Entitások érkezése
@@ -41,24 +37,16 @@ public abstract class Field {
 /**
  * Napvihar hatása a Fieldekre
  */
-    public void solarFlare() {
-        FunctionPrinter.enter("Field", "solarFlare", this);
-        FunctionPrinter.exit();
-    }
+    public abstract void solarFlare() ;
 /**
  * Szomszédos robbanás hatása a Fieldekre
  */
-    public void explodeReaction() {
-        FunctionPrinter.enter("Field", "explodeReaction", this);
-        FunctionPrinter.exit();
-    }
+    public  void explodeReaction(){}
 /**
  * Visszaadja a Field szomszédjait
  * @return a szomszédok
  */
     public ArrayList<Field> getNeighbors() {
-        FunctionPrinter.enter("Field", "getNeighbors", this);
-        FunctionPrinter.exit();
         return neighbors;
     }
 

@@ -29,11 +29,18 @@ public class Asteroid extends Field {
     private boolean nearSun;
     private int depth;
 
-
+    /**
+     * Konstruktor
+     */
     public Asteroid(){
         depth=new Random().nextInt(10);
         nearSun=new Random().nextBoolean();
     }
+
+    /**
+     * Override a Field solarFlare-re. Ha nem üres, akkor mindenki meghal rajta
+     */
+
     @Override
     public void solarFlare() {
 
@@ -104,7 +111,7 @@ public class Asteroid extends Field {
 
         //TODO: billofresources nem stimmel
 
-        boolean enough = winBill.isCompleted();
+        boolean enough = false; //winBill.isCompleted();
         return enough;
     }
 /**
