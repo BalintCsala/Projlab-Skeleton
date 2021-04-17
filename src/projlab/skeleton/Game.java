@@ -127,5 +127,11 @@ public class Game {
         participants.add(participant);
         FunctionPrinter.exit();
     }
+    
+    public void removeField(Field field) {
+       
+        fields.remove(field);
+       
+    }
 
 }

@@ -1,6 +1,7 @@
 package projlab.skeleton.participants;
 
 import projlab.skeleton.entities.Robot;
+import projlab.skeleton.entities.Ufo;
 import projlab.skeleton.utils.FunctionPrinter;
 
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ public class AI extends Participant {
      */
     private final ArrayList<Robot> robots = new ArrayList<>();
 
+    
+    
+    private final ArrayList<Ufo> ufos = new ArrayList<>();
     /**
      * Privát konstruktor a singletonság kedvéért
      */
@@ -45,6 +49,13 @@ public class AI extends Participant {
         FunctionPrinter.exit();
     }
 
+    
+    public void addUfo(Ufo ufo) {
+        
+        ufos.add(ufo);
+        
+    }
+    
     /**
      * Eltávolít egy robotot a robotok listájából
      * @param robot Az eltávolítandó robot
@@ -53,6 +64,11 @@ public class AI extends Participant {
         FunctionPrinter.enter("AI", "removeRobot", this, robot);
         robots.remove(robot);
         FunctionPrinter.exit();
+    }
+    public void removeUfo(Ufo ufo) {
+        
+        ufos.remove(ufo);
+        
     }
 
 }

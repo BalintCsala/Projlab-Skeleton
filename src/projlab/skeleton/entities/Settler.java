@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * A telepeseket jelképező osztály
  */
-public class Settler extends MovingEntity {
+public class Settler extends MovingEntity implements MiningEntity {
 
 	/**
 	 * A telepes hátizsákjában lévő nyersanyagok
@@ -58,6 +58,7 @@ public class Settler extends MovingEntity {
 	/**
 	 * A bányászás parancsot megvalósító metódus
 	 */
+	@Override
 	public void mine() {
 	    FunctionPrinter.enter("Settler", "mine", this);
 		if (inventory.size() < 10) {
