@@ -21,8 +21,10 @@ public class TeleportGate extends Field {
      * Mmegszűnik létezni a teleportkapu
      */
     public void die() {
-        //TODO itt kéne még vmit csinálni? Vagy csak ennyi?
         active=false;
+        for (Field neighbor : neighbors) {
+            neighbor.removeNeighbor(this);
+        }
     }
 
     /**
