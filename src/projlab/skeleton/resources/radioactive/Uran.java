@@ -6,14 +6,15 @@ import projlab.skeleton.map.Asteroid;
  * Az urán nyersanyagot jelképező osztály
  */
 public class Uran extends Radioactive {
-    private int exposedCount=0;
+    
+    private int exposedCount = 0;
 
     public void setExposedCount(int exposedCount) {
         this.exposedCount = exposedCount;
     }
 
-    public void reaction(Asteroid a){
-        if (exposedCount>=3){
+    public void reaction(Asteroid a) {
+        if (exposedCount >= 3) {
             this.reaction(a);
         }
     }
