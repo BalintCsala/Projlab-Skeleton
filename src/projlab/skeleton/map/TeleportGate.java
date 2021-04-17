@@ -53,8 +53,7 @@ public class TeleportGate extends Field {
      * @param entity a teleportkaput használó entitás
      */
     private void teleportToPair(Entity entity) {
-        //TODO ezt már nem így működtetjük, nem stimmel. Honnét tudjuk mikor adjuk asteroidának és mikor a teleportpárnak
-        neighbors.get(0).addEntity(entity);
+        pair.getAsteroid().addEntity(entity);
     }
 
     /**
@@ -97,9 +96,16 @@ public class TeleportGate extends Field {
     }
 
     public void crazyMove(){
-        //TODO hogyan kapja meg a teleport az egyik szomszédos ASTEROIDÁT
         if (crazy){
-            //asteroid=getNeighbors().get(0);
+            for (Field f: asteroid.getNeighbors())
+            if (f instanceof Asteroid){
+                asteroid.removeNeighbor(this);
+                asteroid=(Asteroid)f;
+                asteroid.addNeighbor(this);
+                return;
+            }
         }
     }
+
+    public Asteroid getAsteroid(){return asteroid;}
 }
