@@ -6,6 +6,7 @@ import projlab.skeleton.utils.BillOfResources;
 import projlab.skeleton.utils.FunctionPrinter;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 /**
  * 
@@ -25,11 +26,18 @@ public class Asteroid extends Field {
      * Napvihar hatása az aszteroidára, amennyiben nem lehet elbújni az aszteroidán,
      *  a rajta tartózkodó entitások meghalnak
      */
+    private boolean nearSun;
+    private int depth;
+
+
+    public Asteroid(){
+        depth=new Random().nextInt(10);
+        nearSun=new Random().nextBoolean();
+    }
     @Override
     public void solarFlare() {
-        FunctionPrinter.enter("Asteroid", "solarFlare", this);
-        FunctionPrinter.ask("El lehet rajtam bujni? (I/N)");
-        boolean hollow = new Scanner(System.in).next().equals("I");
+
+        boolean hollow = depth==0;
         if (!hollow) {
             ArrayList<Entity> temp = new ArrayList<>(entities);
             for (Entity entity : temp) {
@@ -37,8 +45,6 @@ public class Asteroid extends Field {
                 entities.remove(entity);
             }
         }
-
-        FunctionPrinter.exit();
     }
     /**
      * az aszteroida felrobban, a rajta tartózkodó entitások meghalnak,
@@ -46,7 +52,6 @@ public class Asteroid extends Field {
      * 
      */
     public void explode() {
-        FunctionPrinter.enter("Asteroid", "explode", this);
 
         ArrayList<Entity> temp = new ArrayList<>(entities);
         for (Entity entity : temp) {
@@ -58,7 +63,6 @@ public class Asteroid extends Field {
             neighbor.explodeReaction();
         }
 
-        FunctionPrinter.exit();
     }
     /**
      * Az aszteroida bányászása amennyiben nincs több rétege,
@@ -66,8 +70,8 @@ public class Asteroid extends Field {
      * @return Resource 
      */
     public Resource mineResource() {
-        FunctionPrinter.enter("Asteroid", "mineResource", this);
-        if (getLayerDepth() != 0)
+
+        if (depth != 0)
             return null;
 
         Resource res = resource;
@@ -81,25 +85,26 @@ public class Asteroid extends Field {
  * 
  */
     public void digLayer() {  //if
-        FunctionPrinter.enter("Asteroid", "diglayer", this);
-        FunctionPrinter.ask("Napkozelben vagyunk es a reteg 0? (I/N)");
-        String choice = new Scanner(System.in).next();
-        if (choice.equals("I")) {
-            resource.reaction(this);
+
+        if (depth>0) {
+            depth--;
+
+            if (depth == 0 && nearSun) {
+                resource.reaction(this);
+            }
         }
 
-        FunctionPrinter.exit();
     }
 /**
- * Gyõzele  vizsgálata aszteroidán
+ * Gyõzelem  vizsgálata aszteroidán
  * @param winBill a gyõzelemhez szükséges nyersanyagok
  * @return visszaadja, hogy van-e elég nyersanyag az aszteroidán a gyõzelemhez
  */
     public boolean checkEnoughResources(BillOfResources winBill) {
-        FunctionPrinter.enter("Asteroid", "checkEnoughResources", this, winBill);
-        FunctionPrinter.ask("Van eleg nyersanyag az aszteroidan? (I/N)");
-        boolean enough = new Scanner(System.in).next().equals("I");
-        FunctionPrinter.exit();
+
+        //TODO: billofresources nem stimmel
+
+        boolean enough = winBill.isCompleted();
         return enough;
     }
 /**
@@ -107,9 +112,7 @@ public class Asteroid extends Field {
  * @param entity az eltávozó entitás
  */
     public void removeEntity(Entity entity) {
-        FunctionPrinter.enter("Asteroid", "removeEntity", this, entity);
         entities.remove(entity);
-        FunctionPrinter.exit();
     }
 /**
  * Az aszteroidára entitás érkezik
@@ -117,18 +120,14 @@ public class Asteroid extends Field {
  */
     @Override
     public void addEntity(Entity entity) {
-        FunctionPrinter.enter("Asteroid", "addEntity", this, entity);
         entities.add(entity);
         entity.setLocation(this);
-        FunctionPrinter.exit();
     }
 /**
  *  Visszaadja az aszteroida nyersanyagát
  * @return resource az aszteroida nyersanyaga
  */
     public Resource getResource() {
-        FunctionPrinter.enter("Asteroid", "getResource", this);
-        FunctionPrinter.exit();
         return resource;
     }
 /**
@@ -136,30 +135,21 @@ public class Asteroid extends Field {
  * @param res a beállítandó nyersanyag
  */
     public void setResource(Resource res) {
-        FunctionPrinter.enter("Asteroid", "setResource", this, res);
         resource = res;
-        FunctionPrinter.exit();
     }
 /**
  * az aszteroida rétegének visszaadása
  * @return  az aszteroida rétege
  */
-    public int getLayerDepth() {
-        FunctionPrinter.enter("Asteroid", "getLayerDepth", this);
-        FunctionPrinter.ask("Milyen vastag legyen az aszteroida kerge?");
-        int depth = (new Scanner(System.in)).nextInt();
-        FunctionPrinter.exit();
+    public int getDepth() {
         return depth;
     }
+
 /**
  * Visszaadja azt, hogy az aszteroida Napközelben van-e
  * @return napközelben vagy sem
  */
     public boolean getIsNearSun() {
-        FunctionPrinter.enter("Asteroid", "getIsNearSun", this);
-        FunctionPrinter.ask("Kozel van az aszteroida a naphoz? (I/N)");
-        boolean nearSun = new Scanner(System.in).next().equals("I");
-        FunctionPrinter.exit();
         return nearSun;
     }
 }

@@ -20,9 +20,7 @@ public class BillOfResources {
 	 * @param resource A hozzáadandó nyersanyag
 	 */
 	public void addResource(Resource resource) {
-	    FunctionPrinter.enter("BillOfResources", "addResource", this, resource);
 		resources.add(resource);
-	    FunctionPrinter.exit();
 	}
 
 	/**
@@ -31,10 +29,9 @@ public class BillOfResources {
 	 * @return Teljesíti-e a követelményeket a megadott lista
 	 */
 	public boolean isCompleted(ArrayList<Resource> resources) {
-	    FunctionPrinter.enter("BillOfResources", "isCompleted", this, "resources");
-	    FunctionPrinter.ask("Kesz van a megadott resource lista? (I/N)");
-		boolean completed = new Scanner(System.in).next().equals("I");
-	    FunctionPrinter.exit();
+		boolean completed=false;
+		//TODO: isCompleted inside
+
 	    return completed;
 	}
 }
