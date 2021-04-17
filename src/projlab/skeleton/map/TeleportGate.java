@@ -95,9 +95,19 @@ public class TeleportGate extends Field {
     }
 
     public void crazyMove() {
-        //TODO hogyan kapja meg a teleport az egyik szomszédos ASTEROIDÁT
         if (crazy) {
-            //asteroid=getNeighbors().get(0);
+            for (Field f : asteroid.getNeighbors()) {
+                if (f instanceof Asteroid) {
+                    asteroid.removeNeighbor(this);
+                    asteroid = (Asteroid) f;
+                    asteroid.addNeighbor(this);
+                    return;
+                }
+            }
         }
+    }
+
+    public Asteroid getAsteroid() {
+        return asteroid;
     }
 }

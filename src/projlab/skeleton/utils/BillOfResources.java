@@ -26,13 +26,15 @@ public class BillOfResources {
     /**
      * Ellenőrzi, hogy a megadott lista teljesíti-e a követelményeket
      *
-     * @param resources A meglévő nyersanyagok listája
+     * @param incomingResources A meglévő nyersanyagok listája
      * @return Teljesíti-e a követelményeket a megadott lista
      */
-    public boolean isCompleted(ArrayList<Resource> resources) {
-        boolean completed = false;
-        //TODO: isCompleted inside
-
-        return completed;
+    public boolean isCompleted(ArrayList<Resource> incomingResources) {
+		/*ArrayList<Resource> res=resources;
+		for (Resource own: res){
+			for
+		}
+		*/
+        return false;
     }
 }
