@@ -1,5 +1,7 @@
 package projlab.skeleton.participants;
 
+import java.util.Scanner;
+
 import projlab.skeleton.Game;
 import projlab.skeleton.entities.Settler;
 import projlab.skeleton.utils.FunctionPrinter;
@@ -22,7 +24,8 @@ public class Player extends Participant {
         // Ã–ljÃ¼k meg a telepest
         settler.die();
         // TÃ¡volÃ­tsuk el a jÃ¡tÃ©kost a jÃ¡tÃ©kbÃ³l
-        Game.getInstance().removeParticipant(this);
+        //Game.getInstance().removeParticipant(this);
+        isPlaying = false;
         FunctionPrinter.exit();
     }
 
@@ -42,5 +45,60 @@ public class Player extends Participant {
         FunctionPrinter.enter("Player", "setSettler", this, settler);
         this.settler = settler;
         FunctionPrinter.exit();
+    }
+    @Override
+    public void round() {
+    	if(this.settler.getalive()==false) {
+    		isPlaying=false;//majd game kiveszi
+    	} //settler lehetseges lepesei player altal meg player lepesei 
+    	 System.out.println("Kerlek valassz a lehetséges lépések közül :");
+    	 System.out.println("Mine(1):");
+    	 System.out.println("Dig(2)");
+    	 System.out.println("Move(3)");
+    	 System.out.println("Buildteleport(4)");
+    	 System.out.println("Buildrobot(5)");
+    	 System.out.println("PlaceDownResource(6)");
+    	 System.out.println("PlaceDownTeleport(7)");
+    	 System.out.println("Giveup(8)");
+    	 System.out.println("Pass(9)");
+         Scanner scanner = new Scanner(System.in);
+
+         int scenario = scanner.nextInt();
+         
+
+
+         switch (scenario) {
+             case 1:
+                settler.mine();
+                 break;
+             case 2:
+                 settler.dig();
+                 break;
+             case 3:
+            	 settler.move(settler.getLocation().getNeighbors().get(0));//ezt lehet máshogy kellene
+                 break;
+             case 4:
+                 settler.buildTeleportGate();
+                 break;
+             case 5:
+            	 settler.buildRobot();
+                 break;
+             case 6:
+                 settler.placeDownResource(settler.getInventory().get(0));
+                 break;
+             case 7:
+            	 settler.placeDownTeleport(settler.getLocation());;
+                 break;
+             case 8:
+                 this.giveUp();;
+                 break;
+             case 9:
+                 this.pass();;
+                 break;
+           
+           
+         }
+     
+    	
     }
 }

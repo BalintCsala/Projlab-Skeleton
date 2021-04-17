@@ -29,20 +29,36 @@ public class Settler extends MovingEntity implements MiningEntity {
 	/**
 	 * Az egy robot megépítéséhez szükséges nyersanyagokat tároló objektum
 	 */
-	private static BillOfResources robotBill;
+	private static BillOfResources robotBill= new BillOfResources();
+	
+	static {
+		
+		robotBill.addResource(new Coal());
+		
+		robotBill.addResource(new Iron());
+		
+		robotBill.addResource(new Uran());
+	}
 	/**
 	 * A teleportkapuk építéséhez szükséges nyersanyagokat tároló objektum
 	 */
 	private static BillOfResources teleportBill;
-
+	
+	static {
+		teleportBill.addResource(new WaterIce());
+		teleportBill.addResource(new Iron());
+		teleportBill.addResource(new Iron());
+		teleportBill.addResource(new Uran());
+		
+	}
+	private boolean alive;
 	/**
 	 * A settler konstruktora
 	 * @param robotBill A robothoz szükséges nyersamyagok
 	 * @param teleportBill A teleportokhoz szükséges nyersanyagok
 	 */
-	public Settler(BillOfResources robotBill, BillOfResources teleportBill) {//param n�lk�li konstr kellene
-		Settler.robotBill = robotBill;
-		Settler.teleportBill = teleportBill;
+	public Settler() {//param n�lk�li konstr kellene
+		alive = true;
 	}
 
 	/**
@@ -208,6 +224,14 @@ public class Settler extends MovingEntity implements MiningEntity {
 		teleports.add(teleport1);
 		teleports.add(teleport2);
 		FunctionPrinter.exit();
+	}
+	@Override
+	public void die() {
+		alive = false;
+	}
+	public boolean getalive() {
+		
+		return alive;
 	}
 
 }

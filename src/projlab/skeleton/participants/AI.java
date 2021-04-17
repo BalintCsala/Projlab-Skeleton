@@ -70,5 +70,43 @@ public class AI extends Participant {
         ufos.remove(ufo);
         
     }
+    @Override
+    public void round() {
+    	for (Robot robot : robots) {
+            robotround(robot);
+        }
+    	for (Ufo ufo : ufos) {
+            uforound(ufo);
+        }
+    	
+    	
+    }
+    public void robotround(Robot robot) {
+    	int scenario= 1;  // majd valahogy kisorsoljuk
+    	
+    	switch (scenario) {
+        case 1:
+        	robot.move(robot.getLocation().getNeighbors().get(0));//ezt lehet máshogy kellene
+            break;
+        case 2:
+            robot.dig();
+            break;
+        
+      
+    }
+    }
+    public void uforound(Ufo ufo) {
+    	int scenario=1;// majd valahogy kisorsoljuk
+    switch (scenario) {
+    case 1:
+       ufo.mine();
+        break;
+    case 2:
+        ufo.move(ufo.getLocation().getNeighbors().get(0));
+        break;
+    
+  
+    }
+}
 
 }

@@ -1,7 +1,16 @@
 package projlab.skeleton;
 
+import projlab.skeleton.entities.Aluminium;
+import projlab.skeleton.entities.Copper;
+import projlab.skeleton.entities.Plutonium;
+import projlab.skeleton.entities.Sulfur;
+import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
 import projlab.skeleton.participants.Participant;
+import projlab.skeleton.resources.Coal;
+import projlab.skeleton.resources.Iron;
+import projlab.skeleton.resources.WaterIce;
+import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
 import projlab.skeleton.utils.FunctionPrinter;
 
@@ -24,11 +33,24 @@ public class Game {
     /**
      * A játékhoz szükséges nyersanyagokat tároló objektum
      */
-    private BillOfResources winBill;
+    private static BillOfResources winBill;
+    static {
+		winBill.addResource(new Aluminium());
+		winBill.addResource(new Coal());
+		winBill.addResource(new Copper());
+		winBill.addResource(new Iron());
+		winBill.addResource(new Sulfur());
+		winBill.addResource(new WaterIce());
+		winBill.addResource(new Plutonium());
+		winBill.addResource(new Uran());
+	}
 
     /**
      * A singleton design pattern instance tagváltozója
      */
+    
+    private static int effectedCount;
+    
     private static Game instance;
 
     /**
@@ -69,9 +91,20 @@ public class Game {
     public boolean checkGameEnd() {
         FunctionPrinter.enter("Game", "checkGameEnd", this);
         FunctionPrinter.ask("Vege a jateknak? (I/N)");
-        boolean end = new Scanner(System.in).next().equals("I");
+       // boolean end = new Scanner(System.in).next().equals("I");
+        
+        boolean enoughresource=checkEnoughResources();
+        if(!enoughresource||participants.size()==1) {//atirva
+        	return true;
+        	
+        }
+        
+        
         FunctionPrinter.exit();
-        return end;
+        
+        
+        
+        return false;
     }
 
     /**
@@ -81,7 +114,16 @@ public class Game {
     public boolean checkEnoughResources() {
         FunctionPrinter.enter("Game", "checkEnoughResources", this);
         FunctionPrinter.ask("Van eleg nyersanyag? (I/N)");
-        boolean enough = new Scanner(System.in).next().equals("I");
+       // boolean enough = new Scanner(System.in).next().equals("I");
+        Asteroid a = new Asteroid();
+        ArrayList<Resource> b = new ArrayList<>();
+        for(int i=0;i<fields.size();i++) {
+        	if(fields.get(i).getClass()==a.getClass()) {
+        		b.addResource(fields.get(i).getresource());
+        	}
+        	
+        }
+       boolean enough= winBill.isCompleted(b);
         FunctionPrinter.exit();
         return enough;
     }
@@ -92,8 +134,8 @@ public class Game {
     public void solarFlare() {
         FunctionPrinter.enter("Game", "solarFlare", this);
         // Menjünk végig az összes mezőn és futtassunk le rajtuk egy napkitörést
-        for (Field field : fields) {
-            field.solarFlare();
+        for (int i=0;i<effectedCount;i++) {
+            fields.get(i).solarFlare();
         }
         FunctionPrinter.exit();
     }
@@ -132,6 +174,17 @@ public class Game {
        
         fields.remove(field);
        
+    }
+    public void round() {
+    	for (Participant participant : participants) {
+    		if(participant.getisplaying()==true) {
+            participant.round();}
+        }
+    	for (Participant participant : participants) {
+    		if(participant.getisplaying()==false) {
+            removeParticipant(participant);}
+        }
+    	
     }
 
 }
