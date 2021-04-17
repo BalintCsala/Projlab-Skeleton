@@ -1,6 +1,6 @@
 package projlab.skeleton.map;
 
-import projlab.skeleton.entities.MovingEntity;
+import projlab.skeleton.entities.Entity;
 import projlab.skeleton.utils.FunctionPrinter;
 
 import java.util.Scanner;
@@ -13,13 +13,18 @@ public class TeleportGate extends Field {
      * A teleportkapu párja
      */
     private TeleportGate pair;
+    private boolean active=false;
+    private boolean crazy=false;
+    private Asteroid asteroid;
 
     /**
      * Mmegszűnik létezni a teleportkapu
      */
     public void die() {
-        FunctionPrinter.enter("TeleportGate", "die", this);
-        FunctionPrinter.exit();
+        active=false;
+        for (Field neighbor : neighbors) {
+            neighbor.removeNeighbor(this);
+        }
     }
 
     /**
@@ -27,10 +32,8 @@ public class TeleportGate extends Field {
      */
     @Override
     public void explodeReaction() {
-        FunctionPrinter.enter("TeleportGate", "explodeReaction", this);
         pair.die();
         this.die();
-        FunctionPrinter.exit();
     }
 
     /**
@@ -38,10 +41,10 @@ public class TeleportGate extends Field {
      * @param entity az érkező entitás
      */
     @Override
-    public void addEntity(MovingEntity entity) {
-        FunctionPrinter.enter("TeleportGate", "addEntity", this, entity);
-        teleportToPair(entity);
-        FunctionPrinter.exit();
+    public void addEntity(Entity entity) {
+        if (active){
+            teleportToPair(entity);
+        }
     }
 
     /**
@@ -49,10 +52,9 @@ public class TeleportGate extends Field {
      *
      * @param entity a teleportkaput használó entitás
      */
-    private void teleportToPair(MovingEntity entity) {
-        FunctionPrinter.enter("TeleportGate", "teleportToPair", this, entity);
+    private void teleportToPair(Entity entity) {
+        //TODO ezt már nem így működtetjük, nem stimmel. Honnét tudjuk mikor adjuk asteroidának és mikor a teleportpárnak
         neighbors.get(0).addEntity(entity);
-        FunctionPrinter.exit();
     }
 
     /**
@@ -61,21 +63,15 @@ public class TeleportGate extends Field {
      * @param teleport a teleportkapu párja
      */
     public void setPair(TeleportGate teleport) {
-        FunctionPrinter.enter("TeleportGate", "setPair", this, teleport);
         pair = teleport;
-        FunctionPrinter.exit();
     }
 
     /**
-     * Megadja, hogy aktyv-e a teleportkapu
+     * Megadja, hogy aktiv-e a teleportkapu
      *
      * @return aktívság
      */
-    public boolean getActive() {
-        FunctionPrinter.enter("TeleportGate", "getActive", this);
-        FunctionPrinter.ask("Aktiv a teleport? (I/N)");
-        boolean active = new Scanner(System.in).next().equals("I");
-        FunctionPrinter.exit();
+    public boolean isActive() {
         return active;
     }
 
@@ -85,15 +81,25 @@ public class TeleportGate extends Field {
      * @param active a teleportkapu aktívsága
      */
     public void setActive(boolean active) {
-        FunctionPrinter.enter("TeleportGate", "setActive", this, active);
         // Eggyezzen meg a pár aktivitása is
         if (active) {
-            if (!pair.getActive())
+            if (!pair.isActive())
                 pair.setActive(true);
         } else {
-            if (pair.getActive())
+            if (pair.isActive())
                 pair.setActive(false);
         }
-        FunctionPrinter.exit();
+    }
+
+    @Override
+    public void solarFlare(){
+        crazy=true;
+    }
+
+    public void crazyMove(){
+        //TODO hogyan kapja meg a teleport az egyik szomszédos ASTEROIDÁT
+        if (crazy){
+            //asteroid=getNeighbors().get(0);
+        }
     }
 }

@@ -12,7 +12,5 @@ public abstract class Resource {
 	 * @param a Az az aszteroida, amiben a nyersanyag van
 	 */
 	public void reaction(Asteroid a) {
-		FunctionPrinter.enter("Resource", "reaction", this, a);
-		FunctionPrinter.exit();
 	}
 }

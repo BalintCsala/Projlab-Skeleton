@@ -13,11 +13,10 @@ public abstract class Radioactive extends Resource {
 	 * akkor a nyersanyag úgy reagál, hogy felrobbantja az aszteroidát
 	 * @param a Az az aszteroida, amiben a nyersanyag van
 	 */
+
 	@Override
 	public void reaction(Asteroid a) {
-		FunctionPrinter.enter("Radioactive", "reaction", this, a);
 		a.explode();
-		FunctionPrinter.exit();
 	}
 
 }
