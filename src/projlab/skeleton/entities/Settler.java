@@ -158,8 +158,11 @@ public class Settler extends MovingEntity implements MiningEntity {
 	    	// Vegy√ºk ki az els≈ë teleportkaput √©s adjuk hozz√° az aszteroida szomsz√©ds√°g√°hoz
 			TeleportGate teleport = teleports.get(0);
 			asteroid.addNeighbor(teleport);
-			FunctionPrinter.ask("Le van rakva a teleport parja? (I/N)");
-			boolean placedDown = new Scanner(System.in).next().equals("I");// nem kell
+			teleport.setAsteroid(location);
+			boolean placedDown = true;
+			if(teleport.getPair().getAsteroid()==null) {
+			 placedDown =false;
+			 }
 			// Ha m√°r mindk√©t teleportkapu le van rakva, aktiv√°luk ≈ëket
 			if (placedDown) {//lÈtrehoz ilyen attrib˙tum
 				teleport.setActive(true);
@@ -175,8 +178,11 @@ public class Settler extends MovingEntity implements MiningEntity {
 	 */
 	public void placeDownResource(Resource resource) {
 	    FunctionPrinter.enter("Settler", "placeDownResource", this, resource);
-	    FunctionPrinter.ask("Le lehet helyezni a nyersanyagot (ki van banyaszva es ureges)? (I/N)");
-	    boolean canPlace = new Scanner(System.in).next().equals("I");//nem kell
+	    boolean canPlace= false;
+	    //Ha nincs az aszteroid·nak nyersanyaga Ès tˆbb rÈtege akkor ¸reges Ès ezÈrt lerakhatÛ a resource
+	   if(location.getResource()==null && location.getDepth()==0) {
+		   canPlace=true;
+	   }
 	    // Ha lehelyezhet≈ë a nyersanyag, rakjuk le √©s vegy√ºk ki a h√°tizs√°kb√≥l
 		if (canPlace) {// megnÈz ¸res-e mine nem ad vissza semmit
 			location.setResource(resource);

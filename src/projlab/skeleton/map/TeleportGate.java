@@ -108,4 +108,10 @@ public class TeleportGate extends Field {
     public Asteroid getAsteroid() {
         return asteroid;
     }
+    public void setAsteroid(Asteroid a) {
+        asteroid = a;
+    }
+    public TeleportGate getPair() {
+        return pair;
+    }
 }
