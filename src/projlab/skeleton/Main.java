@@ -1,7 +1,9 @@
 package projlab.skeleton;
 
+import com.sun.source.doctree.TextTree;
 import projlab.skeleton.entities.Robot;
 import projlab.skeleton.entities.Settler;
+import projlab.skeleton.entities.Ufo;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
 import projlab.skeleton.map.TeleportGate;
@@ -31,7 +33,12 @@ public class Main {
             System.out.println(ObjectCatalog.getInfo(id));
         });
 
-        TesterEventHandler.registerListener(new String[]{"robot", "*"}, cmd -> ObjectCatalog.addObject(cmd[1], new Robot()));
+        TesterEventHandler.registerListener(new String[]{"robot", "*", "*"}, cmd -> {
+            Robot robot = new Robot();
+            Asteroid asteroid = (Asteroid) ObjectCatalog.getObject(cmd[2]);
+            asteroid.addEntity(robot);
+            ObjectCatalog.addObject(cmd[1], robot);
+        });
 
         TesterEventHandler.registerListener(new String[]{"resource", "coal", "*"}, cmd -> ObjectCatalog.addObject(cmd[2], new Coal()));
 
@@ -53,13 +60,18 @@ public class Main {
 
         TesterEventHandler.registerListener(new String[]{"resource", "aluminium", "*"}, cmd -> ObjectCatalog.addObject(cmd[2], new Aluminium()));
 
-        TesterEventHandler.registerListener(new String[]{"settler", "*", "*", "*"}, cmd -> {
+        TesterEventHandler.registerListener(new String[]{"settler", "*", "*", "*"}, 14, cmd -> {
             String name = cmd[1];
             Player player = (Player) ObjectCatalog.getObject(cmd[2]);
             Asteroid asteroid = (Asteroid) ObjectCatalog.getObject(cmd[3]);
             Settler settler = new Settler();
             player.setSettler(settler);
             asteroid.addEntity(settler);
+
+            for (int i = 4; i < cmd.length; i++) {
+                settler.addResource((Resource) ObjectCatalog.getObject(cmd[i]));
+            }
+
             ObjectCatalog.addObject(name, settler);
         });
 
@@ -142,7 +154,7 @@ public class Main {
 
         TesterEventHandler.registerListener(new String[]{"load", "*"}, cmd -> {
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(cmd[1]));
+                BufferedReader reader = new BufferedReader(new FileReader(cmd[1] + ".txt"));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     TesterEventHandler.fireEvent(new TesterEvent(line.split(" ")));
@@ -152,6 +164,27 @@ public class Main {
                 e.printStackTrace();
             }
         });
+
+        TesterEventHandler.registerListener(new String[]{"ufo", "*", "*"}, cmd -> {
+            Ufo ufo = new Ufo();
+            Asteroid asteroid = (Asteroid) ObjectCatalog.getObject(cmd[2]);
+            asteroid.addEntity(ufo);
+            ObjectCatalog.addObject(cmd[1], ufo);
+        });
+
+        TesterEventHandler.registerListener(new String[]{"dig", "*"}, cmd -> ((Settler) ObjectCatalog.getObject(cmd[1])).dig());
+
+        TesterEventHandler.registerListener(new String[]{"solarflare", "*"}, cmd -> ((Field) ObjectCatalog.getObject(cmd[1])).solarFlare());
+
+        TesterEventHandler.registerListener(new String[]{"round"}, cmd -> Game.getInstance().round());
+
+        TesterEventHandler.registerListener(new String[]{"buildteleport", "*"}, cmd -> ((Settler) ObjectCatalog.getObject(cmd[1])).buildTeleport());
+
+        TesterEventHandler.registerListener(new String[]{"buildrobot", "*"}, cmd -> ((Settler) ObjectCatalog.getObject(cmd[1])).buildRobot());
+
+        TesterEventHandler.registerListener(new String[]{"giveup", "*"}, cmd -> ((Player) ObjectCatalog.getObject(cmd[1])).giveUp());
+
+        TesterEventHandler.registerListener(new String[]{"pass", "*"}, cmd -> ((Player) ObjectCatalog.getObject(cmd[1])).pass());
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
