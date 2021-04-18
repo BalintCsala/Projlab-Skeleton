@@ -1,18 +1,18 @@
 package projlab.skeleton;
 
-import projlab.skeleton.entities.Aluminium;
-import projlab.skeleton.entities.Copper;
-import projlab.skeleton.entities.Plutonium;
-import projlab.skeleton.entities.Sulfur;
+import projlab.skeleton.resources.Aluminium;
+import projlab.skeleton.resources.Copper;
+import projlab.skeleton.resources.radioactive.Plutonium;
+import projlab.skeleton.resources.Sulfur;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
 import projlab.skeleton.participants.Participant;
 import projlab.skeleton.resources.Coal;
 import projlab.skeleton.resources.Iron;
 import projlab.skeleton.resources.WaterIce;
+import projlab.skeleton.resources.Resource;
 import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
-import projlab.skeleton.utils.FunctionPrinter;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -32,6 +32,7 @@ public class Game {
     private final ArrayList<Participant> participants = new ArrayList<>();
     /**
      * A j√°t√©khoz sz√ºks√©ges nyersanyagokat t√°rol√≥ objektum
+     * Hozz·adunk minden nyersanyagtÌpusbÛl egyet, mivel mindegyikbıl 1 kell a j·tÈk megnyerÈsÈhez
      */
     private static BillOfResources winBill;
     static {
@@ -46,10 +47,15 @@ public class Game {
 	}
 
     /**
-     * A singleton design pattern instance tagv√°ltoz√≥ja
+     * Megadja, hogy h·ny Fieldet Èrint a solarFlare
      */
     
     private static int effectedCount;
+    /**
+     * A singleton design pattern instance tagv√°ltoz√≥ja
+     */
+    
+   
     
     private static Game instance;
 
@@ -72,72 +78,65 @@ public class Game {
      * Elind√≠tja a j√°t√©kot, egyel≈ëre semmit nem csin√°l
      */
     public void startGame() {
-        FunctionPrinter.enter("Game", "startGame", this);
-        FunctionPrinter.exit();
+        
     }
 
     /**
      * Befejezi a j√°t√©kot, egyel≈ëre semmit nem csin√°l
      */
     public void endGame() {
-        FunctionPrinter.enter("Game", "endGame", this);
-        FunctionPrinter.exit();
+       
     }
 
     /**
      * Leellen≈ërzi, hogy a j√°t√©k v√©get √©rt-e
+     * Ha egy rÈsztvevı maradt vagy ha nincs elÈg nyersanyag vÈget Èr a j·tÈk
      * @return V√©get √©rt-e a j√°t√©k
      */
     public boolean checkGameEnd() {
-        FunctionPrinter.enter("Game", "checkGameEnd", this);
-        FunctionPrinter.ask("Vege a jateknak? (I/N)");
-       // boolean end = new Scanner(System.in).next().equals("I");
+        
         
         boolean enoughresource=checkEnoughResources();
-        if(!enoughresource||participants.size()==1) {//atirva
+        if(!enoughresource||participants.size()==1) {//participantsbe az AI is beletartozik
         	return true;
         	
         }
         
-        
-        FunctionPrinter.exit();
-        
-        
-        
+      
         return false;
     }
 
     /**
      * Leellen≈ërzi, hogy van-e el√©g nyersanyag a j√°t√©k megnyer√©s√©hez
+     * Megvizsg·lja az aszteroid·kat Ès ˆsszegy˚jti az elıfordulÛ nyersanyag tÌpusokat
      * @return Van-e el√©g nyersanyag a j√°t√©k megnyer√©s√©hez
      */
     public boolean checkEnoughResources() {
-        FunctionPrinter.enter("Game", "checkEnoughResources", this);
-        FunctionPrinter.ask("Van eleg nyersanyag? (I/N)");
-       // boolean enough = new Scanner(System.in).next().equals("I");
+        
         Asteroid a = new Asteroid();
         ArrayList<Resource> b = new ArrayList<>();
         for(int i=0;i<fields.size();i++) {
         	if(fields.get(i).getClass()==a.getClass()) {
-        		b.addResource(fields.get(i).getresource());
+        		a = (Asteroid)fields.get(i);
+        		b.add(a.getResource());
         	}
         	
         }
        boolean enough= winBill.isCompleted(b);
-        FunctionPrinter.exit();
         return enough;
+       
     }
 
     /**
-     * Lefuttat egy napkit√∂r√©st a j√°t√©kp√°ly√°n
+     * Lefuttat egy napkit√∂r√©st a j√°t√©kp√°ly√°n anniy Fielden amennyi az effectedCount
      */
     public void solarFlare() {
-        FunctionPrinter.enter("Game", "solarFlare", this);
+        
         // Menj√ºnk v√©gig az √∂sszes mez≈ën √©s futtassunk le rajtuk egy napkit√∂r√©st
         for (int i=0;i<effectedCount;i++) {
             fields.get(i).solarFlare();
         }
-        FunctionPrinter.exit();
+        
     }
 
     /**
@@ -145,9 +144,9 @@ public class Game {
      * @param field A hozz√°adand√≥ met√≥dus
      */
     public void addField(Field field) {
-        FunctionPrinter.enter("Game", "addField", this, field);
+        
         fields.add(field);
-        FunctionPrinter.exit();
+       
     }
 
     /**
@@ -155,9 +154,9 @@ public class Game {
      * @param participant Az elt√°vol√≠tand√≥ r√©sztvev≈ë
      */
     public void removeParticipant(Participant participant) {
-        FunctionPrinter.enter("Game", "removeParticipant", this, participant);
+       
         participants.remove(participant);
-        FunctionPrinter.exit();
+       
     }
 
     /**
@@ -165,16 +164,25 @@ public class Game {
      * @param participant A hozz√°adand√≥ r√©sztvev≈ë
      */
     public void addParticipant (Participant participant){
-        FunctionPrinter.enter("Game", "addParticipant", this, participant);
+       
         participants.add(participant);
-        FunctionPrinter.exit();
+       
     }
-    
+    /**
+     * Elt√°vol√≠t egy Fieldet a j√°t√©kb√≥l
+     * @param field Az elt√°vol√≠tand√≥ Field
+     */
     public void removeField(Field field) {
        
         fields.remove(field);
        
     }
+    
+    /**
+     * Lefuttat egy kˆrt a j·tÈk rÈsztvevıin 
+     * Amennyiben j·tÈkban vannak mÈg elindul a kˆr¸k
+     * Ha m·r nincsenek j·tÈkban elt·volÌtjuk ıket a rÈsztvevık kˆz¸l
+     */
     public void round() {
     	for (Participant participant : participants) {
     		if(participant.getisplaying()==true) {

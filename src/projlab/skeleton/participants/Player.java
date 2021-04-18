@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import projlab.skeleton.Game;
 import projlab.skeleton.entities.Settler;
-import projlab.skeleton.utils.FunctionPrinter;
+
 
 /**
  * A hum√°n j√°t√©kosokat jelk√©pez≈ë oszt√°ly
@@ -20,21 +20,20 @@ public class Player extends Participant {
      * A felad√°s parancsot implement√°l√≥ met√≥dus
      */
     public void giveUp() {
-        FunctionPrinter.enter("Player", "giveUp", this);
+       
         // √ñlj√ºk meg a telepest
         settler.die();
-        // T√°vol√≠tsuk el a j√°t√©kost a j√°t√©kb√≥l
-        //Game.getInstance().removeParticipant(this);
+        // Be·llÌtjuk, hogy a j√°t√©kos m·r nem j·tszik
+        
         isPlaying = false;
-        FunctionPrinter.exit();
+       
     }
 
     /**
      * A semmittev√©s/passz parancsot implement√°l√≥ met√≥dus, nem csin√°l semmit
      */
     public void pass() {
-        FunctionPrinter.enter("Player", "pass", this);
-        FunctionPrinter.exit();
+        
     }
 
     /**
@@ -42,10 +41,14 @@ public class Player extends Participant {
      * @param settler A be√°ll√≠tand√≥ telepes
      */
     public void setSettler(Settler settler) {
-        FunctionPrinter.enter("Player", "setSettler", this, settler);
+       
         this.settler = settler;
-        FunctionPrinter.exit();
+       
     }
+    /**
+     * Amennyiben a j·tÈkos settlere Èletben van lefuttatjuk a kˆrÈt 
+     * A j·tÈkos v·laszthat egyet a lehtsÈges lÈpÈsek kˆz¸l
+     */
     @Override
     public void round() {
     	if(this.settler.getalive()==false) {
@@ -78,7 +81,7 @@ public class Player extends Participant {
             	 settler.move(settler.getLocation().getNeighbors().get(0));//ezt lehet m·shogy kellene
                  break;
              case 4:
-                 settler.buildTeleportGate();
+                 settler.buildTeleport();;
                  break;
              case 5:
             	 settler.buildRobot();

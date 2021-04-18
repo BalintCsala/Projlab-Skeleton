@@ -2,7 +2,7 @@ package projlab.skeleton.participants;
 
 import projlab.skeleton.entities.Robot;
 import projlab.skeleton.entities.Ufo;
-import projlab.skeleton.utils.FunctionPrinter;
+
 
 import java.util.ArrayList;
 
@@ -21,7 +21,9 @@ public class AI extends Participant {
      */
     private final ArrayList<Robot> robots = new ArrayList<>();
 
-    
+    /**
+     * Az AI ufoi
+     */
     
     private final ArrayList<Ufo> ufos = new ArrayList<>();
     /**
@@ -44,11 +46,14 @@ public class AI extends Participant {
      * @param robot A hozzÃ¡adandÃ³ robot
      */
     public void addRobot(Robot robot) {
-        FunctionPrinter.enter("AI", "addRobot", this, robot);
+       
         robots.add(robot);
-        FunctionPrinter.exit();
+       
     }
-
+    /**
+     * HozzÃ¡ad egy ufot a ufok listÃ¡jÃ¡hoz
+     * @param ufo A hozzÃ¡adandÃ³ ufo
+     */
     
     public void addUfo(Ufo ufo) {
         
@@ -61,27 +66,26 @@ public class AI extends Participant {
      * @param robot Az eltÃ¡volÃ­tandÃ³ robot
      */
     public void removeRobot(Robot robot) {
-        FunctionPrinter.enter("AI", "removeRobot", this, robot);
+       
         robots.remove(robot);
-        FunctionPrinter.exit();
+       
     }
+    /**
+     * EltÃ¡volÃ­t egy ufot a ufok listÃ¡jÃ¡bÃ³l
+     * @param ufo Az eltÃ¡volÃ­tandÃ³ ufo
+     */
     public void removeUfo(Ufo ufo) {
         
         ufos.remove(ufo);
         
     }
-    @Override
-    public void round() {
-    	for (Robot robot : robots) {
-            robotround(robot);
-        }
-    	for (Ufo ufo : ufos) {
-            uforound(ufo);
-        }
-    	
-    	
-    }
-    public void robotround(Robot robot) {
+    /**
+     * A robot lehetséges lépései közül lefuttat egyet
+     * @param robot a robot melynek a köre végrehajtódik
+     */
+
+
+	public void robotround(Robot robot) {
     	int scenario= 1;  // majd valahogy kisorsoljuk
     	
     	switch (scenario) {
@@ -95,6 +99,10 @@ public class AI extends Participant {
       
     }
     }
+	/**
+     * Az ufo lehetséges lépései közül lefuttat egyet
+     * @param ufo az ufo melynek a köre végrehajtódik
+     */
     public void uforound(Ufo ufo) {
     	int scenario=1;// majd valahogy kisorsoljuk
     switch (scenario) {
@@ -108,5 +116,23 @@ public class AI extends Participant {
   
     }
 }
+    
+    
+    /**
+     * Lefuttatja a robots lista elemein  a robotok körét
+     * Lefuttatja a ufos lista elemein  a ufok körét
+     */
+    @Override
+    public void round() {
+    	for (Robot robot : robots) {
+            robotround(robot);
+        }
+    	for (Ufo ufo : ufos) {
+            uforound(ufo);
+        }
+    	
+    	
+    }
+    
 
 }
