@@ -13,6 +13,11 @@ import projlab.skeleton.utils.ObjectCatalog;
 import projlab.skeleton.utils.TesterEvent;
 import projlab.skeleton.utils.TesterEventHandler;
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -133,6 +138,19 @@ public class Main {
             settler.setTeleports(gate1, gate2, null);
             ObjectCatalog.addObject(cmd[1], gate1);
             ObjectCatalog.addObject(cmd[2], gate2);
+        });
+
+        TesterEventHandler.registerListener(new String[]{"load", "*"}, cmd -> {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(cmd[1]));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    TesterEventHandler.fireEvent(new TesterEvent(line.split(" ")));
+                }
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         Scanner scanner = new Scanner(System.in);
