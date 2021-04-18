@@ -1,6 +1,9 @@
 package projlab.skeleton.map;
 
 import projlab.skeleton.entities.MovingEntity;
+import projlab.skeleton.entities.Settler;
+import projlab.skeleton.utils.ObjectCatalog;
+import projlab.skeleton.utils.TesterEventHandler;
 
 /**
  * Teleportkapuk megtestesítése
@@ -35,6 +38,7 @@ public class TeleportGate extends Field {
 
     /**
      * Az teleportkapura entitás érkezik
+     *
      * @param entity az érkező entitás
      */
     @Override
@@ -46,15 +50,16 @@ public class TeleportGate extends Field {
 
     /**
      * A teleportkapu párjára való átteleportálás
+     *
      * @param entity a teleportkaput használó entitás
      */
     private void teleportToPair(MovingEntity entity) {
-        //TODO ezt már nem így működtetjük, nem stimmel. Honnét tudjuk mikor adjuk asteroidának és mikor a teleportpárnak
         neighbors.get(0).addEntity(entity);
     }
 
     /**
      * Beállítja a teleportkapu párját
+     *
      * @param teleport a teleportkapu párja
      */
     public void setPair(TeleportGate teleport) {
@@ -63,6 +68,7 @@ public class TeleportGate extends Field {
 
     /**
      * Megadja, hogy aktiv-e a teleportkapu
+     *
      * @return aktívság
      */
     public boolean isActive() {
@@ -71,6 +77,7 @@ public class TeleportGate extends Field {
 
     /**
      * Beállítjuk a teleportkapu aktívságát
+     *
      * @param active a teleportkapu aktívsága
      */
     public void setActive(boolean active) {
@@ -107,5 +114,12 @@ public class TeleportGate extends Field {
 
     public Asteroid getAsteroid() {
         return asteroid;
+    }
+
+    @Override
+    public String toString() {
+        return "type: TeleportGate\n" +
+                "name: " + ObjectCatalog.getName(this) + "\n" +
+                "pair: " + ObjectCatalog.getName(pair);
     }
 }

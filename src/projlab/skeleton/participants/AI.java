@@ -2,9 +2,11 @@ package projlab.skeleton.participants;
 
 import projlab.skeleton.entities.Robot;
 import projlab.skeleton.entities.Ufo;
-import projlab.skeleton.utils.FunctionPrinter;
+import projlab.skeleton.map.Field;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A mesterséges intelligenciát kezelő, singleton osztály
@@ -21,16 +23,18 @@ public class AI extends Participant {
      */
     private final ArrayList<Robot> robots = new ArrayList<>();
 
-    
-    
+
     private final ArrayList<Ufo> ufos = new ArrayList<>();
+
     /**
      * Privát konstruktor a singletonság kedvéért
      */
-    private AI() { }
+    private AI() {
+    }
 
     /**
      * A singleton design pattern getInstance metódusa
+     *
      * @return Az osztály singleton instance-e
      */
     public static AI getInstance() {
@@ -41,72 +45,70 @@ public class AI extends Participant {
 
     /**
      * Hozzáad egy robotot a robotok listájához
+     *
      * @param robot A hozzáadandó robot
      */
     public void addRobot(Robot robot) {
-        FunctionPrinter.enter("AI", "addRobot", this, robot);
         robots.add(robot);
-        FunctionPrinter.exit();
     }
 
-    
+
     public void addUfo(Ufo ufo) {
-        
+
         ufos.add(ufo);
-        
+
     }
-    
+
     /**
      * Eltávolít egy robotot a robotok listájából
+     *
      * @param robot Az eltávolítandó robot
      */
     public void removeRobot(Robot robot) {
-        FunctionPrinter.enter("AI", "removeRobot", this, robot);
         robots.remove(robot);
-        FunctionPrinter.exit();
     }
+
     public void removeUfo(Ufo ufo) {
-        
         ufos.remove(ufo);
-        
     }
+
     @Override
     public void round() {
-    	for (Robot robot : robots) {
+        for (Robot robot : robots) {
             robotround(robot);
         }
-    	for (Ufo ufo : ufos) {
+        for (Ufo ufo : ufos) {
             uforound(ufo);
         }
-    	
-    	
     }
+
     public void robotround(Robot robot) {
-    	int scenario= 1;  // majd valahogy kisorsoljuk
-    	
-    	switch (scenario) {
-        case 1:
-        	robot.move(robot.getLocation().getNeighbors().get(0));//ezt lehet m�shogy kellene
+        Random random = new Random();
+        int scenario = random.nextInt(2);
+
+        switch (scenario) {
+            case 0:
+                List<Field> neighbors = robot.getLocation().getNeighbors();
+                robot.move(neighbors.get(random.nextInt(neighbors.size())));
             break;
-        case 2:
-            robot.dig();
-            break;
-        
-      
+            case 1:
+                robot.dig();
+                break;
+        }
     }
-    }
+
     public void uforound(Ufo ufo) {
-    	int scenario=1;// majd valahogy kisorsoljuk
-    switch (scenario) {
-    case 1:
-       ufo.mine();
-        break;
-    case 2:
-        ufo.move(ufo.getLocation().getNeighbors().get(0));
-        break;
-    
-  
+        Random random = new Random();
+        int scenario = random.nextInt(2);
+        switch (scenario) {
+            case 0:
+                ufo.mine();
+                break;
+            case 1:
+                List<Field> neighbors = ufo.getLocation().getNeighbors();
+                ufo.move(neighbors.get(random.nextInt(neighbors.size())));
+                break;
+        }
     }
-}
 
 }
