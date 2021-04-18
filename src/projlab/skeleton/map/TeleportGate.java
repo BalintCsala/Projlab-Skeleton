@@ -122,6 +122,10 @@ public class TeleportGate extends Field {
         return asteroid;
     }
 
+    public TeleportGate getPair() {
+        return pair;
+    }
+
     @Override
     public String toString() {
         return "type: TeleportGate\n" +

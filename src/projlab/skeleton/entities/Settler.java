@@ -14,7 +14,6 @@ import projlab.skeleton.utils.ObjectCatalog;
 import projlab.skeleton.utils.TesterEvent;
 import projlab.skeleton.utils.TesterEventHandler;
 
-import javax.management.ObjectName;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -124,9 +123,11 @@ public class Settler extends MovingEntity implements MiningEntity {
             // Vegyük ki az első teleportkaput és adjuk hozzá az aszteroida szomszédságához
             teleports.remove(teleport);
             asteroid.addNeighbor(teleport);
-            boolean placedDown = new Scanner(System.in).next().equals("I");// nem kell
-            // Ha már mindkét teleportkapu le van rakva, aktiváluk őket
-            if (placedDown) {
+			boolean placedDown = true;
+			if(teleport.getPair().getAsteroid()==null) {
+				placedDown =false;
+			}
+			if (placedDown) {
                 teleport.setActive(true);
             }
             teleports.remove(0);
@@ -139,7 +140,10 @@ public class Settler extends MovingEntity implements MiningEntity {
      * @param resource A lehelyezendő nyersanyag
      */
     public void placeDownResource(Resource resource) {
-        boolean canPlace = new Scanner(System.in).next().equals("I");//nem kell
+        boolean canPlace = false;
+		if(location.getResource()==null && location.getDepth()==0) {
+			canPlace=true;
+		}
         // Ha lehelyezhető a nyersanyag, rakjuk le és vegyük ki a hátizsákból
         if (canPlace) {// megn�z �res-e mine nem ad vissza semmit
             location.setResource(resource);
