@@ -1,12 +1,14 @@
 package projlab.skeleton;
 
 import com.sun.source.doctree.TextTree;
+import projlab.skeleton.entities.MiningEntity;
 import projlab.skeleton.entities.Robot;
 import projlab.skeleton.entities.Settler;
 import projlab.skeleton.entities.Ufo;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
 import projlab.skeleton.map.TeleportGate;
+import projlab.skeleton.participants.AI;
 import projlab.skeleton.participants.Player;
 import projlab.skeleton.resources.*;
 import projlab.skeleton.resources.radioactive.Plutonium;
@@ -82,14 +84,15 @@ public class Main {
         });
 
         TesterEventHandler.registerListener(new String[]{"mine", "*"}, cmd -> {
-            Settler settler = (Settler) ObjectCatalog.getObject(cmd[1]);
-            settler.mine();
+            MiningEntity entity = (MiningEntity) ObjectCatalog.getObject(cmd[1]);
+            entity.mine();
         });
 
-        TesterEventHandler.registerListener(new String[]{"placedownteleport", "*", "*"}, cmd -> {
+        TesterEventHandler.registerListener(new String[]{"placedownteleport", "*", "*", "*"}, cmd -> {
             Asteroid asteroid = (Asteroid) ObjectCatalog.getObject(cmd[2]);
             Settler settler = (Settler) ObjectCatalog.getObject(cmd[1]);
-            settler.placeDownTeleport(asteroid);
+            TeleportGate teleport = (TeleportGate) ObjectCatalog.getObject(cmd[3]);
+            settler.placeDownTeleport(asteroid, teleport);
         });
 
         TesterEventHandler.registerListener(new String[]{"placedownresource", "*", "*"}, cmd -> {
@@ -132,13 +135,14 @@ public class Main {
             gate1.setPair(gate2);
             gate2.setPair(gate1);
             gate1.setActive(true);
-            gate2.setActive(true);
             Asteroid asteroid1 = (Asteroid) ObjectCatalog.getObject(cmd[3]);
             Asteroid asteroid2 = (Asteroid) ObjectCatalog.getObject(cmd[4]);
             asteroid1.addTeleport(gate1);
             asteroid2.addTeleport(gate2);
             ObjectCatalog.addObject(cmd[1], gate1);
             ObjectCatalog.addObject(cmd[2], gate2);
+            Game.getInstance().addField(gate1);
+            Game.getInstance().addField(gate2);
         });
 
         TesterEventHandler.registerListener(new String[]{"teleportpairtosettler", "*", "*", "*"}, cmd -> {
@@ -150,6 +154,8 @@ public class Main {
             settler.setTeleports(gate1, gate2, null);
             ObjectCatalog.addObject(cmd[1], gate1);
             ObjectCatalog.addObject(cmd[2], gate2);
+            Game.getInstance().addField(gate1);
+            Game.getInstance().addField(gate2);
         });
 
         TesterEventHandler.registerListener(new String[]{"load", "*"}, cmd -> {
@@ -169,6 +175,7 @@ public class Main {
             Ufo ufo = new Ufo();
             Asteroid asteroid = (Asteroid) ObjectCatalog.getObject(cmd[2]);
             asteroid.addEntity(ufo);
+            AI.getInstance().addUfo(ufo);
             ObjectCatalog.addObject(cmd[1], ufo);
         });
 

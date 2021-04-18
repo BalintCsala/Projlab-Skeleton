@@ -58,5 +58,11 @@ public abstract class Field {
         return neighbors;
     }
 
+    /**
+     * Lefuttat egy kört a mezőn
+     */
+    public void round() {
+
+    }
 
 }

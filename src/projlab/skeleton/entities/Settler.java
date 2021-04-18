@@ -14,6 +14,7 @@ import projlab.skeleton.utils.ObjectCatalog;
 import projlab.skeleton.utils.TesterEvent;
 import projlab.skeleton.utils.TesterEventHandler;
 
+import javax.management.ObjectName;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -96,15 +97,7 @@ public class Settler extends MovingEntity implements MiningEntity {
             teleports.add(teleport1);
             teleports.add(teleport2);
             // Végül távolítsuk el a felhasznált nyersanyagokat a hátizsákból
-            Iron iron1 = new Iron();
-            Iron iron2 = new Iron();
-            WaterIce waterIce = new WaterIce();
-            Uran uran = new Uran();
-
-            removeResource(iron1);
-            removeResource(iron2);
-            removeResource(waterIce);
-            removeResource(uran);
+            teleportBill.removeRequired(inventory);
         }
     }
 
@@ -117,13 +110,7 @@ public class Settler extends MovingEntity implements MiningEntity {
             // Hozzuk létre a robotot, ez automatikusan hozzáadódik az AI-hoz
             Robot robot = new Robot();
             // Majd távolítsuk el a felhasznált nyersanyagokat a hátizsákból
-            Iron iron2 = new Iron();
-            Coal coal2 = new Coal();
-            Uran uran2 = new Uran();
-
-            removeResource(iron2);
-            removeResource(coal2);
-            removeResource(uran2);
+            robotBill.removeRequired(inventory);
         }
     }
 
@@ -132,10 +119,10 @@ public class Settler extends MovingEntity implements MiningEntity {
      *
      * @param asteroid Az aszteroida, amire lehelyezzük a teleportot
      */
-    public void placeDownTeleport(Asteroid asteroid) {
+    public void placeDownTeleport(Asteroid asteroid, TeleportGate teleport) {
         if (teleports.size() > 0) {
             // Vegyük ki az első teleportkaput és adjuk hozzá az aszteroida szomszédságához
-            TeleportGate teleport = teleports.get(0);
+            teleports.remove(teleport);
             asteroid.addNeighbor(teleport);
             boolean placedDown = new Scanner(System.in).next().equals("I");// nem kell
             // Ha már mindkét teleportkapu le van rakva, aktiváluk őket
@@ -218,11 +205,20 @@ public class Settler extends MovingEntity implements MiningEntity {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("type: Settler\n");
+        builder.append("name: ").append(ObjectCatalog.getName(this)).append("\n");
+        builder.append("asteroid name: ").append(ObjectCatalog.getName(location)).append("\n");
         builder.append("alive: ").append(alive).append("\n");
-        builder.append("inventory: \n");
-        for (Resource resource : inventory) {
-            builder.append(ObjectCatalog.getInfo(ObjectCatalog.getName(resource), 1)).append("\n");
+        builder.append("inventoryCount: ").append(inventory.size()).append("\n");
+        if (inventory.size() > 0) {
+            builder.append("inventoryContent: ");
+            for (Resource resource : inventory) {
+                builder.append(ObjectCatalog.getInfo(ObjectCatalog.getName(resource), 1)).append(" ");
+            }
         }
         return builder.toString();
+    }
+
+    public ArrayList<TeleportGate> getTeleports() {
+        return teleports;
     }
 }

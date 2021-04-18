@@ -160,6 +160,10 @@ public class Game {
             }
         }
 
+        for (Field field : fields) {
+            field.round();
+        }
+
     }
 
 }

@@ -44,7 +44,7 @@ public class TeleportGate extends Field {
     @Override
     public void addEntity(MovingEntity entity) {
         if (active) {
-            teleportToPair(entity);
+            pair.teleportToPair(entity);
         }
     }
 
@@ -54,7 +54,7 @@ public class TeleportGate extends Field {
      * @param entity a teleportkaput használó entitás
      */
     private void teleportToPair(MovingEntity entity) {
-        neighbors.get(0).addEntity(entity);
+        asteroid.addEntity(entity);
     }
 
     /**
@@ -82,6 +82,7 @@ public class TeleportGate extends Field {
      */
     public void setActive(boolean active) {
         // Eggyezzen meg a pár aktivitása is
+        this.active = active;
         if (active) {
             if (!pair.isActive())
                 pair.setActive(true);
@@ -99,7 +100,8 @@ public class TeleportGate extends Field {
     /**
      * Megmozgatja a teleportot, ha az megőrült
      */
-    public void crazyMove() {
+    @Override
+    public void round() {
         if (crazy) {
             for (Field f : asteroid.getNeighbors()) {
                 if (f instanceof Asteroid) {
@@ -112,6 +114,10 @@ public class TeleportGate extends Field {
         }
     }
 
+    public void setAsteroid(Asteroid asteroid) {
+        this.asteroid = asteroid;
+    }
+
     public Asteroid getAsteroid() {
         return asteroid;
     }
@@ -120,6 +126,9 @@ public class TeleportGate extends Field {
     public String toString() {
         return "type: TeleportGate\n" +
                 "name: " + ObjectCatalog.getName(this) + "\n" +
-                "pair: " + ObjectCatalog.getName(pair);
+                "pair: " + ObjectCatalog.getName(pair) + "\n" +
+                "asteroid name: " + ObjectCatalog.getName(asteroid) + "\n" +
+                "isActive: " + active + "\n" +
+                "isCrazy: " + crazy;
     }
 }

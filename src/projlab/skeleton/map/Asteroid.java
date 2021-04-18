@@ -43,7 +43,7 @@ public class Asteroid extends Field {
 
     @Override
     public void solarFlare() {
-        boolean hollow = depth == 0;
+        boolean hollow = resource == null && depth == 0;
         if (!hollow) {
             ArrayList<MovingEntity> temp = new ArrayList<>(entities);
             for (MovingEntity entity : temp) {
@@ -168,6 +168,7 @@ public class Asteroid extends Field {
 
     public void addTeleport(TeleportGate teleport) {
         neighbors.add(teleport);
+        teleport.setAsteroid(this);
     }
 
     public void setDepth(int depth) {

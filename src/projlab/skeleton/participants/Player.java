@@ -22,7 +22,8 @@ public class Player extends Participant {
      */
     public void giveUp() {
         // Öljük meg a telepest
-        settler.die();
+        if (settler != null)
+            settler.die();
         // Távolítsuk el a játékost a játékból
         //Game.getInstance().removeParticipant(this);
         isPlaying = false;
@@ -83,7 +84,8 @@ public class Player extends Participant {
                 settler.placeDownResource(settler.getInventory().get(0));
                 break;
             case 7:
-                settler.placeDownTeleport(settler.getLocation());
+                if (settler.getTeleports().size() > 0)
+                    settler.placeDownTeleport(settler.getLocation(), settler.getTeleports().get(0));
                 break;
             case 8:
                 this.giveUp();
