@@ -1,3 +1,4 @@
+
 package projlab.skeleton.map;
 
 import projlab.skeleton.entities.Entity;
@@ -23,10 +24,12 @@ public class Asteroid extends Field {
      */
     private final ArrayList<Entity> entities = new ArrayList<>();
     /**
-     * Napvihar hatása az aszteroidára, amennyiben nem lehet elbújni az aszteroidán,
-     *  a rajta tartózkodó entitások meghalnak
+     * az aszteroida napközelben van-e
      */
     private boolean nearSun;
+    /**
+     * hány réteget kell a magjáig lefúrni
+     */
     private int depth;
 
     /**

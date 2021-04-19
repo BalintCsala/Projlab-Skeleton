@@ -79,6 +79,7 @@ public class TeleportGate extends Field {
      *
      * @param active a teleportkapu aktívsága
      */
+
     public void setActive(boolean active) {
         // Eggyezzen meg a pár aktivitása is
         if (active) {
@@ -90,11 +91,17 @@ public class TeleportGate extends Field {
         }
     }
 
+    /**
+     * override az ősből, a teleportgate viselkedése solarflare-re
+     */
     @Override
     public void solarFlare(){
         crazy=true;
     }
 
+    /**
+     * solarflare hatására aktíválódik a teleportmozgása, ezt írja le a függvény
+     */
     public void crazyMove(){
         if (crazy){
             for (Field f: asteroid.getNeighbors())
@@ -107,5 +114,9 @@ public class TeleportGate extends Field {
         }
     }
 
+    /**
+     * getter
+     * @return
+     */
     public Asteroid getAsteroid(){return asteroid;}
 }
