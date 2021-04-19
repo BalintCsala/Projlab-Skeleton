@@ -17,9 +17,7 @@ name: s1
 asteroid name: a1
 alive: true
 inventoryCount: 1
-inventoryContent:     type: WaterIce
-    name: waterice1
- 
+inventoryContent: waterice1 
 
 type: Ufo
 name: ufo1

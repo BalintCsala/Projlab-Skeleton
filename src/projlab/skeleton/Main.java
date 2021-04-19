@@ -1,6 +1,5 @@
 package projlab.skeleton;
 
-import com.sun.source.doctree.TextTree;
 import projlab.skeleton.entities.*;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
@@ -14,7 +13,6 @@ import projlab.skeleton.utils.ObjectCatalog;
 import projlab.skeleton.utils.TesterEvent;
 import projlab.skeleton.utils.TesterEventHandler;
 
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Scanner;
 
@@ -160,15 +158,38 @@ public class Main {
         TesterEventHandler.registerListener(new String[]{"load", "*"}, cmd -> {
             try {
                 PrintWriter oldWriter = writer;
-                writer = new PrintWriter(new FileWriter("out_" + cmd[1] + ".txt"));
-                BufferedReader reader = new BufferedReader(new FileReader(cmd[1] + ".txt"));
+                StringWriter stringWriter = new StringWriter();
+                writer = new PrintWriter(stringWriter);
+                BufferedReader reader = new BufferedReader(new FileReader("tests/" + cmd[1] + ".txt"));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     TesterEventHandler.fireEvent(new TesterEvent(line.split(" ")));
                 }
+                String result = stringWriter.toString().trim();
                 writer.close();
                 writer = oldWriter;
                 reader.close();
+
+                // Check existing output
+                BufferedReader outputReader = new BufferedReader(new FileReader("tests/out_" + cmd[1] + ".txt"));
+                StringBuilder builder = new StringBuilder();
+                while ((line = outputReader.readLine()) != null) {
+                    builder.append(line).append("\n");
+                }
+                outputReader.close();
+                String example = builder.toString().trim();
+                String[] exampleLines = example.split("\n");
+                String[] resultLines = result.split("\n");
+                boolean success = true;
+                for (int i = 0; i < Math.min(exampleLines.length, resultLines.length); i++) {
+                    if (!exampleLines[i].trim().equals(resultLines[i].trim())) {
+                        System.out.println("Sor #" + (i + 1) + ":");
+                        System.out.println("Vart:   " + exampleLines[i]);
+                        System.out.println("Kapott: " + resultLines[i]);
+                        success = false;
+                    }
+                }
+                System.out.println(success ? "Sikeres teszt" : "Sikertelen teszt");
             } catch (IOException e) {
                 e.printStackTrace();
             }
