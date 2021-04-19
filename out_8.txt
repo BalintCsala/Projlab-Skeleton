@@ -1,0 +1,18 @@
+type: Settler
+name: s1
+asteroid name: a1
+alive: true
+inventoryCount: 1
+inventoryContent:     type: Coal
+    name: c1
+ 
+
+type: Settler
+name: s1
+asteroid name: a1
+alive: true
+inventoryCount: 1
+inventoryContent:     type: Coal
+    name: c1
+ 
+

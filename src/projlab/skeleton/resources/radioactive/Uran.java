@@ -16,8 +16,9 @@ public class Uran extends Radioactive {
     }
 
     public void reaction(Asteroid a) {
+        exposedCount++;
         if (exposedCount >= 3) {
-            this.reaction(a);
+            super.reaction(a);
         }
     }
 

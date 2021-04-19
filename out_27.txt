@@ -1,0 +1,15 @@
+type: Asteroid
+name: a1
+layerDepth: 0
+isNearSun: false
+resource: 
+    type: Iron
+    name: i1
+
+type: Settler
+name: s1
+asteroid name: a1
+alive: true
+inventoryCount: 1
+inventoryContent: c1 
+

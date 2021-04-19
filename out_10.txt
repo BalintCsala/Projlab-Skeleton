@@ -1,0 +1,10 @@
+type: Settler
+name: s1
+asteroid name: a1
+alive: false
+inventoryCount: 0
+
+type: Ufo
+name: ufo1
+alive: false
+

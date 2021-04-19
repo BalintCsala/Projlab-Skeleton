@@ -92,7 +92,7 @@ public class Asteroid extends Field {
         if (depth > 0) {
             depth--;
 
-            if (depth == 0 && nearSun) {
+            if (depth == 0 && resource != null && nearSun) {
                 resource.reaction(this);
             }
         }

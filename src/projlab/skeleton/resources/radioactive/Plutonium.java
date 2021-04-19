@@ -8,7 +8,6 @@ import projlab.skeleton.utils.TesterEventHandler;
  */
 public class Plutonium extends Radioactive {
 
-
     @Override
     public String toString() {
         return "type: Plutonium\n" +

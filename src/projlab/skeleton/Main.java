@@ -1,10 +1,7 @@
 package projlab.skeleton;
 
 import com.sun.source.doctree.TextTree;
-import projlab.skeleton.entities.MiningEntity;
-import projlab.skeleton.entities.Robot;
-import projlab.skeleton.entities.Settler;
-import projlab.skeleton.entities.Ufo;
+import projlab.skeleton.entities.*;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
 import projlab.skeleton.map.TeleportGate;
@@ -18,10 +15,7 @@ import projlab.skeleton.utils.TesterEvent;
 import projlab.skeleton.utils.TesterEventHandler;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -29,10 +23,15 @@ import java.util.Scanner;
  */
 public class Main {
 
+    private static PrintWriter writer;
+
+
     public static void main(String[] args) {
+        writer = new PrintWriter(new OutputStreamWriter(System.out));
+
         TesterEventHandler.registerListener(new String[]{"info", "*"}, cmd -> {
             String id = cmd[1];
-            System.out.println(ObjectCatalog.getInfo(id));
+            writer.println(ObjectCatalog.getInfo(id));
         });
 
         TesterEventHandler.registerListener(new String[]{"robot", "*", "*"}, cmd -> {
@@ -151,7 +150,7 @@ public class Main {
             gate1.setPair(gate2);
             gate2.setPair(gate1);
             Settler settler = (Settler) ObjectCatalog.getObject(cmd[3]);
-            settler.setTeleports(gate1, gate2, null);
+            settler.setTeleports(gate1, gate2);
             ObjectCatalog.addObject(cmd[1], gate1);
             ObjectCatalog.addObject(cmd[2], gate2);
             Game.getInstance().addField(gate1);
@@ -160,11 +159,15 @@ public class Main {
 
         TesterEventHandler.registerListener(new String[]{"load", "*"}, cmd -> {
             try {
+                PrintWriter oldWriter = writer;
+                writer = new PrintWriter(new FileWriter("out_" + cmd[1] + ".txt"));
                 BufferedReader reader = new BufferedReader(new FileReader(cmd[1] + ".txt"));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     TesterEventHandler.fireEvent(new TesterEvent(line.split(" ")));
                 }
+                writer.close();
+                writer = oldWriter;
                 reader.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -179,7 +182,7 @@ public class Main {
             ObjectCatalog.addObject(cmd[1], ufo);
         });
 
-        TesterEventHandler.registerListener(new String[]{"dig", "*"}, cmd -> ((Settler) ObjectCatalog.getObject(cmd[1])).dig());
+        TesterEventHandler.registerListener(new String[]{"dig", "*"}, cmd -> ((MovingEntity) ObjectCatalog.getObject(cmd[1])).dig());
 
         TesterEventHandler.registerListener(new String[]{"solarflare", "*"}, cmd -> ((Field) ObjectCatalog.getObject(cmd[1])).solarFlare());
 

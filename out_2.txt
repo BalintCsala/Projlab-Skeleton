@@ -1,0 +1,27 @@
+type: Asteroid
+name: a1
+layerDepth: 0
+isNearSun: false
+resource: 
+    null
+
+type: Asteroid
+name: a2
+layerDepth: 0
+isNearSun: false
+resource: 
+    null
+
+type: Settler
+name: s1
+asteroid name: a1
+alive: true
+inventoryCount: 1
+inventoryContent:     type: WaterIce
+    name: waterice1
+ 
+
+type: Ufo
+name: ufo1
+alive: true
+

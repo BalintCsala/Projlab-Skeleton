@@ -15,6 +15,7 @@ import projlab.skeleton.utils.TesterEvent;
 import projlab.skeleton.utils.TesterEventHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -122,7 +123,7 @@ public class Settler extends MovingEntity implements MiningEntity {
         if (teleports.size() > 0) {
             // Vegyük ki az első teleportkaput és adjuk hozzá az aszteroida szomszédságához
             teleports.remove(teleport);
-            asteroid.addNeighbor(teleport);
+            asteroid.addTeleport(teleport);
 			boolean placedDown = true;
 			if(teleport.getPair().getAsteroid()==null) {
 				placedDown =false;
@@ -130,7 +131,6 @@ public class Settler extends MovingEntity implements MiningEntity {
 			if (placedDown) {
                 teleport.setActive(true);
             }
-            teleports.remove(0);
         }
     }
 
@@ -179,15 +179,11 @@ public class Settler extends MovingEntity implements MiningEntity {
 
     /**
      * Beállítja a telepesnél lévő teleportkapukat tesztelés célből
-     *
-     * @param teleport1 Az első teleportkapu
-     * @param teleport2 A második teleportkapu
+     * @param teleports A teleport kapuk listája
      */
-    public void setTeleports(TeleportGate teleport1, TeleportGate teleport2, TeleportGate teleport3) {
-        teleports.clear();
-        teleports.add(teleport1);
-        teleports.add(teleport2);
-        teleports.add(teleport3);
+    public void setTeleports(TeleportGate... teleports) {
+        this.teleports.clear();
+        Collections.addAll(this.teleports, teleports);
     }
 
     @Override
@@ -212,11 +208,14 @@ public class Settler extends MovingEntity implements MiningEntity {
         builder.append("name: ").append(ObjectCatalog.getName(this)).append("\n");
         builder.append("asteroid name: ").append(ObjectCatalog.getName(location)).append("\n");
         builder.append("alive: ").append(alive).append("\n");
-        builder.append("inventoryCount: ").append(inventory.size()).append("\n");
-        if (inventory.size() > 0) {
+        builder.append("inventoryCount: ").append(inventory.size() + teleports.size()).append("\n");
+        if (inventory.size() + teleports.size() > 0) {
             builder.append("inventoryContent: ");
             for (Resource resource : inventory) {
-                builder.append(ObjectCatalog.getInfo(ObjectCatalog.getName(resource), 1)).append(" ");
+                builder.append(ObjectCatalog.getName(resource)).append(" ");
+            }
+            for (TeleportGate teleport : teleports) {
+                builder.append(ObjectCatalog.getName(teleport)).append(" ");
             }
         }
         return builder.toString();

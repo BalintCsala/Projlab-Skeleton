@@ -1,0 +1,14 @@
+type: Asteroid
+name: a1
+layerDepth: 1
+isNearSun: false
+resource: 
+    null
+
+type: Asteroid
+name: a1
+layerDepth: 0
+isNearSun: false
+resource: 
+    null
+

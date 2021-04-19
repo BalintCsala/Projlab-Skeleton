@@ -1,0 +1,20 @@
+type: Settler
+name: s1
+asteroid name: a1
+alive: true
+inventoryCount: 3
+inventoryContent:     type: Coal
+    name: coal0
+     type: Iron
+    name: iron0
+     type: Uran
+    name: uran0
+    exposedCount: 0
+ 
+
+type: Settler
+name: s1
+asteroid name: a1
+alive: true
+inventoryCount: 0
+

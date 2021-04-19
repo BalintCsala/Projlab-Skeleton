@@ -1,0 +1,12 @@
+type: Settler
+name: s1
+asteroid name: a1
+alive: true
+inventoryCount: 0
+
+type: Settler
+name: s1
+asteroid name: a2
+alive: true
+inventoryCount: 0
+

@@ -131,7 +131,7 @@ public class TeleportGate extends Field {
         return "type: TeleportGate\n" +
                 "name: " + ObjectCatalog.getName(this) + "\n" +
                 "pair: " + ObjectCatalog.getName(pair) + "\n" +
-                "asteroid name: " + ObjectCatalog.getName(asteroid) + "\n" +
+                "asteroid name: " + (asteroid == null ? "null" : ObjectCatalog.getName(asteroid))+ "\n" +
                 "isActive: " + active + "\n" +
                 "isCrazy: " + crazy;
     }

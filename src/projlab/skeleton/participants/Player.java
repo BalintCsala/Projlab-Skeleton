@@ -49,7 +49,8 @@ public class Player extends Participant {
         if (!this.settler.isAlive()) {
             isPlaying = false;
         }
-        System.out.println("Kerlek valassz a lehetseges lepesek kozul :");
+        return;
+        /*System.out.println("Kerlek valassz a lehetseges lepesek kozul :");
         System.out.println("Mine(1):");
         System.out.println("Dig(2)");
         System.out.println("Move(3)");
@@ -93,7 +94,7 @@ public class Player extends Participant {
             case 9:
                 this.pass();
                 break;
-        }
+        }*/
     }
 
     @Override

@@ -45,6 +45,7 @@ public class Robot extends MovingEntity {
     @Override
     public String toString() {
         return "type: Robot\n" +
-                "name: " + ObjectCatalog.getName(this);
+                "name: " + ObjectCatalog.getName(this) + "\n" +
+                "asteroid name: " + ObjectCatalog.getName(location);
     }
 }
