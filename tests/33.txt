@@ -1,0 +1,13 @@
+startinit
+asteroid a1 3 null false
+player p1
+settler s1 p1 a1
+teleportpairtosettler t1 t2 s1
+endinit
+play
+placedownteleport s1 a1 t1
+info a1
+info s1
+info t1
+info t2
+stopplay 

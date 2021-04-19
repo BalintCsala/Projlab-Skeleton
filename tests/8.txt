@@ -1,0 +1,11 @@
+startinit
+resource coal c1
+asteroid a1 0 null false
+player p1
+settler s1 p1 a1 c1
+endinit
+play
+info s1
+buildteleport s1
+info s1
+stopplay

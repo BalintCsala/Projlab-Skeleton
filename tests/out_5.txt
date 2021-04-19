@@ -1,0 +1,13 @@
+type: Settler
+name: s1
+asteroid name: a1
+alive: true
+inventoryCount: 3
+inventoryContent: coal0 iron0 uran0 
+
+type: Settler
+name: s1
+asteroid name: a1
+alive: true
+inventoryCount: 0
+

@@ -1,0 +1,11 @@
+startinit
+resource uran u1 0
+asteroid a1 1 u1 true
+player p1
+settler s1 p1 a1
+endinit
+play
+info u1
+dig s1
+info u1
+stopplay 

@@ -1,43 +1,40 @@
-
 package projlab.skeleton.map;
 
-import projlab.skeleton.entities.Entity;
+import projlab.skeleton.Game;
+import projlab.skeleton.entities.MovingEntity;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.BillOfResources;
-import projlab.skeleton.utils.FunctionPrinter;
+import projlab.skeleton.utils.ObjectCatalog;
+import projlab.skeleton.utils.TesterEventHandler;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
+
 /**
- * 
  * Ez az osztály az Aszteroidákat testesíti meg
- *
  */
 public class Asteroid extends Field {
+    /**
+     * az aszteroidán tartózkodó entitások
+     */
+    private final ArrayList<MovingEntity> entities = new ArrayList<>();
     /**
      * az aszteroida nyersanyaga
      */
     private Resource resource;
     /**
-     * az aszteroidán tartózkodó entitások
-     */
-    private final ArrayList<Entity> entities = new ArrayList<>();
-    /**
-     * az aszteroida napközelben van-e
+     * Napvihar hatása az aszteroidára, amennyiben nem lehet elbújni az aszteroidán,
+     * a rajta tartózkodó entitások meghalnak
      */
     private boolean nearSun;
-    /**
-     * hány réteget kell a magjáig lefúrni
-     */
     private int depth;
 
     /**
      * Konstruktor
      */
-    public Asteroid(){
-        depth=new Random().nextInt(10);
-        nearSun=new Random().nextBoolean();
+    public Asteroid() {
+        depth = new Random().nextInt(10);
+        nearSun = new Random().nextBoolean();
     }
 
     /**
@@ -46,25 +43,23 @@ public class Asteroid extends Field {
 
     @Override
     public void solarFlare() {
-
-        boolean hollow = depth==0;
+        boolean hollow = resource == null && depth == 0;
         if (!hollow) {
-            ArrayList<Entity> temp = new ArrayList<>(entities);
-            for (Entity entity : temp) {
+            ArrayList<MovingEntity> temp = new ArrayList<>(entities);
+            for (MovingEntity entity : temp) {
                 entity.die();
                 entities.remove(entity);
             }
         }
     }
+
     /**
      * az aszteroida felrobban, a rajta tartózkodó entitások meghalnak,
      * az aszteroida szomszédjai reagálnak a robbanásra és megszûntetik szomszédságukat az aszteroidával
-     * 
      */
     public void explode() {
-
-        ArrayList<Entity> temp = new ArrayList<>(entities);
-        for (Entity entity : temp) {
+        ArrayList<MovingEntity> temp = new ArrayList<>(entities);
+        for (MovingEntity entity : temp) {
             entity.explode();
         }
 
@@ -72,94 +67,125 @@ public class Asteroid extends Field {
             neighbor.removeNeighbor(this);
             neighbor.explodeReaction();
         }
-
     }
+
     /**
      * Az aszteroida bányászása amennyiben nincs több rétege,
-     *  bányászható és visszaadja az aszteroida nyersanyagát
-     * @return Resource 
+     * bányászható és visszaadja az aszteroida nyersanyagát
+     *
+     * @return Resource
      */
     public Resource mineResource() {
-
         if (depth != 0)
             return null;
 
         Resource res = resource;
         setResource(null);
-        FunctionPrinter.exit();
         return res;
     }
-/**
- * Aszteroida rétegének csökkentése, amennyiben Napközelben vagyunk és a réteg 0
- * az aszteroida nyersanyaga reagál
- * 
- */
-    public void digLayer() {  //if
 
-        if (depth>0) {
+    /**
+     * Aszteroida rétegének csökkentése, amennyiben Napközelben vagyunk és a réteg 0
+     * az aszteroida nyersanyaga reagál
+     */
+    public void digLayer() {
+        if (depth > 0) {
             depth--;
 
-            if (depth == 0 && nearSun) {
+            if (depth == 0 && resource != null && nearSun) {
                 resource.reaction(this);
             }
         }
 
     }
-/**
- * Gyõzelem  vizsgálata aszteroidán
- * @param winBill a gyõzelemhez szükséges nyersanyagok
- * @return visszaadja, hogy van-e elég nyersanyag az aszteroidán a gyõzelemhez
- */
+
+    /**
+     * Gyõzelem  vizsgálata aszteroidán
+     *
+     * @param winBill a gyõzelemhez szükséges nyersanyagok
+     * @return visszaadja, hogy van-e elég nyersanyag az aszteroidán a gyõzelemhez
+     */
     public boolean checkEnoughResources(BillOfResources winBill) {
-
-        //TODO: billofresources nem stimmel
-
         boolean enough = false; //winBill.isCompleted();
         return enough;
     }
-/**
- * Egy entitás eltávozása az aszteroidáról
- * @param entity az eltávozó entitás
- */
-    public void removeEntity(Entity entity) {
+
+    /**
+     * Egy entitás eltávozása az aszteroidáról
+     *
+     * @param entity az eltávozó entitás
+     */
+    public void removeEntity(MovingEntity entity) {
         entities.remove(entity);
     }
-/**
- * Az aszteroidára entitás érkezik
- * @param entity  az érkezõ entitás
- */
+
+    /**
+     * Az aszteroidára entitás érkezik
+     *
+     * @param entity az érkezõ entitás
+     */
     @Override
-    public void addEntity(Entity entity) {
+    public void addEntity(MovingEntity entity) {
         entities.add(entity);
         entity.setLocation(this);
     }
-/**
- *  Visszaadja az aszteroida nyersanyagát
- * @return resource az aszteroida nyersanyaga
- */
+
+    /**
+     * Visszaadja az aszteroida nyersanyagát
+     *
+     * @return resource az aszteroida nyersanyaga
+     */
     public Resource getResource() {
         return resource;
     }
-/**
- * Az aszteroida nyersanyagának beállítása
- * @param res a beállítandó nyersanyag
- */
+
+    /**
+     * Az aszteroida nyersanyagának beállítása
+     *
+     * @param res a beállítandó nyersanyag
+     */
     public void setResource(Resource res) {
         resource = res;
     }
-/**
- * az aszteroida rétegének visszaadása
- * @return  az aszteroida rétege
- */
+
+    /**
+     * az aszteroida rétegének visszaadása
+     *
+     * @return az aszteroida rétege
+     */
     public int getDepth() {
         return depth;
     }
 
-/**
- * Visszaadja azt, hogy az aszteroida Napközelben van-e
- * @return napközelben vagy sem
- */
-    public boolean getIsNearSun() {
+    /**
+     * Visszaadja azt, hogy az aszteroida Napközelben van-e
+     *
+     * @return napközelben vagy sem
+     */
+    public boolean isNearSun() {
         return nearSun;
+    }
+
+    public void addTeleport(TeleportGate teleport) {
+        neighbors.add(teleport);
+        teleport.setAsteroid(this);
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
+    public void setNearSun(boolean nearSun) {
+        this.nearSun = nearSun;
+    }
+
+    @Override
+    public String toString() {
+        return "type: Asteroid\n" +
+                "name: " + ObjectCatalog.getName(this) + "\n" +
+                "layerDepth: " + depth + "\n" +
+                "isNearSun: " + nearSun + "\n" +
+                "resource: \n" +
+                    ObjectCatalog.getInfo(ObjectCatalog.getName(resource), 1);
     }
 }

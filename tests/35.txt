@@ -1,0 +1,13 @@
+startinit
+resource plutonium plut1
+asteroid a1 1 plut1 true
+player p1
+settler s1 p1 a1
+ufo ufo1 a1
+endinit
+play
+dig s1
+info a1
+info s1
+info ufo1
+stopplay

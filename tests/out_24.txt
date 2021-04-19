@@ -1,0 +1,16 @@
+type: Robot
+name: r1
+asteroid name: a1
+
+type: Asteroid
+name: a1
+layerDepth: 0
+isNearSun: true
+resource: 
+    type: Plutonium
+    name: pl1
+
+type: Robot
+name: r1
+asteroid name: a2
+

@@ -1,0 +1,21 @@
+startinit
+resource waterice waterice1
+resource coal coal0
+resource coal coal1
+resource coal coal2
+resource coal coal3
+resource coal coal4
+resource coal coal5
+resource coal coal6
+resource coal coal7
+resource coal coal8
+resource coal coal9
+asteroid a1 0 waterice1 false
+player p1
+settler s1 p1 a1 coal0 coal1 coal2 coal3 coal4 coal5 coal6 coal7 coal8 coal9
+endinit
+play
+mine s1
+info a1
+info s1
+stopplay

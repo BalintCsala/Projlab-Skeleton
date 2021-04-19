@@ -1,9 +1,9 @@
 package projlab.skeleton.map;
 
-import projlab.skeleton.entities.Entity;
-import projlab.skeleton.utils.FunctionPrinter;
-
-import java.util.Scanner;
+import projlab.skeleton.entities.MovingEntity;
+import projlab.skeleton.entities.Settler;
+import projlab.skeleton.utils.ObjectCatalog;
+import projlab.skeleton.utils.TesterEventHandler;
 
 /**
  * Teleportkapuk megtestesítése
@@ -13,15 +13,15 @@ public class TeleportGate extends Field {
      * A teleportkapu párja
      */
     private TeleportGate pair;
-    private boolean active=false;
-    private boolean crazy=false;
+    private boolean active = false;
+    private boolean crazy = false;
     private Asteroid asteroid;
 
     /**
      * Mmegszűnik létezni a teleportkapu
      */
     public void die() {
-        active=false;
+        active = false;
         for (Field neighbor : neighbors) {
             neighbor.removeNeighbor(this);
         }
@@ -38,12 +38,13 @@ public class TeleportGate extends Field {
 
     /**
      * Az teleportkapura entitás érkezik
+     *
      * @param entity az érkező entitás
      */
     @Override
-    public void addEntity(Entity entity) {
-        if (active){
-            teleportToPair(entity);
+    public void addEntity(MovingEntity entity) {
+        if (active) {
+            pair.teleportToPair(entity);
         }
     }
 
@@ -52,8 +53,8 @@ public class TeleportGate extends Field {
      *
      * @param entity a teleportkaput használó entitás
      */
-    private void teleportToPair(Entity entity) {
-        pair.getAsteroid().addEntity(entity);
+    private void teleportToPair(MovingEntity entity) {
+        asteroid.addEntity(entity);
     }
 
     /**
@@ -79,9 +80,9 @@ public class TeleportGate extends Field {
      *
      * @param active a teleportkapu aktívsága
      */
-
     public void setActive(boolean active) {
         // Eggyezzen meg a pár aktivitása is
+        this.active = active;
         if (active) {
             if (!pair.isActive())
                 pair.setActive(true);
@@ -91,32 +92,47 @@ public class TeleportGate extends Field {
         }
     }
 
-    /**
-     * override az ősből, a teleportgate viselkedése solarflare-re
-     */
     @Override
-    public void solarFlare(){
-        crazy=true;
+    public void solarFlare() {
+        crazy = true;
     }
 
     /**
-     * solarflare hatására aktíválódik a teleportmozgása, ezt írja le a függvény
+     * Megmozgatja a teleportot, ha az megőrült
      */
-    public void crazyMove(){
-        if (crazy){
-            for (Field f: asteroid.getNeighbors())
-            if (f instanceof Asteroid){
-                asteroid.removeNeighbor(this);
-                asteroid=(Asteroid)f;
-                asteroid.addNeighbor(this);
-                return;
+    @Override
+    public void round() {
+        if (crazy) {
+            for (Field f : asteroid.getNeighbors()) {
+                if (f instanceof Asteroid) {
+                    asteroid.removeNeighbor(this);
+                    asteroid = (Asteroid) f;
+                    asteroid.addNeighbor(this);
+                    return;
+                }
             }
         }
     }
 
-    /**
-     * getter
-     * @return
-     */
-    public Asteroid getAsteroid(){return asteroid;}
+    public void setAsteroid(Asteroid asteroid) {
+        this.asteroid = asteroid;
+    }
+
+    public Asteroid getAsteroid() {
+        return asteroid;
+    }
+
+    public TeleportGate getPair() {
+        return pair;
+    }
+
+    @Override
+    public String toString() {
+        return "type: TeleportGate\n" +
+                "name: " + ObjectCatalog.getName(this) + "\n" +
+                "pair: " + ObjectCatalog.getName(pair) + "\n" +
+                "asteroid name: " + (asteroid == null ? "null" : ObjectCatalog.getName(asteroid))+ "\n" +
+                "isActive: " + active + "\n" +
+                "isCrazy: " + crazy;
+    }
 }

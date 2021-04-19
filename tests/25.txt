@@ -1,0 +1,11 @@
+startinit
+resource waterice wi1
+asteroid a1 1 wi1 true
+player p1
+settler s1 p1 a1
+endinit
+play
+dig s1
+info a1
+info s1
+stopplay 

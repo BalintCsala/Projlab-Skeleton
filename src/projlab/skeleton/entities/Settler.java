@@ -1,212 +1,227 @@
 package projlab.skeleton.entities;
 
 import projlab.skeleton.map.Asteroid;
+import projlab.skeleton.map.Field;
 import projlab.skeleton.map.TeleportGate;
+import projlab.skeleton.participants.Player;
 import projlab.skeleton.resources.Coal;
 import projlab.skeleton.resources.Iron;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.resources.WaterIce;
 import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
-import projlab.skeleton.utils.FunctionPrinter;
+import projlab.skeleton.utils.ObjectCatalog;
+import projlab.skeleton.utils.TesterEvent;
+import projlab.skeleton.utils.TesterEventHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
  * A telepeseket jelképező osztály
  */
-public class Settler extends Entity {
+public class Settler extends MovingEntity implements MiningEntity {
 
-	/**
-	 * A telepes hátizsákjában lévő nyersanyagok
-	 */
-	private final ArrayList<Resource> inventory = new ArrayList<>();
-	/**
-	 * A telepesnél lévő teleportkapuk
-	 */
-	private ArrayList<TeleportGate> teleports = new ArrayList<>();
-	/**
-	 * Az egy robot megépítéséhez szükséges nyersanyagokat tároló objektum
-	 */
-	private BillOfResources robotBill;
-	/**
-	 * A teleportkapuk építéséhez szükséges nyersanyagokat tároló objektum
-	 */
-	private BillOfResources teleportBill;
+    /**
+     * Az egy robot megépítéséhez szükséges nyersanyagokat tároló objektum
+     */
+    private static final BillOfResources robotBill = new BillOfResources();
+    /**
+     * A teleportkapuk építéséhez szükséges nyersanyagokat tároló objektum
+     */
+    private static final BillOfResources teleportBill = new BillOfResources();
 
-	/**
-	 * A settler konstruktora
-	 * @param robotBill A robothoz szükséges nyersamyagok
-	 * @param teleportBill A teleportokhoz szükséges nyersanyagok
-	 */
-	public Settler(BillOfResources robotBill, BillOfResources teleportBill) {
-		this.robotBill = robotBill;
-		this.teleportBill = teleportBill;
-	}
+    static {
+        // A robot bill feltöltése
+        robotBill.addResource(new Coal());
+        robotBill.addResource(new Iron());
+        robotBill.addResource(new Uran());
 
-	/**
-	 * A telepes felrobbanását lekezelő metódus
-	 */
-	@Override
-	public void explode() {
-		FunctionPrinter.enter("Settler", "explode", this);
-		die();
-		FunctionPrinter.exit();
-	}
+        // A teleport bill feltöltése
+        teleportBill.addResource(new WaterIce());
+        teleportBill.addResource(new Iron());
+        teleportBill.addResource(new Iron());
+        teleportBill.addResource(new Uran());
+    }
 
-	/**
-	 * A bányászás parancsot megvalósító metódus
-	 */
-	public void mine() {
-	    FunctionPrinter.enter("Settler", "mine", this);
-		if (inventory.size() < 10) {
-			// Bányásszuk ki az aszteroida nyersanyagát
-			Resource resource = location.mineResource();
-			// Ha van még hely a telepes hátizsákjában és nem null az aszteroida nyersanyaga,
-			// akkor adjuk hozzá azt a hátizsákhoz
-			if (resource != null)
-				inventory.add(resource);
-		}
-	    FunctionPrinter.exit();
-	}
+    /**
+     * A telepes hátizsákjában lévő nyersanyagok
+     */
+    private final ArrayList<Resource> inventory = new ArrayList<>();
+    /**
+     * A telepesnél lévő teleportkapuk
+     */
+    private final ArrayList<TeleportGate> teleports = new ArrayList<>();
+    private boolean alive;
 
-	/**
-	 * A teleportok építését megvalósító metódus
-	 */
-	public void buildTeleport() {
-	    FunctionPrinter.enter("Settler", "buildTeleport", this);
-	    // Ha van elég nyersanyagunk hozzá, építsük meg a teleport kapukat
-		if (teleportBill.isCompleted(inventory) && teleports.size() == 0) {
-			// Hozzunk létre két teleportkaput
-			TeleportGate teleport1 = new TeleportGate();
-			FunctionPrinter.register(teleport1, "teleport1");
-			TeleportGate teleport2 = new TeleportGate();
-			FunctionPrinter.register(teleport2, "teleport2");
-			// majd állítsuk be őket egymás párjának és tároljuk el őket
-			teleport1.setPair(teleport2);
-			teleport2.setPair(teleport1);
-			teleports.add(teleport1);
-			teleports.add(teleport2);
-			// Végül távolítsuk el a felhasznált nyersanyagokat a hátizsákból
-			Iron iron1 = new Iron();
-			FunctionPrinter.register(iron1, "iron1");
-			Iron iron2 = new Iron();
-			FunctionPrinter.register(iron2, "iron2");
-			WaterIce waterIce = new WaterIce();
-			FunctionPrinter.register(waterIce, "waterIce");
-			Uran uran = new Uran();
-			FunctionPrinter.register(uran, "uran");
+    public Settler() {
+        alive = true;
+    }
 
-			removeResource(iron1);
-			removeResource(iron2);
-			removeResource(waterIce);
-			removeResource(uran);
-		}
-	    FunctionPrinter.exit();
-	}
+    /**
+     * A telepes felrobbanását lekezelő metódus
+     */
+    @Override
+    public void explode() {
+        die();
+    }
 
-	/**
-	 * A robot építés parancsot megvalósító metódus
-	 */
-	public void buildRobot() {
-	    FunctionPrinter.enter("Settler", "buildRobot", this);
-		// Ha van elég nyersanyagunk hozzá, építsük meg a robotot
-		if (robotBill.isCompleted(inventory)) {
-			// Hozzuk létre a robotot, ez automatikusan hozzáadódik az AI-hoz
-			Robot robot = new Robot();
-			FunctionPrinter.register(robot, "robot");
-			// Majd távolítsuk el a felhasznált nyersanyagokat a hátizsákból
-			Iron iron2 = new Iron();
-			FunctionPrinter.register(iron2, "iron2");
-			Coal coal2 = new Coal();
-			FunctionPrinter.register(coal2, "coal2");
-			Uran uran2 = new Uran();
-			FunctionPrinter.register(uran2, "uran2");
+    /**
+     * A bányászás parancsot megvalósító metódus
+     */
+    @Override
+    public void mine() {
+        if (inventory.size() < 10) {
+            // Bányásszuk ki az aszteroida nyersanyagát
+            Resource resource = location.mineResource();
+            // Ha van még hely a telepes hátizsákjában és nem null az aszteroida nyersanyaga,
+            // akkor adjuk hozzá azt a hátizsákhoz
+            if (resource != null)
+                inventory.add(resource);
+        }
+    }
 
-			removeResource(iron2);
-			removeResource(coal2);
-			removeResource(uran2);
-		}
-	    FunctionPrinter.exit();
-	}
+    /**
+     * A teleportok építését megvalósító metódus
+     */
+    public void buildTeleport() {
+        // Ha van elég nyersanyagunk hozzá, építsük meg a teleport kapukat
+        if (teleportBill.isCompleted(inventory) && teleports.size() < 2) {
+            // Hozzunk létre két teleportkaput
+            TeleportGate teleport1 = new TeleportGate();
+            TeleportGate teleport2 = new TeleportGate();
+            // majd állítsuk be őket egymás párjának és tároljuk el őket
+            teleport1.setPair(teleport2);
+            teleport2.setPair(teleport1);
+            teleports.add(teleport1);
+            teleports.add(teleport2);
+            // Végül távolítsuk el a felhasznált nyersanyagokat a hátizsákból
+            teleportBill.removeRequired(inventory);
+        }
+    }
 
-	/**
-	 * A teleport lehelyezés parancsot megvalósító metódus
-	 * @param asteroid Az aszteroida, amire lehelyezzük a teleportot
-	 */
-	public void placeDownTeleport(Asteroid asteroid) {
-	    FunctionPrinter.enter("Settler", "placeDownTeleport", this, asteroid);
-	    if (teleports.size() > 0) {
-	    	// Vegyük ki az első teleportkaput és adjuk hozzá az aszteroida szomszédságához
-			TeleportGate teleport = teleports.get(0);
-			asteroid.addNeighbor(teleport);
-			FunctionPrinter.ask("Le van rakva a teleport parja? (I/N)");
-			boolean placedDown = new Scanner(System.in).next().equals("I");
-			// Ha már mindkét teleportkapu le van rakva, aktiváluk őket
+    /**
+     * A robot építés parancsot megvalósító metódus
+     */
+    public void buildRobot() {
+        // Ha van elég nyersanyagunk hozzá, építsük meg a robotot
+        if (robotBill.isCompleted(inventory)) {
+            // Hozzuk létre a robotot, ez automatikusan hozzáadódik az AI-hoz
+            Robot robot = new Robot();
+            // Majd távolítsuk el a felhasznált nyersanyagokat a hátizsákból
+            robotBill.removeRequired(inventory);
+        }
+    }
+
+    /**
+     * A teleport lehelyezés parancsot megvalósító metódus
+     *
+     * @param asteroid Az aszteroida, amire lehelyezzük a teleportot
+     */
+    public void placeDownTeleport(Asteroid asteroid, TeleportGate teleport) {
+        if (teleports.size() > 0) {
+            // Vegyük ki az első teleportkaput és adjuk hozzá az aszteroida szomszédságához
+            teleports.remove(teleport);
+            asteroid.addTeleport(teleport);
+			boolean placedDown = true;
+			if(teleport.getPair().getAsteroid()==null) {
+				placedDown =false;
+			}
 			if (placedDown) {
-				teleport.setActive(true);
-			}
-			teleports.remove(0);
+                teleport.setActive(true);
+            }
+        }
+    }
+
+    /**
+     * A nyersanyag visszahelyezés parancsot implementáló metódus
+     *
+     * @param resource A lehelyezendő nyersanyag
+     */
+    public void placeDownResource(Resource resource) {
+        boolean canPlace = false;
+		if(location.getResource()==null && location.getDepth()==0) {
+			canPlace=true;
 		}
-	    FunctionPrinter.exit();
-	}
+        // Ha lehelyezhető a nyersanyag, rakjuk le és vegyük ki a hátizsákból
+        if (canPlace) {// megn�z �res-e mine nem ad vissza semmit
+            location.setResource(resource);
+            inventory.remove(resource);
+            // Ha napközelben vagyunk, indítsuk el a nyersanyag reakcióját
+            if (location.isNearSun()) {
+                resource.reaction(location);
+            }
+        }
 
-	/**
-	 * A nyersanyag visszahelyezés parancsot implementáló metódus
-	 * @param resource A lehelyezendő nyersanyag
-	 */
-	public void placeDownResource(Resource resource) {
-	    FunctionPrinter.enter("Settler", "placeDownResource", this, resource);
-	    FunctionPrinter.ask("Le lehet helyezni a nyersanyagot (ki van banyaszva es ureges)? (I/N)");
-	    boolean canPlace = new Scanner(System.in).next().equals("I");
-	    // Ha lehelyezhető a nyersanyag, rakjuk le és vegyük ki a hátizsákból
-		if (canPlace) {
-			location.setResource(resource);
-			inventory.remove(resource);
-			// Ha napközelben vagyunk, indítsuk el a nyersanyag reakcióját
-			if (location.getIsNearSun()) {
-				resource.reaction(location);
-			}
-		}
+    }
 
-	    FunctionPrinter.exit();
-	}
+    /**
+     * Hozzáad egy nyersanyagot a telepes hátizsákjához
+     *
+     * @param resource A hozzáadandó nyersanyag
+     */
+    public void addResource(Resource resource) {
+        // Ha még van hely, adjuk hozzá
+        if (inventory.size() < 10) {
+            inventory.add(resource);
+        }
+    }
 
-	/**
-	 * Hozzáad egy nyersanyagot a telepes hátizsákjához
-	 * @param resource A hozzáadandó nyersanyag
-	 */
-	public void addResource(Resource resource) {
-		FunctionPrinter.enter("Settler", "addResource", this, resource);
-		// Ha még van hely, adjuk hozzá
-		if (inventory.size() < 10) {
-			inventory.add(resource);
-		}
-		FunctionPrinter.exit();
-	}
+    /**
+     * Távolítsunk el egy nyersanyagot a teleps hátizsákjából
+     *
+     * @param resource Az eltávolítandó nyersanyag
+     */
+    public void removeResource(Resource resource) {
+        inventory.remove(resource);
+    }
 
-	/**
-	 * Távolítsunk el egy nyersanyagot a teleps hátizsákjából
-	 * @param resource Az eltávolítandó nyersanyag
-	 */
-	public void removeResource(Resource resource) {
-	    FunctionPrinter.enter("Settler", "removeResource", this, resource);
-	    inventory.remove(resource);
-	    FunctionPrinter.exit();
-	}
+    /**
+     * Beállítja a telepesnél lévő teleportkapukat tesztelés célből
+     * @param teleports A teleport kapuk listája
+     */
+    public void setTeleports(TeleportGate... teleports) {
+        this.teleports.clear();
+        Collections.addAll(this.teleports, teleports);
+    }
 
-	/**
-	 * Beállítja a telepesnél lévő teleportkapukat tesztelés célből
-	 * @param teleport1 Az első teleportkapu
-	 * @param teleport2 A második teleportkapu
-	 */
-	public void setTeleports(TeleportGate teleport1, TeleportGate teleport2) {
-		FunctionPrinter.enter("Settler", "setTeleports", this, teleport1, teleport2);
-		teleports.clear();
-		teleports.add(teleport1);
-		teleports.add(teleport2);
-		FunctionPrinter.exit();
-	}
+    @Override
+    public void die() {
+        alive = false;
+    }
 
+    public boolean isAlive() {
+
+        return alive;
+    }
+
+    public ArrayList<Resource> getInventory() {
+        return inventory;
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("type: Settler\n");
+        builder.append("name: ").append(ObjectCatalog.getName(this)).append("\n");
+        builder.append("asteroid name: ").append(ObjectCatalog.getName(location)).append("\n");
+        builder.append("alive: ").append(alive).append("\n");
+        builder.append("inventoryCount: ").append(inventory.size() + teleports.size()).append("\n");
+        if (inventory.size() + teleports.size() > 0) {
+            builder.append("inventoryContent: ");
+            for (Resource resource : inventory) {
+                builder.append(ObjectCatalog.getName(resource)).append(" ");
+            }
+            for (TeleportGate teleport : teleports) {
+                builder.append(ObjectCatalog.getName(teleport)).append(" ");
+            }
+        }
+        return builder.toString();
+    }
+
+    public ArrayList<TeleportGate> getTeleports() {
+        return teleports;
+    }
 }

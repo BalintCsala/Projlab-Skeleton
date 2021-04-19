@@ -5,4 +5,11 @@ package projlab.skeleton.participants;
  */
 public abstract class Participant {
 
+    protected boolean isPlaying = true;
+
+    public abstract void round();
+
+    public boolean getIsPlaying() {
+        return isPlaying;
+    }
 }
