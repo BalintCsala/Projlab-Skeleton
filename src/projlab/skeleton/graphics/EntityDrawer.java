@@ -1,4 +1,5 @@
 package projlab.skeleton.graphics;
 
-public class EntityDrawer {
+public abstract class EntityDrawer  {
+    public abstract void draw(int x, int y);
 }

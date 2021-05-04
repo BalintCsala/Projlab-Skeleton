@@ -188,4 +188,9 @@ public class Asteroid extends Field {
                 "resource: \n" +
                     ObjectCatalog.getInfo(ObjectCatalog.getName(resource), 1);
     }
+
+    @Override
+    public void draw() {
+
+    }
 }

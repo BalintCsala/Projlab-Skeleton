@@ -1,13 +1,14 @@
 package projlab.skeleton.map;
 
 import projlab.skeleton.entities.MovingEntity;
+import projlab.skeleton.graphics.Drawable;
 
 import java.util.ArrayList;
 
 /**
  * Az entitások által tartózkodásra használható objektumok összefogása
  */
-public abstract class Field {
+public abstract class Field implements Drawable {
     /**
      * szomszédos mezők
      */

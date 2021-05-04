@@ -135,4 +135,9 @@ public class TeleportGate extends Field {
                 "isActive: " + active + "\n" +
                 "isCrazy: " + crazy;
     }
+
+    @Override
+    public void draw() {
+
+    }
 }
