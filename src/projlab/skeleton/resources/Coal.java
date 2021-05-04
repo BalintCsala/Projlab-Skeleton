@@ -13,4 +13,5 @@ public class Coal extends Resource {
         return "type: Coal\n" +
                 "name: " + ObjectCatalog.getName(this);
     }
+
 }

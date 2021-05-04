@@ -13,4 +13,6 @@ public class Sulfur extends Resource {
         return "type: Sulfur\n" +
                 "name: " + ObjectCatalog.getName(this);
     }
+
+
 }

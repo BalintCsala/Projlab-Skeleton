@@ -13,4 +13,6 @@ public class Copper extends Resource {
         return "type: Copper\n" +
                 "name: " + ObjectCatalog.getName(this);
     }
+
+
 }

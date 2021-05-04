@@ -13,4 +13,5 @@ public class Aluminium extends Resource {
         return "type: Aluminium\n" +
                 "name: " + ObjectCatalog.getName(this);
     }
+
 }

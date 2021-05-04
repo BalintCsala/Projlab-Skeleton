@@ -13,4 +13,5 @@ public class Iron extends Resource {
         return "type: Iron\n" +
                 "name: " + ObjectCatalog.getName(this);
     }
+
 }

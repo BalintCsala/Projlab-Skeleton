@@ -103,4 +103,8 @@ public class Player extends Participant {
                 "name: " + ObjectCatalog.getName(this) + "\n" +
                 "isPlaying: " + isPlaying;
     }
+
+    public Settler getSettler() {
+        return settler;
+    }
 }
