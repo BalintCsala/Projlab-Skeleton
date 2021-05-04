@@ -1,7 +1,8 @@
 package projlab.skeleton.graphics;
 
+/**
+ * absztrakt ősosztály a teleporthoz, illetve a aszteroidához
+ */
 public abstract class FieldDrawer extends GameDrawer {
-    public void draw(int x, int y, boolean nearSun) {
-
-    }
+    public abstract void draw(int x, int y, boolean nearSun) ;
 }
