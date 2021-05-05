@@ -1,8 +1,11 @@
 package projlab.skeleton.map;
 
+import projlab.skeleton.Game;
 import projlab.skeleton.entities.MovingEntity;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.BillOfResources;
+import projlab.skeleton.utils.ObjectCatalog;
+import projlab.skeleton.utils.TesterEventHandler;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -40,7 +43,7 @@ public class Asteroid extends Field {
 
     @Override
     public void solarFlare() {
-        boolean hollow = depth == 0;
+        boolean hollow = resource == null && depth == 0;
         if (!hollow) {
             ArrayList<MovingEntity> temp = new ArrayList<>(entities);
             for (MovingEntity entity : temp) {
@@ -69,6 +72,7 @@ public class Asteroid extends Field {
     /**
      * Az aszteroida bányászása amennyiben nincs több rétege,
      * bányászható és visszaadja az aszteroida nyersanyagát
+     *
      * @return Resource
      */
     public Resource mineResource() {
@@ -97,18 +101,18 @@ public class Asteroid extends Field {
 
     /**
      * Gyõzelem  vizsgálata aszteroidán
+     *
      * @param winBill a gyõzelemhez szükséges nyersanyagok
      * @return visszaadja, hogy van-e elég nyersanyag az aszteroidán a gyõzelemhez
      */
     public boolean checkEnoughResources(BillOfResources winBill) {
-        //TODO: billofresources nem stimmel
-
         boolean enough = false; //winBill.isCompleted();
         return enough;
     }
 
     /**
      * Egy entitás eltávozása az aszteroidáról
+     *
      * @param entity az eltávozó entitás
      */
     public void removeEntity(MovingEntity entity) {
@@ -117,6 +121,7 @@ public class Asteroid extends Field {
 
     /**
      * Az aszteroidára entitás érkezik
+     *
      * @param entity az érkezõ entitás
      */
     @Override
@@ -127,6 +132,7 @@ public class Asteroid extends Field {
 
     /**
      * Visszaadja az aszteroida nyersanyagát
+     *
      * @return resource az aszteroida nyersanyaga
      */
     public Resource getResource() {
@@ -135,6 +141,7 @@ public class Asteroid extends Field {
 
     /**
      * Az aszteroida nyersanyagának beállítása
+     *
      * @param res a beállítandó nyersanyag
      */
     public void setResource(Resource res) {
@@ -143,6 +150,7 @@ public class Asteroid extends Field {
 
     /**
      * az aszteroida rétegének visszaadása
+     *
      * @return az aszteroida rétege
      */
     public int getDepth() {
@@ -151,13 +159,33 @@ public class Asteroid extends Field {
 
     /**
      * Visszaadja azt, hogy az aszteroida Napközelben van-e
+     *
      * @return napközelben vagy sem
      */
-    public boolean getIsNearSun() {
+    public boolean isNearSun() {
         return nearSun;
     }
 
     public void addTeleport(TeleportGate teleport) {
         neighbors.add(teleport);
+        teleport.setAsteroid(this);
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
+    public void setNearSun(boolean nearSun) {
+        this.nearSun = nearSun;
+    }
+
+    @Override
+    public String toString() {
+        return "type: Asteroid\n" +
+                "name: " + ObjectCatalog.getName(this) + "\n" +
+                "layerDepth: " + depth + "\n" +
+                "isNearSun: " + nearSun + "\n" +
+                "resource: \n" +
+                    ObjectCatalog.getInfo(ObjectCatalog.getName(resource), 1);
     }
 }

@@ -2,6 +2,8 @@ package projlab.skeleton.entities;
 
 import projlab.skeleton.map.Field;
 import projlab.skeleton.participants.AI;
+import projlab.skeleton.utils.ObjectCatalog;
+import projlab.skeleton.utils.TesterEventHandler;
 
 import java.util.ArrayList;
 
@@ -38,5 +40,11 @@ public class Robot extends MovingEntity {
     public void die() {
         super.die();
         AI.getInstance().removeRobot(this);
+    }
+
+    @Override
+    public String toString() {
+        return "type: Robot\n" +
+                "name: " + ObjectCatalog.getName(this);
     }
 }

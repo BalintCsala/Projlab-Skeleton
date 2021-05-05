@@ -1,0 +1,12 @@
+startinit
+asteroid a1 5 null false
+player p1
+settler s1 p1 a1
+ufo ufo1 a1
+endinit
+play
+mine s1
+mine ufo1
+info s1
+info ufo1
+stopplay

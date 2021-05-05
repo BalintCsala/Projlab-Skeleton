@@ -1,0 +1,13 @@
+startinit
+resource coal coal0
+resource iron iron0
+resource uran uran0 0
+asteroid a1 0 null false
+player p1
+settler s1 p1 a1 coal0 iron0 uran0
+endinit
+play
+info s1
+buildrobot s1
+info s1
+stopplay

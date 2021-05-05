@@ -5,6 +5,7 @@ package projlab.skeleton.participants;
  */
 public abstract class Participant {
 
+<<<<<<< HEAD
 	
 	/**
 	 * Megmondja, hogy játékban van-e az adott résztvevõ
@@ -21,4 +22,13 @@ public abstract class Participant {
 	public boolean getisplaying() {
 		return isPlaying;
 	}
+=======
+    protected boolean isPlaying = true;
+
+    public abstract void round();
+
+    public boolean getIsPlaying() {
+        return isPlaying;
+    }
+>>>>>>> refs/remotes/origin/main
 }

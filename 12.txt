@@ -1,0 +1,11 @@
+startinit
+asteroid a1 0 null false
+asteroid a2 0 null false
+neighbor a1 a2
+teleportpairtoasteroids t11 t12 a1 a2
+endinit
+play
+info t11
+solarflare t11
+info t11
+stopplay
