@@ -1,22 +1,16 @@
 package projlab.skeleton.entities;
 
 import projlab.skeleton.map.Asteroid;
-import projlab.skeleton.map.Field;
 import projlab.skeleton.map.TeleportGate;
-import projlab.skeleton.participants.Player;
 import projlab.skeleton.resources.Coal;
 import projlab.skeleton.resources.Iron;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.resources.WaterIce;
 import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
-import projlab.skeleton.utils.ObjectCatalog;
-import projlab.skeleton.utils.TesterEvent;
-import projlab.skeleton.utils.TesterEventHandler;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 /**
  * A telepeseket jelképező osztály
@@ -200,26 +194,6 @@ public class Settler extends MovingEntity implements MiningEntity {
         return inventory;
     }
 
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("type: Settler\n");
-        builder.append("name: ").append(ObjectCatalog.getName(this)).append("\n");
-        builder.append("asteroid name: ").append(ObjectCatalog.getName(location)).append("\n");
-        builder.append("alive: ").append(alive).append("\n");
-        builder.append("inventoryCount: ").append(inventory.size() + teleports.size()).append("\n");
-        if (inventory.size() + teleports.size() > 0) {
-            builder.append("inventoryContent: ");
-            for (Resource resource : inventory) {
-                builder.append(ObjectCatalog.getName(resource)).append(" ");
-            }
-            for (TeleportGate teleport : teleports) {
-                builder.append(ObjectCatalog.getName(teleport)).append(" ");
-            }
-        }
-        return builder.toString();
-    }
 
     public ArrayList<TeleportGate> getTeleports() {
         return teleports;

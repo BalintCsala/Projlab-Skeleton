@@ -1,8 +1,6 @@
 package projlab.skeleton.resources;
 
 import projlab.skeleton.map.Asteroid;
-import projlab.skeleton.utils.ObjectCatalog;
-import projlab.skeleton.utils.TesterEventHandler;
 
 /**
  * A vízjég nyersanyagot jelképező osztály
@@ -19,10 +17,5 @@ public class WaterIce extends Resource {
         a.setResource(null);
     }
 
-    @Override
-    public String toString() {
-        return "type: WaterIce\n" +
-                "name: " + ObjectCatalog.getName(this);
-    }
 
 }

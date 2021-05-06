@@ -2,10 +2,6 @@ package projlab.skeleton.participants;
 
 import projlab.skeleton.Game;
 import projlab.skeleton.entities.Settler;
-import projlab.skeleton.utils.ObjectCatalog;
-import projlab.skeleton.utils.TesterEventHandler;
-
-import java.util.Scanner;
 
 /**
  * A humán játékosokat jelképező osztály
@@ -95,13 +91,6 @@ public class Player extends Participant {
                 this.pass();
                 break;
         }*/
-    }
-
-    @Override
-    public String toString() {
-        return "type: Player\n" +
-                "name: " + ObjectCatalog.getName(this) + "\n" +
-                "isPlaying: " + isPlaying;
     }
 
     public Settler getSettler() {

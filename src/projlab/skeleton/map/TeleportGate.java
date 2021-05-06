@@ -1,9 +1,6 @@
 package projlab.skeleton.map;
 
 import projlab.skeleton.entities.MovingEntity;
-import projlab.skeleton.entities.Settler;
-import projlab.skeleton.utils.ObjectCatalog;
-import projlab.skeleton.utils.TesterEventHandler;
 
 /**
  * Teleportkapuk megtestesítése
@@ -124,16 +121,6 @@ public class TeleportGate extends Field {
 
     public TeleportGate getPair() {
         return pair;
-    }
-
-    @Override
-    public String toString() {
-        return "type: TeleportGate\n" +
-                "name: " + ObjectCatalog.getName(this) + "\n" +
-                "pair: " + ObjectCatalog.getName(pair) + "\n" +
-                "asteroid name: " + (asteroid == null ? "null" : ObjectCatalog.getName(asteroid))+ "\n" +
-                "isActive: " + active + "\n" +
-                "isCrazy: " + crazy;
     }
 
     @Override

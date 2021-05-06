@@ -1,11 +1,8 @@
 package projlab.skeleton.map;
 
-import projlab.skeleton.Game;
 import projlab.skeleton.entities.MovingEntity;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.BillOfResources;
-import projlab.skeleton.utils.ObjectCatalog;
-import projlab.skeleton.utils.TesterEventHandler;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -177,16 +174,6 @@ public class Asteroid extends Field {
 
     public void setNearSun(boolean nearSun) {
         this.nearSun = nearSun;
-    }
-
-    @Override
-    public String toString() {
-        return "type: Asteroid\n" +
-                "name: " + ObjectCatalog.getName(this) + "\n" +
-                "layerDepth: " + depth + "\n" +
-                "isNearSun: " + nearSun + "\n" +
-                "resource: \n" +
-                    ObjectCatalog.getInfo(ObjectCatalog.getName(resource), 1);
     }
 
     @Override

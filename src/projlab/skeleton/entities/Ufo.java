@@ -1,7 +1,5 @@
 package projlab.skeleton.entities;
 
-import projlab.skeleton.utils.ObjectCatalog;
-
 public class Ufo extends MovingEntity implements MiningEntity {
 
     private boolean alive = true;
@@ -28,10 +26,4 @@ public class Ufo extends MovingEntity implements MiningEntity {
         die();
     }
 
-    @Override
-    public String toString() {
-        return "type: Ufo\n" +
-                "name: " + ObjectCatalog.getName(this) + "\n" +
-                "alive: " + alive;
-    }
 }
