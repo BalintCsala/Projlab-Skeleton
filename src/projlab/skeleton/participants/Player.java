@@ -25,7 +25,7 @@ public class Player extends Participant {
         if (settler != null)
             settler.die();
         // Távolítsuk el a játékost a játékból
-        //Game.getInstance().removeParticipant(this);
+        Game.getInstance().removeParticipant(this);
         isPlaying = false;
     }
 

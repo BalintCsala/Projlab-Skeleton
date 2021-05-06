@@ -5,8 +5,8 @@ package projlab.skeleton.graphics;
  * Gyakorlatilag lekéri az aktív aszteroidát és a tulajdonságai alapján felépíti a pályát
  */
 
-public class GameDrawer {
-    public void draw(){
+public abstract class GameDrawer<T> {
 
-    }
+    public abstract void draw(T object, int x, int y);
+
 }

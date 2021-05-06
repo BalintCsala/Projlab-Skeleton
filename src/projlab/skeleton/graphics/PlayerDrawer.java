@@ -8,31 +8,27 @@ import projlab.skeleton.resources.Resource;
  * Gyakorlatilag a statusbar-on megjelenő dolgokat rajzolja ki
  */
 
-public class PlayerDrawer {
-    private Player player;
+public class PlayerDrawer extends GameDrawer<Player> {
 
-    public PlayerDrawer(Player p){
-        player=p;
+    @Override
+    public void draw(Player player, int x, int y) {
+        drawName(player);
+        drawResources(player);
+        drawTeleports(player);
     }
 
-    public void draw() {
-        drawName();
-        drawResources();
-        drawTeleports();
-    }
-
-    public void drawName() {
+    public void drawName(Player player) {
         //TODO: Kiírni coor: 870:40 player.toString()
     }
 
-    public void drawResources() {
+    public void drawResources(Player player) {
         Settler s= player.getSettler();
         for (Resource r: s.getInventory()){
 
         }
     }
 
-    public void drawTeleports(){
+    public void drawTeleports(Player player){
 
     }
 }

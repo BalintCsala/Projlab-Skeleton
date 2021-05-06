@@ -1,11 +1,15 @@
 package projlab.skeleton.graphics;
 
+import projlab.skeleton.map.TeleportGate;
+
 /**
  * Teleport kirajzolása
  */
-public class TeleportDrawer extends FieldDrawer{
+public class TeleportDrawer extends GameDrawer<TeleportGate> {
+
     @Override
-    public void draw(int x, int y, boolean nearSun) {
+    public void draw(TeleportGate teleport, int x, int y) {
 
     }
+
 }
