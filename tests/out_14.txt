@@ -1,4 +1,0 @@
-type: Player
-name: p1
-isPlaying: false
-
