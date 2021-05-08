@@ -1,8 +1,0 @@
-type: Uran
-name: u1
-exposedCount: 0
-
-type: Uran
-name: u1
-exposedCount: 1
-

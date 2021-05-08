@@ -1,7 +1,0 @@
-startinit
-player p1
-endinit
-play
-giveup p1
-info p1
-stopplay
