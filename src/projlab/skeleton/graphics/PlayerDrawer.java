@@ -1,16 +1,14 @@
 package projlab.skeleton.graphics;
-
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+
+import projlab.skeleton.MainController;
 import projlab.skeleton.entities.Settler;
 import projlab.skeleton.participants.Player;
-import projlab.skeleton.resources.Resource;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+
 
 /**
  * Gyakorlatilag a statusbar-on megjelenő dolgokat rajzolja ki
@@ -31,8 +29,7 @@ public class PlayerDrawer extends GameDrawer<Player> {
     Image waterice = new Image(new FileInputStream("/res/waterice.png"));
     Image teleport = new Image(new FileInputStream("/res/teleport.png"));
     Image crazyteleport = new Image(new FileInputStream("/res/crazy_teleport.png"));
-    Text playername;
-    ArrayList<ImageView> imageViews;
+
 
     public PlayerDrawer() throws FileNotFoundException {
     }
@@ -46,7 +43,6 @@ public class PlayerDrawer extends GameDrawer<Player> {
      */
     @Override
     public void draw(Player player, int x, int y) throws Exception {
-        imageViews.clear();
         drawName(player);
         drawResources(player);
         drawTeleports(player);
@@ -57,8 +53,7 @@ public class PlayerDrawer extends GameDrawer<Player> {
      * @param player adott játékos
      */
     private void drawName(Player player) {
-        playername=new Text(435,10,"Player"); //TODO: sorszámot adni a playernek
-        playername.setFont(new Font(20));
+        MainController.g.fillText("Player",435, 10);
     }
 
     /**
@@ -70,33 +65,32 @@ public class PlayerDrawer extends GameDrawer<Player> {
         Settler s= player.getSettler();
         for (int i=0; i<s.getInventory().size(); i++){
             String r=s.getInventory().get(i).getClass().getSimpleName();
-            ImageView res=new ImageView();
-            res.setX(310+i*120);
-            res.setY(435);
+            int x= (155+i*60);
+            int y =(435);
             switch (r) {
                 case "Aluminium":
-                    res.setImage(aluminium);
+                    MainController.g.drawImage(aluminium,x,y);
                     break;
                 case "Coal":
-                    res.setImage(coal);
+                    MainController.g.drawImage(coal,x,y);
                     break;
                 case "Copper":
-                    res.setImage(copper);
+                    MainController.g.drawImage(copper,x,y);
                     break;
                 case "Iron":
-                    res.setImage(iron);
+                    MainController.g.drawImage(iron,x,y);
                     break;
                 case "Plutonium":
-                    res.setImage(plutonium);
+                    MainController.g.drawImage(plutonium,x,y);
                     break;
                 case "Sulfur":
-                    res.setImage(sulfur);
+                    MainController.g.drawImage(sulfur,x,y);
                     break;
-                case"Uran":
-                    res.setImage(uran);
+                case "Uran":
+                   MainController.g.drawImage(uran,x,y);
                     break;
                 case "WaterIce":
-                    res.setImage(waterice);
+                    MainController.g.drawImage(waterice,x,y);
                     break;
                 default:
                     throw new Exception("Nincs ilyen osztaly, nem tudok kepet tolteni hozza");
@@ -108,13 +102,11 @@ public class PlayerDrawer extends GameDrawer<Player> {
     private void drawTeleports(Player player){
         Settler s= player.getSettler();
         for (int i=0; i<s.getTeleports().size(); i++){
-            ImageView tele=new ImageView();
-            tele.setX(310+i*120);
-            tele.setY(435);
+            int x=(155+i*60);
+            int y= (435);
             if (s.getTeleports().get(i).isCrazy()) {
-                tele.setImage(crazyteleport);
-            } else{tele.setImage(teleport);}
-            imageViews.add(tele);
+                MainController.g.drawImage(crazyteleport,x,y);
+            } else{MainController.g.drawImage(crazyteleport,x,y);}
         }
     }
 

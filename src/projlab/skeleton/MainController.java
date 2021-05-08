@@ -14,7 +14,7 @@ public class MainController implements Initializable {
     @FXML
     public Canvas canvas;
 
-    private GraphicsContext g;
+    public static GraphicsContext g;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
