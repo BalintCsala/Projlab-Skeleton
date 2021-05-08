@@ -1,7 +1,8 @@
 package projlab.skeleton.graphics;
 import javafx.scene.image.Image;
 
-import projlab.skeleton.MainController;
+import projlab.skeleton.GameController;
+import projlab.skeleton.GameController;
 import projlab.skeleton.entities.Settler;
 import projlab.skeleton.participants.Player;
 
@@ -19,16 +20,16 @@ public class PlayerDrawer extends GameDrawer<Player> {
     /**
      * image-ek a képek betöltéséhez
      */
-    Image aluminium = new Image("/res/aluminium.png");
-    Image coal = new Image("/res/coal.png");
-    Image copper = new Image("/res/copper.png");
-    Image iron = new Image("/res/iron.png");
-    Image plutonium = new Image("/res/plutonium.png");
-    Image sulfur = new Image("/res/sulfur.png");
-    Image uran = new Image("/res/uran.png");
-    Image waterice = new Image("/res/waterice.png");
-    Image teleport = new Image("/res/teleport.png");
-    Image crazyteleport = new Image("/res/crazy_teleport.png");
+    Image aluminium = new Image("aluminium.png");
+    Image coal = new Image("coal.png");
+    Image copper = new Image("copper.png");
+    Image iron = new Image("iron.png");
+    Image plutonium = new Image("plutonium.png");
+    Image sulfur = new Image("sulfur.png");
+    Image uran = new Image("uran.png");
+    Image waterice = new Image("waterice.png");
+    Image teleport = new Image("teleport.png");
+    Image crazyteleport = new Image("crazy_teleport.png");
 
 
     public PlayerDrawer() throws FileNotFoundException {
@@ -53,7 +54,7 @@ public class PlayerDrawer extends GameDrawer<Player> {
      * @param player adott játékos
      */
     private void drawName(Player player) {
-        MainController.g.fillText("Player",435, 10);
+        GameController.g.fillText("Player",435, 10);
     }
 
     /**
@@ -69,28 +70,28 @@ public class PlayerDrawer extends GameDrawer<Player> {
             int y =(435);
             switch (r) {
                 case "Aluminium":
-                    MainController.g.drawImage(aluminium,x,y);
+                    GameController.g.drawImage(aluminium,x,y);
                     break;
                 case "Coal":
-                    MainController.g.drawImage(coal,x,y);
+                    GameController.g.drawImage(coal,x,y);
                     break;
                 case "Copper":
-                    MainController.g.drawImage(copper,x,y);
+                    GameController.g.drawImage(copper,x,y);
                     break;
                 case "Iron":
-                    MainController.g.drawImage(iron,x,y);
+                    GameController.g.drawImage(iron,x,y);
                     break;
                 case "Plutonium":
-                    MainController.g.drawImage(plutonium,x,y);
+                    GameController.g.drawImage(plutonium,x,y);
                     break;
                 case "Sulfur":
-                    MainController.g.drawImage(sulfur,x,y);
+                    GameController.g.drawImage(sulfur,x,y);
                     break;
                 case "Uran":
-                   MainController.g.drawImage(uran,x,y);
+                   GameController.g.drawImage(uran,x,y);
                     break;
                 case "WaterIce":
-                    MainController.g.drawImage(waterice,x,y);
+                    GameController.g.drawImage(waterice,x,y);
                     break;
                 default:
                     throw new Exception("Nincs ilyen osztaly, nem tudok kepet tolteni hozza");
@@ -105,8 +106,8 @@ public class PlayerDrawer extends GameDrawer<Player> {
             int x=(155+i*60);
             int y= (435);
             if (s.getTeleports().get(i).isCrazy()) {
-                MainController.g.drawImage(crazyteleport,x,y);
-            } else{MainController.g.drawImage(teleport,x,y);}
+                GameController.g.drawImage(crazyteleport,x,y);
+            } else{GameController.g.drawImage(teleport,x,y);}
         }
     }
 
