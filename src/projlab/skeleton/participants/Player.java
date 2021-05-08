@@ -13,6 +13,8 @@ public class Player extends Participant {
      */
     private Settler settler;
 
+    private boolean isActive = false;
+
     /**
      * A feladás parancsot implementáló metódus
      */
@@ -29,6 +31,7 @@ public class Player extends Participant {
      * A semmittevés/passz parancsot implementáló metódus, nem csinál semmit
      */
     public void pass() {
+        isActive = false;
     }
 
     /**
@@ -42,10 +45,12 @@ public class Player extends Participant {
 
     @Override
     public void round() {
+        isActive = true;
         if (!this.settler.isAlive()) {
             isPlaying = false;
         }
-        return;
+        if(!isActive) return;
+
         /*System.out.println("Kerlek valassz a lehetseges lepesek kozul :");
         System.out.println("Mine(1):");
         System.out.println("Dig(2)");
@@ -95,5 +100,13 @@ public class Player extends Participant {
 
     public Settler getSettler() {
         return settler;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }
