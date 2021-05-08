@@ -19,16 +19,16 @@ public class PlayerDrawer extends GameDrawer<Player> {
     /**
      * image-ek a képek betöltéséhez
      */
-    Image aluminium = new Image(new FileInputStream("/res/aluminium.png"));
-    Image coal = new Image(new FileInputStream("/res/coal.png"));
-    Image copper = new Image(new FileInputStream("/res/copper.png"));
-    Image iron = new Image(new FileInputStream("/res/iron.png"));
-    Image plutonium = new Image(new FileInputStream("/res/plutonium.png"));
-    Image sulfur = new Image(new FileInputStream("/res/sulfur.png"));
-    Image uran = new Image(new FileInputStream("/res/uran.png"));
-    Image waterice = new Image(new FileInputStream("/res/waterice.png"));
-    Image teleport = new Image(new FileInputStream("/res/teleport.png"));
-    Image crazyteleport = new Image(new FileInputStream("/res/crazy_teleport.png"));
+    Image aluminium = new Image("/res/aluminium.png");
+    Image coal = new Image("/res/coal.png");
+    Image copper = new Image("/res/copper.png");
+    Image iron = new Image("/res/iron.png");
+    Image plutonium = new Image("/res/plutonium.png");
+    Image sulfur = new Image("/res/sulfur.png");
+    Image uran = new Image("/res/uran.png");
+    Image waterice = new Image("/res/waterice.png");
+    Image teleport = new Image("/res/teleport.png");
+    Image crazyteleport = new Image("/res/crazy_teleport.png");
 
 
     public PlayerDrawer() throws FileNotFoundException {
@@ -106,7 +106,7 @@ public class PlayerDrawer extends GameDrawer<Player> {
             int y= (435);
             if (s.getTeleports().get(i).isCrazy()) {
                 MainController.g.drawImage(crazyteleport,x,y);
-            } else{MainController.g.drawImage(crazyteleport,x,y);}
+            } else{MainController.g.drawImage(teleport,x,y);}
         }
     }
 
