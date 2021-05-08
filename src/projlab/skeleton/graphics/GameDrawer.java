@@ -7,6 +7,6 @@ package projlab.skeleton.graphics;
 
 public abstract class GameDrawer<T> {
 
-    public abstract void draw(T object, int x, int y);
+    public abstract void draw(T object, int x, int y) throws Exception;
 
 }
