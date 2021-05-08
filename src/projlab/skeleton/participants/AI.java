@@ -23,7 +23,9 @@ public class AI extends Participant {
      */
     private final ArrayList<Robot> robots = new ArrayList<>();
 
-
+    /**
+     * Az AI ufói
+     */
     private final ArrayList<Ufo> ufos = new ArrayList<>();
 
     /**
@@ -54,9 +56,7 @@ public class AI extends Participant {
 
 
     public void addUfo(Ufo ufo) {
-
         ufos.add(ufo);
-
     }
 
     /**
@@ -68,10 +68,17 @@ public class AI extends Participant {
         robots.remove(robot);
     }
 
+    /**
+     * Eltávoliít egy ufót az ufók listájából
+     * @param ufo az eltávolítandó ufó
+     */
     public void removeUfo(Ufo ufo) {
         ufos.remove(ufo);
     }
 
+    /**
+     * Az összes roboton és ufón lefuttat egy kört
+     */
     @Override
     public void round() {
         for (Robot robot : robots) {
@@ -82,6 +89,10 @@ public class AI extends Participant {
         }
     }
 
+    /**
+     * A robotok körét kezeli, eldönti, hogy az adott körben mit fog csinálni az adott robot(mozogni/fúrni)
+     * @param robot az adott robot, aminek a körét kezeljük
+     */
     public void robotround(Robot robot) {
         Random random = new Random();
         int scenario = random.nextInt(2);
@@ -97,6 +108,10 @@ public class AI extends Participant {
         }
     }
 
+    /**
+     * Az ufók körét kezeli, eldönti, hogy az adott körben mit fog csinálni az adott ufó(bányászni/mozogni)
+     * @param ufo az adott ufó, aminek a körét kezeljük
+     */
     public void uforound(Ufo ufo) {
         Random random = new Random();
         int scenario = random.nextInt(2);

@@ -1,7 +1,9 @@
 package projlab.skeleton;
 
+import projlab.skeleton.entities.Ufo;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
+import projlab.skeleton.participants.AI;
 import projlab.skeleton.participants.Participant;
 import projlab.skeleton.resources.*;
 import projlab.skeleton.resources.radioactive.Plutonium;
@@ -9,6 +11,8 @@ import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A játékot eltároló objektum
@@ -82,7 +86,7 @@ public class Game {
      */
     public boolean checkGameEnd() {
         boolean enoughresource = checkEnoughResources();
-        if (!enoughresource || participants.size() == 1) {//atirva
+        if (!enoughresource || participants.size() == 1) {
             return true;
         }
 
@@ -112,8 +116,11 @@ public class Game {
      */
     public void solarFlare() {
         // Menjünk végig a kellő számú mezőn és futtassunk le rajtuk egy napkitörést
+        Random random = new Random();
+        effectedCount = random.nextInt(fields.size());
         for (int i = 0; i < effectedCount; i++) {
             fields.get(i).solarFlare();
+            GameController.solarFlareText.setText("Solar flare hit the asteroid belt");
         }
     }
 
@@ -153,17 +160,17 @@ public class Game {
             if (participant.getIsPlaying()) {
                 participant.round();
             }
-        }
-        for (Participant participant : participants) {
-            if (!participant.getIsPlaying()) {
-                removeParticipant(participant);
-            }
+            else removeParticipant(participant);
         }
 
         for (Field field : fields) {
             field.round();
         }
+        GameController.solarFlareText.setText("");
 
     }
 
+    public ArrayList<Participant> getParticipants() {
+        return participants;
+    }
 }
