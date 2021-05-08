@@ -1,4 +1,4 @@
-module Projlab.Skeleton {
+module Projlab {
     requires javafx.fxml;
     requires javafx.controls;
 
