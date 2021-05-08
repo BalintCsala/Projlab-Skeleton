@@ -21,16 +21,16 @@ public class PlayerDrawer extends GameDrawer<Player> {
     /**
      * image-ek a képek betöltéséhez
      */
-    Image aluminium = new Image(new FileInputStream("url for the image"));
-    Image coal = new Image(new FileInputStream("url for the image"));
-    Image copper = new Image(new FileInputStream("url for the image"));
-    Image iron = new Image(new FileInputStream("url for the image"));
-    Image plutonium = new Image(new FileInputStream("url for the image"));
-    Image sulfur = new Image(new FileInputStream("url for the image"));
-    Image uran = new Image(new FileInputStream("url for the image"));
-    Image waterice = new Image(new FileInputStream("url for the image"));
-    Image teleport = new Image(new FileInputStream("url for the image"));
-    Image crazyteleport = new Image(new FileInputStream("url for the image"));
+    Image aluminium = new Image(new FileInputStream("/res/aluminium.png"));
+    Image coal = new Image(new FileInputStream("/res/coal.png"));
+    Image copper = new Image(new FileInputStream("/res/copper.png"));
+    Image iron = new Image(new FileInputStream("/res/iron.png"));
+    Image plutonium = new Image(new FileInputStream("/res/plutonium.png"));
+    Image sulfur = new Image(new FileInputStream("/res/sulfur.png"));
+    Image uran = new Image(new FileInputStream("/res/uran.png"));
+    Image waterice = new Image(new FileInputStream("/res/waterice.png"));
+    Image teleport = new Image(new FileInputStream("/res/teleport.png"));
+    Image crazyteleport = new Image(new FileInputStream("/res/crazy_teleport.png"));
     Text playername;
     ArrayList<ImageView> imageViews;
 
