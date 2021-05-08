@@ -127,4 +127,8 @@ public class TeleportGate extends Field {
     public void draw() {
 
     }
+
+    public boolean isCrazy() {
+        return crazy;
+    }
 }
