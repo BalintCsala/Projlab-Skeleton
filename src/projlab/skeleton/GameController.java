@@ -19,7 +19,7 @@ public class GameController implements Initializable {
     @FXML
     public static Text solarFlareText;
 
-    private GraphicsContext g;
+    public static GraphicsContext g;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
