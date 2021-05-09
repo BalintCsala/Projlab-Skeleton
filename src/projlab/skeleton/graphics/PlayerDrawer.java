@@ -22,7 +22,7 @@ public class PlayerDrawer extends GameDrawer<Player> {
     }
 
     public void drawResources(Player player) {
-        Settler s= player.getSettler();
+        Settler s = player.getSettler();
         for (Resource r: s.getInventory()){
 
         }
