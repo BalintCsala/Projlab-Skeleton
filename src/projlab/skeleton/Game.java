@@ -1,9 +1,7 @@
 package projlab.skeleton;
 
-import projlab.skeleton.entities.Ufo;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
-import projlab.skeleton.participants.AI;
 import projlab.skeleton.participants.Participant;
 import projlab.skeleton.resources.*;
 import projlab.skeleton.resources.radioactive.Plutonium;
@@ -11,8 +9,6 @@ import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.List;
 import java.util.Random;
 
 /**

@@ -1,13 +1,10 @@
 package projlab.skeleton.graphics;
-import javafx.scene.image.Image;
 
-import projlab.skeleton.GameController;
+import javafx.scene.image.Image;
 import projlab.skeleton.GameController;
 import projlab.skeleton.entities.Settler;
 import projlab.skeleton.participants.Player;
 
-
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 
