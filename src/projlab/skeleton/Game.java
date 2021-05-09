@@ -11,6 +11,7 @@ import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.List;
 import java.util.Random;
 
@@ -149,6 +150,7 @@ public class Game {
      */
     public void addParticipant(Participant participant) {
         participants.add(participant);
+       
     }
 
     public void removeField(Field field) {
@@ -160,7 +162,9 @@ public class Game {
             if (participant.getIsPlaying()) {
                 participant.round();
             }
-            else removeParticipant(participant);
+            else {
+                removeParticipant(participant);
+            }
         }
 
         for (Field field : fields) {

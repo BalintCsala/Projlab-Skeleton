@@ -17,7 +17,8 @@ public class Ufo extends MovingEntity implements MiningEntity {
      * Felülírja a MovingEntity dig() metódusát, nem csinál semmit, mivel az ufó nem tud fúrni
      */
     @Override
-    public void dig() { }
+    public void dig() {
+    }
 
     /**
      * Implementálja a MiningEntity mine() metódusát, kibányássza annak az aszteroidának
@@ -36,6 +37,7 @@ public class Ufo extends MovingEntity implements MiningEntity {
     public void die() {
         super.die();
         alive = false;
+        AI.getInstance().removeUfo(this);
     }
 
     /**
