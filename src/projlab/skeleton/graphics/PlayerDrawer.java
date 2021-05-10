@@ -5,7 +5,10 @@ import javafx.scene.text.Font;
 import projlab.skeleton.Game;
 import projlab.skeleton.GameController;
 import projlab.skeleton.entities.Settler;
+import projlab.skeleton.map.TeleportGate;
 import projlab.skeleton.participants.Player;
+import projlab.skeleton.resources.Resource;
+import projlab.skeleton.utils.ClickArea;
 
 
 /**
@@ -35,10 +38,9 @@ public class PlayerDrawer extends GameDrawer<Player> {
      * @param player adott játékos
      */
     private void drawName(Player player) {
-        int playerIndex = Game.getInstance().getPlayers().indexOf(player) + 1;
         GameController.graphics.setFill(Color.WHITE);
         GameController.graphics.setFont(new Font("Comic Sans MS", 30));
-        GameController.graphics.fillText("Player #" + playerIndex, 18, 500);
+        GameController.graphics.fillText(player.getName(), 18, 500);
         GameController.graphics.setFill(Color.BLACK);
     }
 
@@ -50,16 +52,26 @@ public class PlayerDrawer extends GameDrawer<Player> {
     private void drawInventory(Player player) {
         Settler s = player.getSettler();
         for (int i = 0; i < s.getInventory().size(); i++) {
-            Game.resourceDrawer.draw(s.getInventory().get(i), 175 + i * 60, 465);
+            final Resource res = s.getInventory().get(i);
+            Game.resourceDrawer.draw(res, 175 + i * 60, 465);
+            GameController.clickAreas.add(new ClickArea(175 + i * 60, 465, 50, 50, () -> {
+                Game.getInstance().getCurrentPlayer().getSettler().placeDownResource(res);
+                Game.getInstance().round();
+            }));
         }
     }
 
     private void drawTeleports(Player player) {
-        Settler s = player.getSettler();
+        final Settler s = player.getSettler();
         for (int i = 0; i < s.getTeleports().size(); i++) {
+            final TeleportGate teleport = s.getTeleports().get(i);
             int x = 175 + (i + 10) * 60;
             int y = 465;
-            Game.teleportDrawer.draw(s.getTeleports().get(i), x, y);
+            Game.teleportDrawer.draw(teleport, x, y);
+            GameController.clickAreas.add(new ClickArea(x, y, 50, 50, () -> {
+                s.placeDownTeleport(s.getLocation(), teleport);
+                Game.getInstance().round();
+            }));
         }
     }
 

@@ -13,7 +13,13 @@ public class Player extends Participant {
      */
     private Settler settler;
 
+    private String name;
+
     private boolean isActive = false;
+
+    public Player(String name) {
+        this.name = name;
+    }
 
     /**
      * A feladás parancsot implementáló metódus
@@ -62,5 +68,9 @@ public class Player extends Participant {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public String getName() {
+        return name;
     }
 }

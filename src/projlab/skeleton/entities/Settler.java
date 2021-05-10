@@ -7,6 +7,7 @@ import projlab.skeleton.resources.Coal;
 import projlab.skeleton.resources.Iron;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.resources.WaterIce;
+import projlab.skeleton.resources.radioactive.Plutonium;
 import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
 

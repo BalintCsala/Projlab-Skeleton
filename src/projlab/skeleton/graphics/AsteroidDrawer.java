@@ -6,6 +6,7 @@ import javafx.scene.text.Font;
 import projlab.skeleton.Game;
 import projlab.skeleton.GameController;
 import projlab.skeleton.map.Asteroid;
+import projlab.skeleton.map.Field;
 import projlab.skeleton.utils.ClickArea;
 
 /**
@@ -58,17 +59,16 @@ public class AsteroidDrawer extends GameDrawer<Asteroid> {
         Image currLeftArrow = asteroid.isNearSun() ? leftArrowNearSun : leftArrow;
         Image currRightArrow = asteroid.isNearSun() ? rightArrowNearSun : rightArrow;
 
-        GameController.clickAreas.clear();
         for (int i = 0; i < asteroid.getNeighbors().size(); i++) {
+            final Field neighbor = asteroid.getNeighbors().get(i);
             int side = (i % 2) * 2 - 1;
             int neighborX = 480 + 350 * side - 50;
             int arrowX = 480 + 250 * side - 50;
             int neighborY = 60 + 60 * i - 50;
             GameController.graphics.drawImage(i % 2 == 0 ? currLeftArrow : currRightArrow, arrowX, neighborY, 100, 100);
-            asteroid.getNeighbors().get(i).drawAsNeighbor(neighborX, neighborY);
-            final int asteroidIndex = i;
+            neighbor.drawAsNeighbor(neighborX, neighborY);
             GameController.clickAreas.add(new ClickArea(arrowX, neighborY, 100, 100, () -> {
-                Game.getInstance().getCurrentPlayer().getSettler().move(asteroid.getNeighbors().get(asteroidIndex));
+                Game.getInstance().getCurrentPlayer().getSettler().move(neighbor);
                 Game.getInstance().round();
             }));
         }
