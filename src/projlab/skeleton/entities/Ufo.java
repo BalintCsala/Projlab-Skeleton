@@ -1,6 +1,9 @@
 package projlab.skeleton.entities;
 
+import projlab.skeleton.Game;
 import projlab.skeleton.participants.AI;
+
+import java.util.Random;
 
 public class Ufo extends MovingEntity implements MiningEntity {
 
@@ -17,7 +20,8 @@ public class Ufo extends MovingEntity implements MiningEntity {
      * Felülírja a MovingEntity dig() metódusát, nem csinál semmit, mivel az ufó nem tud fúrni
      */
     @Override
-    public void dig() { }
+    public void dig() {
+    }
 
     /**
      * Implementálja a MiningEntity mine() metódusát, kibányássza annak az aszteroidának
@@ -36,6 +40,7 @@ public class Ufo extends MovingEntity implements MiningEntity {
     public void die() {
         super.die();
         alive = false;
+        AI.getInstance().removeUfo(this);
     }
 
     /**
@@ -46,4 +51,11 @@ public class Ufo extends MovingEntity implements MiningEntity {
         die();
     }
 
+    @Override
+    public void draw() {
+        Random random = new Random();
+        int x = random.nextInt(200) - 100 + 480;
+        int y = random.nextInt(200) - 100 + 250;
+        Game.ufoDrawer.draw(this, x, y);
+    }
 }

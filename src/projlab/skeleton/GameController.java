@@ -1,15 +1,15 @@
 package projlab.skeleton;
 
-import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Text;
 import projlab.skeleton.participants.Player;
+import projlab.skeleton.utils.ClickArea;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -19,51 +19,74 @@ public class GameController implements Initializable {
     @FXML
     public static Text solarFlareText;
 
-    public static GraphicsContext g;
+    public static GraphicsContext graphics;
+
+    public static final ArrayList<ClickArea> clickAreas = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        g = canvas.getGraphicsContext2D();
-        g.fillRect(50, 100, 150, 200);
+        graphics = canvas.getGraphicsContext2D();
+        graphics.fillRect(50, 100, 150, 200);
+        Game.getInstance().startGame();
+        Game.getInstance().round();
+        canvas.setOnMouseClicked(event -> {
+            int x = (int)event.getSceneX();
+            int y = (int)event.getSceneY();
+            for (int i = 0; i < clickAreas.size(); i++) {
+                ClickArea clickArea = clickAreas.get(i);
+                if (x >= clickArea.x && x <= clickArea.x + clickArea.width && y >= clickArea.y && y <= clickArea.y + clickArea.height) {
+                    clickArea.clickEvent.onClick();
+                    break;
+                }
+            }
+        });
     }
 
     @FXML
-    public void Dig(ActionEvent event) {
-        for (int i = 0; i < Game.getInstance().getParticipants().size(); i++) {
-            if (((Player) Game.getInstance().getParticipants().get(i)).isActive()) {
-                ((Player) Game.getInstance().getParticipants().get(i)).getSettler().dig();
-                ((Player) Game.getInstance().getParticipants().get(i)).setActive(false);
+    public void Dig() {
+        for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {
+            Player player = Game.getInstance().getPlayers().get(i);
+            if (player.isActive()) {
+                player.getSettler().dig();
+                player.setActive(false);
             }
         }
+        Game.getInstance().round();
     }
 
     @FXML
-    public void Mine(ActionEvent event) {
-        for (int i = 0; i < Game.getInstance().getParticipants().size(); i++) {
-            if (((Player) Game.getInstance().getParticipants().get(i)).isActive()) {
-                ((Player) Game.getInstance().getParticipants().get(i)).getSettler().mine();
-                ((Player) Game.getInstance().getParticipants().get(i)).setActive(false);
+    public void Mine() {
+        for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {
+            Player player = Game.getInstance().getPlayers().get(i);
+            if (player.isActive()) {
+                player.getSettler().mine();
+                player.setActive(false);
             }
         }
+        Game.getInstance().round();
     }
 
     @FXML
-    public void BuildTeleport(ActionEvent event) {
-        for (int i = 0; i < Game.getInstance().getParticipants().size(); i++) {
-            if (((Player) Game.getInstance().getParticipants().get(i)).isActive()) {
-                ((Player) Game.getInstance().getParticipants().get(i)).getSettler().buildTeleport();
-                ((Player) Game.getInstance().getParticipants().get(i)).setActive(false);
+    public void BuildTeleport() {
+        for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {
+            Player player = Game.getInstance().getPlayers().get(i);
+            if (player.isActive()) {
+                player.getSettler().buildTeleport();
+                player.setActive(false);
             }
         }
+        Game.getInstance().round();
     }
 
     @FXML
-    public void BuildRobot(ActionEvent event) {
-        for (int i = 0; i < Game.getInstance().getParticipants().size(); i++) {
-            if (((Player) Game.getInstance().getParticipants().get(i)).isActive()) {
-                ((Player) Game.getInstance().getParticipants().get(i)).getSettler().buildRobot();
-                ((Player) Game.getInstance().getParticipants().get(i)).setActive(false);
+    public void BuildRobot() {
+        for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {
+            Player player = Game.getInstance().getPlayers().get(i);
+            if (player.isActive()) {
+                player.getSettler().buildRobot();
+                player.setActive(false);
             }
         }
+        Game.getInstance().round();
     }
 }

@@ -1,17 +1,20 @@
 package projlab.skeleton;
 
+import projlab.skeleton.entities.Settler;
 import projlab.skeleton.entities.Ufo;
+import projlab.skeleton.graphics.*;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
 import projlab.skeleton.participants.AI;
 import projlab.skeleton.participants.Participant;
+import projlab.skeleton.participants.Player;
 import projlab.skeleton.resources.*;
 import projlab.skeleton.resources.radioactive.Plutonium;
 import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -24,10 +27,9 @@ public class Game {
      */
     private static final BillOfResources winBill = new BillOfResources();
     /**
-     * A singleton design pattern instance tagváltozója
+     * A singleton design pattern instance tagváltozójac
      */
 
-    private static int effectedCount;
     private static Game instance;
 
     static {
@@ -48,7 +50,20 @@ public class Game {
     /**
      * A játékban résztvevők listája
      */
-    private final ArrayList<Participant> participants = new ArrayList<>();
+    private final ArrayList<Player> players = new ArrayList<>();
+
+
+    private int currentPlayer = -1;
+
+    public static final AsteroidDrawer asteroidDrawer = new AsteroidDrawer();
+    public static final NeighborAsteroidDrawer neighborAsteroidDrawer = new NeighborAsteroidDrawer();
+    public static final NeighborTeleportDrawer neighborTeleportDrawer = new NeighborTeleportDrawer();
+    public static final ResourceDrawer resourceDrawer = new ResourceDrawer();
+    public static final TeleportDrawer teleportDrawer = new TeleportDrawer();
+    public static final PlayerDrawer playerDrawer = new PlayerDrawer();
+    public static final RobotDrawer robotDrawer = new RobotDrawer();
+    public static final SettlerDrawer settlerDrawer = new SettlerDrawer();
+    public static final UfoDrawer ufoDrawer = new UfoDrawer();
 
     /**
      * Privát konstruktor a singleton design patternhez
@@ -71,6 +86,93 @@ public class Game {
      * Elindítja a játékot, egyelőre semmit nem csinál
      */
     public void startGame() {
+        // lista az előforduló nyersanyagoknak
+        ArrayList<Resource> l = new ArrayList<>();
+        //randomizáláshoz
+        Random random = new Random();
+        // a listához mindenféle nyersanyagból hozzáadunk egyet
+        l.add(new Aluminium());
+        l.add(new Coal());
+        l.add(new Copper());
+        l.add(new Iron());
+        l.add(new Sulfur());
+        l.add(new WaterIce());
+        l.add(new Plutonium());
+        l.add(new Uran());
+        int asteroidnum = 50;
+        // azt számolja, hogy a nyersanyag listában hanyadiknál járunk
+        int szamol = 0;
+        // 50 aszteroida lesz
+        for (int i = 0; i < asteroidnum; i++) {
+            // létrehozzuk az aszteroidát
+            Asteroid asteroid = new Asteroid();
+            // az aszteroida nyersanyaga az l lista "szamol" számú tagja lesz
+            asteroid.setResource(l.get(szamol));
+            // növeljük, hogy a következő más nyersanyag legyen
+            szamol++;
+
+            // a Gamebne a Fieldek listajahoz hozzáadjuk az aszteroidát
+            fields.add(asteroid);
+            // ha ez megtörténik akkor újra kell kezdeni a nyersanyaglistát az elejéről
+            if (szamol == l.size()) {
+                //kezdődik a lista elölről
+                szamol = 0;
+            }
+            // ha nem ez az első aszteroida
+            if (i != 0) {
+                //beállítjuk szomszédjánka az előzőt
+                asteroid.addNeighbor(fields.get(i - 1));
+                // és az előzőnek beállítjuk szomszédjának a most létrehozottat
+                fields.get(i - 1).addNeighbor(asteroid);
+            }
+
+            // ha az utolsó létrehozott aszteroidánál vagyunk akkor
+            if (i == asteroidnum - 1) {
+                // beállítuk szomszédjának a legelsőt
+                asteroid.addNeighbor(fields.get(0));
+                // a legelsőnek is szomszédja lesz ez
+                fields.get(0).addNeighbor(asteroid);
+            }
+        }
+
+        for (int i = 0; i < fields.size(); i++) {
+            int neighborNum = random.nextInt(2);
+            // még max 10 kapcsolatot létrehozunk
+            for (int j = 0; j < neighborNum; j++) {
+                // generálunk 2 random sorszámot(ezek az aszteroidák sorszámai a fieldben)
+                int otherIndex = random.nextInt(fields.size());
+                // ha a két szám nem ugyanaz
+                if (i != otherIndex) {
+                    // ha még nem párja
+                    if (!fields.get(i).getNeighbors().contains(fields.get(otherIndex))) {
+                        // csak ha még nem szomszédok
+                        fields.get(i).addNeighbor(fields.get(otherIndex));
+                        // beállítjuk őket egymás párjának
+                        fields.get(otherIndex).addNeighbor(fields.get(i));
+                    }
+                }
+            }
+        }
+
+        // létrehozunk 5 ufot
+        for (int i = 0; i < 5; i++) {
+            // ufo létrehozása
+            Ufo ufo = new Ufo();
+            //egy random sorszámú aszteroidán elhelyezzük
+            int number = random.nextInt(fields.size());
+            // setlocation megtörténik benne
+            fields.get(number).addEntity(ufo);
+
+        }
+
+        for (int i = 0; i < 5; i++) {
+            Settler settler = new Settler();
+            int number = random.nextInt(fields.size());
+            fields.get(number).addEntity(settler);
+            Player player = new Player();
+            player.setSettler(settler);
+            players.add(player);
+        }
     }
 
     /**
@@ -85,12 +187,7 @@ public class Game {
      * @return Véget ért-e a játék
      */
     public boolean checkGameEnd() {
-        boolean enoughresource = checkEnoughResources();
-        if (!enoughresource || participants.size() == 1) {
-            return true;
-        }
-
-        return false;
+        return !checkEnoughResources() || players.size() == 1;
     }
 
     /**
@@ -101,14 +198,13 @@ public class Game {
     public boolean checkEnoughResources() {
         Asteroid a = new Asteroid();
         ArrayList<Resource> b = new ArrayList<>();
-        for (int i = 0; i < fields.size(); i++) {
-            if (fields.get(i).getClass() == a.getClass()) {
-                //b.addResource(fields.get(i).getresource());
+        for (Field field : fields) {
+            if (field instanceof Asteroid) {
+                b.add(((Asteroid) field).getResource());
             }
 
         }
-        boolean enough = winBill.isCompleted(b);
-        return enough;
+        return winBill.isCompleted(b);
     }
 
     /**
@@ -117,9 +213,11 @@ public class Game {
     public void solarFlare() {
         // Menjünk végig a kellő számú mezőn és futtassunk le rajtuk egy napkitörést
         Random random = new Random();
-        effectedCount = random.nextInt(fields.size());
+        int effectedCount = random.nextInt(fields.size() - 5) + 5;
+        ArrayList<Field> copy = new ArrayList<>(fields);
+        Collections.shuffle(copy);
         for (int i = 0; i < effectedCount; i++) {
-            fields.get(i).solarFlare();
+            copy.get(i).solarFlare();
             GameController.solarFlareText.setText("Solar flare hit the asteroid belt");
         }
     }
@@ -139,38 +237,52 @@ public class Game {
      * @param participant Az eltávolítandó résztvevő
      */
     public void removeParticipant(Participant participant) {
-        participants.remove(participant);
+        players.remove(participant);
     }
 
     /**
      * Hozzáad egy résztvevőt a játékjoz
      *
-     * @param participant A hozzáadandó résztvevő
+     * @param player A hozzáadandó játékos
      */
-    public void addParticipant(Participant participant) {
-        participants.add(participant);
+    public void addParticipant(Player player) {
+        players.add(player);
+
     }
 
     public void removeField(Field field) {
         fields.remove(field);
     }
 
+
     public void round() {
-        for (Participant participant : participants) {
-            if (participant.getIsPlaying()) {
-                participant.round();
+        currentPlayer++;
+        if (currentPlayer >= players.size()) {
+            currentPlayer = 0;
+            for (Field field : fields) {
+                field.round();
             }
-            else removeParticipant(participant);
+            AI.getInstance().round();
+        }
+        Player player = players.get(currentPlayer);
+        if (player.getIsPlaying()) {
+            player.round();
+        } else {
+            removeParticipant(player);
         }
 
-        for (Field field : fields) {
-            field.round();
-        }
-        GameController.solarFlareText.setText("");
+        asteroidDrawer.draw(player.getSettler().getLocation());
+        playerDrawer.draw(player, 0, 0);
+
+        //GameController.solarFlareText.setText("");
 
     }
 
-    public ArrayList<Participant> getParticipants() {
-        return participants;
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public Player getCurrentPlayer() {
+        return players.get(currentPlayer);
     }
 }

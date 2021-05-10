@@ -1,5 +1,6 @@
 package projlab.skeleton.entities;
 
+import projlab.skeleton.Game;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.TeleportGate;
 import projlab.skeleton.resources.Coal;
@@ -11,6 +12,7 @@ import projlab.skeleton.utils.BillOfResources;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  * A telepeseket jelképező osztály
@@ -103,6 +105,7 @@ public class Settler extends MovingEntity implements MiningEntity {
         if (robotBill.isCompleted(inventory)) {
             // Hozzuk létre a robotot, ez automatikusan hozzáadódik az AI-hoz
             Robot robot = new Robot();
+            location.addEntity(robot);
             // Majd távolítsuk el a felhasznált nyersanyagokat a hátizsákból
             robotBill.removeRequired(inventory);
         }
@@ -118,11 +121,8 @@ public class Settler extends MovingEntity implements MiningEntity {
             // Vegyük ki az első teleportkaput és adjuk hozzá az aszteroida szomszédságához
             teleports.remove(teleport);
             asteroid.addTeleport(teleport);
-			boolean placedDown = true;
-			if(teleport.getPair().getAsteroid()==null) {
-				placedDown =false;
-			}
-			if (placedDown) {
+			boolean placedDown = teleport.getPair().getAsteroid() != null;
+            if (placedDown) {
                 teleport.setActive(true);
             }
         }
@@ -134,12 +134,9 @@ public class Settler extends MovingEntity implements MiningEntity {
      * @param resource A lehelyezendő nyersanyag
      */
     public void placeDownResource(Resource resource) {
-        boolean canPlace = false;
-		if(location.getResource()==null && location.getDepth()==0) {
-			canPlace=true;
-		}
+        boolean canPlace = location.getResource() == null && location.getDepth() == 0;
         // Ha lehelyezhető a nyersanyag, rakjuk le és vegyük ki a hátizsákból
-        if (canPlace) {// megn�z �res-e mine nem ad vissza semmit
+        if (canPlace) {
             location.setResource(resource);
             inventory.remove(resource);
             // Ha napközelben vagyunk, indítsuk el a nyersanyag reakcióját
@@ -197,5 +194,13 @@ public class Settler extends MovingEntity implements MiningEntity {
 
     public ArrayList<TeleportGate> getTeleports() {
         return teleports;
+    }
+
+    @Override
+    public void draw() {
+        Random random = new Random();
+        int x = random.nextInt(200) - 100 + 480;
+        int y = random.nextInt(200) - 100 + 250;
+        Game.settlerDrawer.draw(this, x, y);
     }
 }

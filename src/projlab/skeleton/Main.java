@@ -1,12 +1,9 @@
 package projlab.skeleton;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,8 +22,9 @@ public class Main extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Asteroids and Settlers");
-            primaryStage.setWidth(960);
-            primaryStage.setHeight(540);
+            primaryStage.setWidth(976);
+            primaryStage.setHeight(579);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package projlab.skeleton.map;
 
+import projlab.skeleton.Game;
 import projlab.skeleton.entities.MovingEntity;
 
 /**
@@ -130,5 +131,10 @@ public class TeleportGate extends Field {
 
     public boolean isCrazy() {
         return crazy;
+    }
+
+    @Override
+    public void drawAsNeighbor(int x, int y) {
+        Game.neighborTeleportDrawer.draw(this, x, y);
     }
 }
