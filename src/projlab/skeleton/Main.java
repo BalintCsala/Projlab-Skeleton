@@ -13,19 +13,21 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
+    public static Stage stage;
+
     @Override
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/main.fxml"));
 
             Scene scene = new Scene(root, 960, 540);
-
             primaryStage.setScene(scene);
             primaryStage.setTitle("Asteroids and Settlers");
             primaryStage.setWidth(976);
             primaryStage.setHeight(579);
             primaryStage.setResizable(false);
             primaryStage.show();
+            stage = primaryStage;
         } catch (IOException e) {
             e.printStackTrace();
         }

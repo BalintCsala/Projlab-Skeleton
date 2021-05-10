@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.text.Text;
 import projlab.skeleton.participants.Player;
 import projlab.skeleton.utils.ClickArea;
 
@@ -16,24 +15,24 @@ public class GameController implements Initializable {
 
     @FXML
     public Canvas canvas;
-    @FXML
-    public static Text solarFlareText;
 
     public static GraphicsContext graphics;
 
     public static final ArrayList<ClickArea> clickAreas = new ArrayList<>();
 
+    public static void endGame() {
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         graphics = canvas.getGraphicsContext2D();
-        graphics.fillRect(50, 100, 150, 200);
         Game.getInstance().startGame();
         Game.getInstance().round();
         canvas.setOnMouseClicked(event -> {
             int x = (int)event.getSceneX();
             int y = (int)event.getSceneY();
-            for (int i = 0; i < clickAreas.size(); i++) {
-                ClickArea clickArea = clickAreas.get(i);
+            for (ClickArea clickArea : clickAreas) {
                 if (x >= clickArea.x && x <= clickArea.x + clickArea.width && y >= clickArea.y && y <= clickArea.y + clickArea.height) {
                     clickArea.clickEvent.onClick();
                     break;

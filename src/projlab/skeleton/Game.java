@@ -1,6 +1,8 @@
 package projlab.skeleton;
 
-import projlab.skeleton.entities.MovingEntity;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import projlab.skeleton.entities.Settler;
@@ -16,6 +18,7 @@ import projlab.skeleton.resources.radioactive.Plutonium;
 import projlab.skeleton.resources.radioactive.Uran;
 import projlab.skeleton.utils.BillOfResources;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -179,18 +182,12 @@ public class Game {
     }
 
     /**
-     * Befejezi a játékot, egyelőre semmit nem csinál
-     */
-    public void endGame() {
-    }
-
-    /**
      * Leellenőrzi, hogy a játék véget ért-e
      *
      * @return Véget ért-e a játék
      */
     public boolean checkGameEnd() {
-        return !checkEnoughResources() || players.size() == 1;
+        return checkEnoughResources() || players.size() == 0;
     }
 
     /**
@@ -199,21 +196,11 @@ public class Game {
      * @return Van-e elég nyersanyag a játék megnyeréséhez
      */
     public boolean checkEnoughResources() {
-        ArrayList<Resource> b = new ArrayList<>();
-        for (Field f: fields){
-            b.clear();
-            if (f instanceof Asteroid){
-                Asteroid a=(Asteroid) f;
-                for (MovingEntity me: a.getEntities()) {
-                    if (me instanceof Settler){
-                        Settler s= (Settler) me;
-                        for (Resource r: s.getInventory()){
-                            b.add(r);
-                        }
-                    }
-
-                }
-                if (winBill.isCompleted(b)) return true;
+        for (Field f : fields) {
+            if (f instanceof Asteroid) {
+                Asteroid a = (Asteroid) f;
+                if (a.checkEnoughResources(winBill))
+                    return true;
             }
 
         }
@@ -271,7 +258,6 @@ public class Game {
         fields.remove(field);
     }
 
-
     public void round() {
         currentPlayer++;
         if (currentPlayer >= players.size()) {
@@ -292,6 +278,21 @@ public class Game {
         playerDrawer.draw(player, 0, 0);
         if (new Random().nextFloat() < 0.13) {
             solarFlare();
+        }
+        if (checkGameEnd()) {
+            if (checkEnoughResources())
+                EndGameController.win = true;
+
+            Parent root;
+            try {
+                root = FXMLLoader.load(getClass().getResource("/end_game.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            Scene scene = new Scene(root, 960, 540);
+            Main.stage.setScene(scene);
         }
     }
 
