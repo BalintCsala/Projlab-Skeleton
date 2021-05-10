@@ -3,9 +3,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@end_game.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text id="gameEndText" layoutX="289.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text id="gameEndText" fill="WHITE" layoutX="-1.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 30; -fx-font-family: &quot;Comic Sans MS&quot;;" styleClass="text" text="Text" textAlignment="CENTER" wrappingWidth="600.0" />
    </children>
 </AnchorPane>
