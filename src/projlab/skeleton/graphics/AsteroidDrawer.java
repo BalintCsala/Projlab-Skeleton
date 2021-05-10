@@ -72,19 +72,21 @@ public class AsteroidDrawer extends GameDrawer<Asteroid> {
                 Game.getInstance().round();
             }));
         }
-        if(asteroid.getResource() == null)
-        {
+        if(asteroid.getResource() == null) {
             GameController.graphics.setFont(new Font("Comic Sans MS", 20));
             GameController.graphics.fillText("ASTEROID RESOURCE: Empty", 599, 409);
             GameController.graphics.setFill(Color.WHITE);
             GameController.graphics.fillText("ASTEROID RESOURCE: Empty", 600, 410);
             GameController.graphics.setFill(Color.BLACK);
         }
-        GameController.graphics.setFont(new Font("Comic Sans MS", 20));
-        GameController.graphics.fillText("ASTEROID RESOURCE:" + asteroid.getResource().getClass().getSimpleName(), 599, 409);
-        GameController.graphics.setFill(Color.WHITE);
-        GameController.graphics.fillText("ASTEROID RESOURCE:" + asteroid.getResource().getClass().getSimpleName(), 600, 410);
-        GameController.graphics.setFill(Color.BLACK);
+        else {
+            GameController.graphics.setFont(new Font("Comic Sans MS", 20));
+            GameController.graphics.fillText("ASTEROID RESOURCE:" + asteroid.getResource().getClass().getSimpleName(), 599, 409);
+            GameController.graphics.setFill(Color.WHITE);
+            GameController.graphics.fillText("ASTEROID RESOURCE:" + asteroid.getResource().getClass().getSimpleName(), 600, 410);
+            GameController.graphics.setFill(Color.BLACK);
+        }
+
 
     }
 
