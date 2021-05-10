@@ -175,7 +175,7 @@ public class Game {
             Settler settler = new Settler();
             int number = random.nextInt(fields.size());
             fields.get(number).addEntity(settler);
-            Player player = new Player();
+            Player player = new Player("Player #" + (i + 1));
             player.setSettler(settler);
             players.add(player);
         }
@@ -204,7 +204,7 @@ public class Game {
             }
 
         }
-        return winBill.isCompleted(b);
+        return false;
     }
 
     /**
@@ -259,6 +259,7 @@ public class Game {
     }
 
     public void round() {
+        GameController.clickAreas.clear();
         currentPlayer++;
         if (currentPlayer >= players.size()) {
             currentPlayer = 0;
