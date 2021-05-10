@@ -7,6 +7,9 @@ import projlab.skeleton.resources.Resource;
  */
 public class ResourceDrawer extends GameDrawer<Resource> {
 
+    /**
+     * Rajzoló metódus
+     */
     @Override
     public void draw(Resource resource, int x, int y) {
 

@@ -18,12 +18,12 @@ public abstract class MovingEntity {
     }
 
     /**
-     * Az entitás mozgás parancsát implementáló metódus
+     * AZ entitás mozgás parancsát implementáló metódus
      *
      * @param field A mező, amire szeretnénk, hogy az entitás lépjen
      */
     public void move(Field field) {
-        // Távolítsuk el az entitást a mostani helyéről és rakjuk át a másikra
+    	// Távolítsuk el az entitást a mostani helyéről és rakjuk át a másikra
         location.removeEntity(this);
         field.addEntity(this);
     }

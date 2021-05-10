@@ -9,8 +9,14 @@ import projlab.skeleton.map.Asteroid;
  */
 public class AsteroidDrawer extends GameDrawer<Asteroid> {
 
+	/**
+	 * Aszteroida képe
+	 */
 	Image asteroidImage = new Image("asteroid.png");
 	
+    /**
+     * Kirajzol egy kisméretű aszteroidát a megadott pontra
+     */
     @Override
     public void draw(Asteroid asteroid, int x, int y) {
     	GameController.g.drawImage(asteroidImage, x, y, 100, 100);

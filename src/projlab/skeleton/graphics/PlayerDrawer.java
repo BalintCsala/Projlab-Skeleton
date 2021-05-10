@@ -97,6 +97,11 @@ public class PlayerDrawer extends GameDrawer<Player> {
         }
     }
 
+    /**
+     * Kirajzolja az adott játékos teleportjait
+     * 
+     * @param player adott játékos
+     */
     private void drawTeleports(Player player){
         Settler s= player.getSettler();
         for (int i=0; i<s.getTeleports().size(); i++){

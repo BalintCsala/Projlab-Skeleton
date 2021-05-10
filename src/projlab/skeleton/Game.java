@@ -140,7 +140,7 @@ public class Game {
     }
 
     /**
-     * Hozzáad egy résztvevőt a játékjoz
+     * Hozzáad egy résztvevőt a játékhoz
      *
      * @param participant A hozzáadandó résztvevő
      */
@@ -149,10 +149,18 @@ public class Game {
        
     }
 
+    /**
+     * Eltávolít egy fieldet a játékpályáról
+     * 
+     * @param field Az eltávolítandó mező
+     */
     public void removeField(Field field) {
         fields.remove(field);
     }
 
+    /**
+     * Egy kör lejátszása.
+     */
     public void round() {
         for (Participant participant : participants) {
             if (participant.getIsPlaying()) {
@@ -170,6 +178,11 @@ public class Game {
 
     }
 
+    /**
+     * Visszaadja a résztvevők listáját
+     * 
+     * @return a résztvevők listája
+     */
     public ArrayList<Participant> getParticipants() {
         return participants;
     }

@@ -7,6 +7,14 @@ package projlab.skeleton.graphics;
 
 public abstract class GameDrawer<T> {
 
+    /**
+     * Rajzoló metódus
+     * 
+     * @param object kirajzolandó objektum
+     * @param x koordináták
+     * @param y koordináták
+     * @throws Exception kivételkezelés
+     */
     public abstract void draw(T object, int x, int y) throws Exception;
 
 }

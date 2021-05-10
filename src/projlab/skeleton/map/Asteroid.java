@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Ez az oszt·ly az Aszteroid·kat testesÌti meg
+ * Ez az oszt√°ly az Aszteroid√°kat testes√≠ti meg
  */
 public class Asteroid extends Field {
     /**
-     * az aszteroid·n tartÛzkodÛ entit·sok
+     * az aszteroid√°n tart√≥zkod√≥ entit√°sok
      */
     private final ArrayList<MovingEntity> entities = new ArrayList<>();
     /**
@@ -20,8 +20,8 @@ public class Asteroid extends Field {
      */
     private Resource resource;
     /**
-     * Napvihar hat·sa az aszteroid·ra, amennyiben nem lehet elb˙jni az aszteroid·n,
-     * a rajta tartÛzkodÛ entit·sok meghalnak
+     * Napvihar hat√°sa az aszteroid√°ra, amennyiben nem lehet elb√∫jni az aszteroid√°n,
+     * a rajta tart√≥zkod√≥ entit√°sok meghalnak
      */
     private boolean nearSun;
     private int depth;
@@ -35,7 +35,7 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Override a Field solarFlare-re. Ha nem ¸res, akkor mindenki meghal rajta
+     * Override a Field solarFlare-re. Ha nem √ºres, akkor mindenki meghal rajta
      */
 
     @Override
@@ -51,8 +51,8 @@ public class Asteroid extends Field {
     }
 
     /**
-     * az aszteroida felrobban, a rajta tartÛzkodÛ entit·sok meghalnak,
-     * az aszteroida szomszÈdjai reag·lnak a robban·sra Ès megsz˚ntetik szomszÈds·gukat az aszteroid·val
+     * az aszteroida felrobban, a rajta tart√≥zkod√≥ entit√°sok meghalnak,
+     * az aszteroida szomsz√©djai reag√°lnak a robban√°sra √©s megsz√ºntetik szomsz√©ds√°gukat az aszteroid√°val
      */
     public void explode() {
         ArrayList<MovingEntity> temp = new ArrayList<>(entities);
@@ -67,8 +67,8 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Az aszteroida b·ny·sz·sa amennyiben nincs tˆbb rÈtege,
-     * b·ny·szhatÛ Ès visszaadja az aszteroida nyersanyag·t
+     * Az aszteroida b√°ny√°sz√°sa, amennyiben nincs t√∂bb r√©tege,
+     * b√°ny√°szhat√≥ √©s visszaadja az aszteroida nyersanyag√°t
      *
      * @return Resource
      */
@@ -82,8 +82,9 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Aszteroida rÈtegÈnek csˆkkentÈse, amennyiben Napkˆzelben vagyunk Ès a rÈteg 0
-     * az aszteroida nyersanyaga reag·l
+     * Aszteroida r√©teg√©nek cs√∂kkent√©se, amennyiben Napk√∂zelben vagyunk √©s a r√©teg 0,
+     * az aszteroida nyersanyaga reag√°l
+     * 
      */
     public void digLayer() {
         if (depth > 0) {
@@ -97,10 +98,10 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Gyızelem  vizsg·lata aszteroid·n
+     * Gy≈ëzelem vizsg√°lata aszteroid√°n
      *
-     * @param winBill a gyızelemhez sz¸ksÈges nyersanyagok
-     * @return visszaadja, hogy van-e elÈg nyersanyag az aszteroid·n a gyızelemhez
+     * @param winBill a gy≈ëzelemhez sz√ºks√©ges nyersanyagok
+     * @return visszaadja, hogy van-e el√©g nyersanyag az aszteroid√°n a gy≈ëzelemhez
      */
     public boolean checkEnoughResources(BillOfResources winBill) {
         boolean enough = false; //winBill.isCompleted();
@@ -108,18 +109,18 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Egy entit·s elt·voz·sa az aszteroid·rÛl
+     * Egy entit√°s elt√°voz√°sa az aszteroid√°r√≥l
      *
-     * @param entity az elt·vozÛ entit·s
+     * @param entity az elt√°voz√≥ entit√°s
      */
     public void removeEntity(MovingEntity entity) {
         entities.remove(entity);
     }
 
     /**
-     * Az aszteroid·ra entit·s Èrkezik
+     * Az aszteroid√°ra entit√°s √©rkezik
      *
-     * @param entity az Èrkezı entit·s
+     * @param entity az √©rkez≈ë entit√°s
      */
     @Override
     public void addEntity(MovingEntity entity) {
@@ -128,7 +129,7 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Visszaadja az aszteroida nyersanyag·t
+     * Visszaadja az aszteroida nyersanyag√°t
      *
      * @return resource az aszteroida nyersanyaga
      */
@@ -137,27 +138,27 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Az aszteroida nyersanyag·nak be·llÌt·sa
+     * Az aszteroida nyersanyag√°nak be√°ll√≠t√°sa
      *
-     * @param res a be·llÌtandÛ nyersanyag
+     * @param res a be√°ll√≠tand√≥ nyersanyag
      */
     public void setResource(Resource res) {
         resource = res;
     }
 
     /**
-     * az aszteroida rÈtegÈnek visszaad·sa
+     * az aszteroida r√©teg√©nek visszaad√°sa
      *
-     * @return az aszteroida rÈtege
+     * @return az aszteroida r√©tege
      */
     public int getDepth() {
         return depth;
     }
 
     /**
-     * Visszaadja azt, hogy az aszteroida Napkˆzelben van-e
+     * Visszaadja azt, hogy az aszteroida Napk√∂zelben van-e
      *
-     * @return napkˆzelben vagy sem
+     * @return napk√∂zelben vagy sem
      */
     public boolean isNearSun() {
         return nearSun;
@@ -168,14 +169,27 @@ public class Asteroid extends Field {
         teleport.setAsteroid(this);
     }
 
+    /**
+     * Az aszteroida r√©tegeinek be√°ll√≠t√°sa
+     * 
+     * @param depth r√©tegsz√°m
+     */
     public void setDepth(int depth) {
         this.depth = depth;
     }
 
+    /**
+     * Annak a be√°ll√≠t√°sa, hogy az aszteroida napk√∂zelben van-e
+     * 
+     * @param nearSun az azsteroida napk√∂zelben van-e
+     */
     public void setNearSun(boolean nearSun) {
         this.nearSun = nearSun;
     }
 
+    /**
+     * Az aszteroid√°t kirajzol√≥ met√≥dus
+     */
     @Override
     public void draw() {
 

@@ -47,8 +47,14 @@ public class Settler extends MovingEntity implements MiningEntity {
      * A telepesnél lévő teleportkapuk
      */
     private final ArrayList<TeleportGate> teleports = new ArrayList<>();
+    /**
+     * A telepes életben van-e vagy sem
+     */
     private boolean alive;
 
+    /**
+     * A telepes konstruktora
+     */
     public Settler() {
         alive = true;
     }
@@ -180,21 +186,39 @@ public class Settler extends MovingEntity implements MiningEntity {
         Collections.addAll(this.teleports, teleports);
     }
 
+    /**
+     * A telepes halálát implementáló metódus
+     */
     @Override
     public void die() {
         alive = false;
     }
 
+    /**
+     * Visszaadja, hogy a telepes életben van-e
+     * 
+     * @return a telepes életben van-e vagy sem
+     */
     public boolean isAlive() {
 
         return alive;
     }
 
+    /**
+     * Visszaadja a telepesnél lévő nyersanyagokat
+     * 
+     * @return a telepesnél lévő nyersanyagok
+     */
     public ArrayList<Resource> getInventory() {
         return inventory;
     }
 
 
+    /**
+     * Visszaadja a telepesnél lévő teleportkapukat
+     * 
+     * @return a telepesnél lévő teleportkapuk
+     */
     public ArrayList<TeleportGate> getTeleports() {
         return teleports;
     }

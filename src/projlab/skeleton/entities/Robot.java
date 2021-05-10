@@ -6,7 +6,7 @@ import projlab.skeleton.participants.AI;
 import java.util.ArrayList;
 
 /**
- * A robot entitást jelképező
+ * A robot entitást jelképező osztály
  */
 public class Robot extends MovingEntity {
 

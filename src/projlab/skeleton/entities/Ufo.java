@@ -2,8 +2,15 @@ package projlab.skeleton.entities;
 
 import projlab.skeleton.participants.AI;
 
+/**
+ * Az ufókat jelképező osztály
+ *
+ */
 public class Ufo extends MovingEntity implements MiningEntity {
 
+    /**
+     * Az ufo életben van-e vagy sem
+     */
     private boolean alive = true;
 
     /**
