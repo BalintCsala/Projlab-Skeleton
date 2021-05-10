@@ -1,9 +1,11 @@
 package projlab.skeleton.entities;
 
+import projlab.skeleton.Game;
 import projlab.skeleton.map.Field;
 import projlab.skeleton.participants.AI;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A robot entitást jelképező
@@ -38,5 +40,13 @@ public class Robot extends MovingEntity {
     public void die() {
         super.die();
         AI.getInstance().removeRobot(this);
+    }
+
+    @Override
+    public void draw() {
+        Random random = new Random();
+        int x = random.nextInt(200) - 100 + 480;
+        int y = random.nextInt(200) - 100 + 250;
+        Game.robotDrawer.draw(this, x, y);
     }
 }

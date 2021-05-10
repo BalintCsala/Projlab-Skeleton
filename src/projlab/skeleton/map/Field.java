@@ -66,4 +66,6 @@ public abstract class Field implements Drawable {
 
     }
 
+    public abstract void drawAsNeighbor(int x, int y);
+
 }

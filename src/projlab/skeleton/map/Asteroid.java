@@ -1,5 +1,6 @@
 package projlab.skeleton.map;
 
+import projlab.skeleton.Game;
 import projlab.skeleton.entities.MovingEntity;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.BillOfResources;
@@ -15,6 +16,8 @@ public class Asteroid extends Field {
      * az aszteroidán tartózkodó entitások
      */
     private final ArrayList<MovingEntity> entities = new ArrayList<>();
+
+
     /**
      * az aszteroida nyersanyaga
      */
@@ -25,12 +28,13 @@ public class Asteroid extends Field {
      */
     private boolean nearSun;
     private int depth;
+    private boolean hasBeenDug = false;
 
     /**
      * Konstruktor
      */
     public Asteroid() {
-        depth = new Random().nextInt(10);
+        depth = new Random().nextInt(8) + 2;
         nearSun = new Random().nextBoolean();
     }
 
@@ -86,6 +90,7 @@ public class Asteroid extends Field {
      * az aszteroida nyersanyaga reagál
      */
     public void digLayer() {
+        hasBeenDug = true;
         if (depth > 0) {
             depth--;
 
@@ -103,8 +108,7 @@ public class Asteroid extends Field {
      * @return visszaadja, hogy van-e elég nyersanyag az aszteroidán a gyõzelemhez
      */
     public boolean checkEnoughResources(BillOfResources winBill) {
-        boolean enough = false; //winBill.isCompleted();
-        return enough;
+        return false;
     }
 
     /**
@@ -168,16 +172,23 @@ public class Asteroid extends Field {
         teleport.setAsteroid(this);
     }
 
-    public void setDepth(int depth) {
-        this.depth = depth;
+    @Override
+    public void draw() {
+        for (MovingEntity entity : entities) {
+            entity.draw();
+        }
     }
 
-    public void setNearSun(boolean nearSun) {
-        this.nearSun = nearSun;
+    public ArrayList<MovingEntity> getEntities() {
+        return entities;
+    }
+
+    public boolean getHasBeenDug() {
+        return hasBeenDug;
     }
 
     @Override
-    public void draw() {
-
+    public void drawAsNeighbor(int x, int y) {
+        Game.neighborAsteroidDrawer.draw(this, x, y);
     }
 }

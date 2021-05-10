@@ -13,7 +13,7 @@ public class UfoDrawer extends GameDrawer<Ufo> {
 	
     @Override
     public void draw(Ufo ufo, int x, int y) {
-    	GameController.g.drawImage(ufoImage, x, y, 64, 64);
+    	GameController.graphics.drawImage(ufoImage, x, y, 64, 64);
     }
 
 }

@@ -22,8 +22,9 @@ public class Main extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Asteroids and Settlers");
-            primaryStage.setWidth(960);
-            primaryStage.setHeight(540);
+            primaryStage.setWidth(976);
+            primaryStage.setHeight(579);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -50,52 +50,6 @@ public class Player extends Participant {
             isPlaying = false;
         }
         if(!isActive) return;
-
-        /*System.out.println("Kerlek valassz a lehetseges lepesek kozul :");
-        System.out.println("Mine(1):");
-        System.out.println("Dig(2)");
-        System.out.println("Move(3)");
-        System.out.println("Buildteleport(4)");
-        System.out.println("Buildrobot(5)");
-        System.out.println("PlaceDownResource(6)");
-        System.out.println("PlaceDownTeleport(7)");
-        System.out.println("Giveup(8)");
-        System.out.println("Pass(9)");
-        Scanner scanner = new Scanner(System.in);
-
-        int scenario = scanner.nextInt();
-
-
-        switch (scenario) {
-            case 1:
-                settler.mine();
-                break;
-            case 2:
-                settler.dig();
-                break;
-            case 3:
-                settler.move(settler.getLocation().getNeighbors().get(0));
-                break;
-            case 4:
-                settler.buildTeleport();
-                break;
-            case 5:
-                settler.buildRobot();
-                break;
-            case 6:
-                settler.placeDownResource(settler.getInventory().get(0));
-                break;
-            case 7:
-                if (settler.getTeleports().size() > 0)
-                    settler.placeDownTeleport(settler.getLocation(), settler.getTeleports().get(0));
-                break;
-            case 8:
-                this.giveUp();
-                break;
-            case 9:
-                this.pass();
-                break;
-        }*/
     }
 
     public Settler getSettler() {

@@ -82,10 +82,10 @@ public class AI extends Participant {
     @Override
     public void round() {
         for (Robot robot : robots) {
-            robotround(robot);
+            robotRound(robot);
         }
         for (Ufo ufo : ufos) {
-            uforound(ufo);
+            ufoRound(ufo);
         }
     }
 
@@ -93,7 +93,7 @@ public class AI extends Participant {
      * A robotok körét kezeli, eldönti, hogy az adott körben mit fog csinálni az adott robot(mozogni/fúrni)
      * @param robot az adott robot, aminek a körét kezeljük
      */
-    public void robotround(Robot robot) {
+    public void robotRound(Robot robot) {
         Random random = new Random();
         int scenario = random.nextInt(2);
 
@@ -112,7 +112,7 @@ public class AI extends Participant {
      * Az ufók körét kezeli, eldönti, hogy az adott körben mit fog csinálni az adott ufó(bányászni/mozogni)
      * @param ufo az adott ufó, aminek a körét kezeljük
      */
-    public void uforound(Ufo ufo) {
+    public void ufoRound(Ufo ufo) {
         Random random = new Random();
         int scenario = random.nextInt(2);
         switch (scenario) {

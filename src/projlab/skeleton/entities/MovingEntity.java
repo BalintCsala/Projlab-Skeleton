@@ -1,12 +1,13 @@
 package projlab.skeleton.entities;
 
+import projlab.skeleton.graphics.Drawable;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
 
 /**
  * Az entitásokat jelképező absztrakt ősosztály
  */
-public abstract class MovingEntity {
+public abstract class MovingEntity implements Drawable {
 
     protected Asteroid location;
 
@@ -52,10 +53,10 @@ public abstract class MovingEntity {
     /**
      * Beállítja az aszteroidát, amin a telepes jelenleg tartózkodik
      *
-     * @param field Az entitás új tartózkodási helye
+     * @param asteroid Az entitás új tartózkodási helye
      */
-    public void setLocation(Asteroid field) {
-        this.location = field;
+    public void setLocation(Asteroid asteroid) {
+        this.location = asteroid;
     }
 
 }

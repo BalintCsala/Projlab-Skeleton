@@ -13,7 +13,7 @@ public class SettlerDrawer extends GameDrawer<Settler> {
 	
     @Override
     public void draw(Settler settler, int x, int y) {
-    	GameController.g.drawImage(settlerImage, x, y, 64, 64);
+    	GameController.graphics.drawImage(settlerImage, x, y, 64, 64);
     }
 
 }

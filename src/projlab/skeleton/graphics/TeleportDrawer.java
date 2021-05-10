@@ -14,8 +14,7 @@ public class TeleportDrawer extends GameDrawer<TeleportGate> {
 	
     @Override
     public void draw(TeleportGate teleport, int x, int y) {
-    	if(teleport.isCrazy()) GameController.g.drawImage(crazyTeleportImage, x, y, 100, 100);
-    	else GameController.g.drawImage(teleportImage, x, y, 100, 100);
+    	GameController.graphics.drawImage(teleport.isCrazy() ? crazyTeleportImage : teleportImage, x, y, 50, 50);
     }
 
 }

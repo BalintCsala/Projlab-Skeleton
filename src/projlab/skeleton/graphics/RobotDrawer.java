@@ -13,7 +13,7 @@ public class RobotDrawer extends GameDrawer<Robot> {
 	
     @Override
     public void draw(Robot robot, int x, int y) {
-    	GameController.g.drawImage(robotImage, x, y, 64, 64);
+    	GameController.graphics.drawImage(robotImage, x, y, 64, 64);
     }
 
 }
