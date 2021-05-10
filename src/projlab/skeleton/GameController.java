@@ -89,4 +89,26 @@ public class GameController implements Initializable {
         }
         Game.getInstance().round();
     }
+    @FXML
+    public void Pass(){
+        for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {
+            Player player = Game.getInstance().getPlayers().get(i);
+            if (player.isActive()) {
+                player.pass();
+                player.setActive(false);
+            }
+        }
+        Game.getInstance().round();
+    }
+    @FXML
+    public void GiveUp(){
+        for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {
+            Player player = Game.getInstance().getPlayers().get(i);
+            if (player.isActive()) {
+                player.giveUp();
+                player.setActive(false);
+            }
+        }
+        Game.getInstance().round();
+    }
 }

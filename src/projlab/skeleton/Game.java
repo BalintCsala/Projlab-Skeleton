@@ -1,5 +1,7 @@
 package projlab.skeleton;
 
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import projlab.skeleton.entities.Settler;
 import projlab.skeleton.entities.Ufo;
 import projlab.skeleton.graphics.*;
@@ -218,8 +220,12 @@ public class Game {
         Collections.shuffle(copy);
         for (int i = 0; i < effectedCount; i++) {
             copy.get(i).solarFlare();
-            GameController.solarFlareText.setText("Solar flare hit the asteroid belt");
         }
+        GameController.graphics.setFont(new Font("Comic Sans MS", 20));
+        GameController.graphics.fillText("A solar flare hit the asteroid belt", 17, 409);
+        GameController.graphics.setFill(Color.WHITE);
+        GameController.graphics.fillText("A solar flare hit the asteroid belt", 18, 410);
+        GameController.graphics.setFill(Color.BLACK);
     }
 
     /**
@@ -273,9 +279,9 @@ public class Game {
 
         asteroidDrawer.draw(player.getSettler().getLocation());
         playerDrawer.draw(player, 0, 0);
-
-        //GameController.solarFlareText.setText("");
-
+        if (new Random().nextFloat() < 0.1) {
+            solarFlare();
+        }
     }
 
     public ArrayList<Player> getPlayers() {
