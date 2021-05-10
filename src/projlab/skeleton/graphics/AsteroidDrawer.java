@@ -1,6 +1,8 @@
 package projlab.skeleton.graphics;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import projlab.skeleton.Game;
 import projlab.skeleton.GameController;
 import projlab.skeleton.map.Asteroid;
@@ -70,6 +72,20 @@ public class AsteroidDrawer extends GameDrawer<Asteroid> {
                 Game.getInstance().round();
             }));
         }
+        if(asteroid.getResource() == null)
+        {
+            GameController.graphics.setFont(new Font("Comic Sans MS", 20));
+            GameController.graphics.fillText("ASTEROID RESOURCE: Empty", 599, 409);
+            GameController.graphics.setFill(Color.WHITE);
+            GameController.graphics.fillText("ASTEROID RESOURCE: Empty", 600, 410);
+            GameController.graphics.setFill(Color.BLACK);
+        }
+        GameController.graphics.setFont(new Font("Comic Sans MS", 20));
+        GameController.graphics.fillText("ASTEROID RESOURCE:" + asteroid.getResource().getClass().getSimpleName(), 599, 409);
+        GameController.graphics.setFill(Color.WHITE);
+        GameController.graphics.fillText("ASTEROID RESOURCE:" + asteroid.getResource().getClass().getSimpleName(), 600, 410);
+        GameController.graphics.setFill(Color.BLACK);
+
     }
 
 }
