@@ -1,5 +1,6 @@
 package projlab.skeleton;
 
+import projlab.skeleton.entities.MovingEntity;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import projlab.skeleton.entities.Settler;
@@ -198,11 +199,21 @@ public class Game {
      * @return Van-e elég nyersanyag a játék megnyeréséhez
      */
     public boolean checkEnoughResources() {
-        Asteroid a = new Asteroid();
         ArrayList<Resource> b = new ArrayList<>();
-        for (Field field : fields) {
-            if (field instanceof Asteroid) {
-                b.add(((Asteroid) field).getResource());
+        for (Field f: fields){
+            b.clear();
+            if (f instanceof Asteroid){
+                Asteroid a=(Asteroid) f;
+                for (MovingEntity me: a.getEntities()) {
+                    if (me instanceof Settler){
+                        Settler s= (Settler) me;
+                        for (Resource r: s.getInventory()){
+                            b.add(r);
+                        }
+                    }
+
+                }
+                if (winBill.isCompleted(b)) return true;
             }
 
         }
