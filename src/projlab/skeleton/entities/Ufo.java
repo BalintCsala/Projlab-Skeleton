@@ -12,11 +12,6 @@ import java.util.Random;
 public class Ufo extends MovingEntity implements MiningEntity {
 
     /**
-     * Az ufo életben van-e vagy sem
-     */
-    private boolean alive = true;
-
-    /**
      * Ufo konstruktora
      */
     public Ufo() {
@@ -46,7 +41,6 @@ public class Ufo extends MovingEntity implements MiningEntity {
     @Override
     public void die() {
         super.die();
-        alive = false;
         AI.getInstance().removeUfo(this);
     }
 

@@ -29,10 +29,6 @@ public class GameController implements Initializable {
 
     public static final ArrayList<ClickArea> clickAreas = new ArrayList<>();
 
-    public static void endGame() {
-
-    }
-
     /**
      * Az initialize metódus implementációja.
      */

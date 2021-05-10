@@ -155,36 +155,6 @@ public class Settler extends MovingEntity implements MiningEntity {
     }
 
     /**
-     * Hozzáad egy nyersanyagot a telepes hátizsákjához
-     *
-     * @param resource A hozzáadandó nyersanyag
-     */
-    public void addResource(Resource resource) {
-        // Ha még van hely, adjuk hozzá
-        if (inventory.size() < 10) {
-            inventory.add(resource);
-        }
-    }
-
-    /**
-     * Távolítsunk el egy nyersanyagot a teleps hátizsákjából
-     *
-     * @param resource Az eltávolítandó nyersanyag
-     */
-    public void removeResource(Resource resource) {
-        inventory.remove(resource);
-    }
-
-    /**
-     * Beállítja a telepesnél lévő teleportkapukat tesztelés célből
-     * @param teleports A teleport kapuk listája
-     */
-    public void setTeleports(TeleportGate... teleports) {
-        this.teleports.clear();
-        Collections.addAll(this.teleports, teleports);
-    }
-
-    /**
      * A telepes halálát implementáló metódus
      */
     @Override

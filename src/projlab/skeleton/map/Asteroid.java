@@ -2,6 +2,7 @@ package projlab.skeleton.map;
 
 import projlab.skeleton.Game;
 import projlab.skeleton.entities.MovingEntity;
+import projlab.skeleton.entities.Settler;
 import projlab.skeleton.resources.Resource;
 import projlab.skeleton.utils.BillOfResources;
 
@@ -26,7 +27,7 @@ public class Asteroid extends Field {
      * Napvihar hatása az aszteroidára, amennyiben nem lehet elbújni az aszteroidán,
      * a rajta tartózkodó entitások meghalnak
      */
-    private boolean nearSun;
+    private final boolean nearSun;
     private int depth;
     private boolean hasBeenDug = false;
 
@@ -109,7 +110,12 @@ public class Asteroid extends Field {
      * @return visszaadja, hogy van-e elég nyersanyag az aszteroidán a győzelemhez
      */
     public boolean checkEnoughResources(BillOfResources winBill) {
-        return false;
+        ArrayList<Resource> resources = new ArrayList<>();
+        for (MovingEntity entity : entities) {
+            if (entity instanceof Settler)
+                resources.addAll(((Settler)entity).getInventory());
+        }
+        return winBill.isCompleted(resources);
     }
 
     /**

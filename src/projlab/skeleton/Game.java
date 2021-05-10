@@ -227,40 +227,12 @@ public class Game {
     }
 
     /**
-     * Hozzáad egy mezőt a játékpályához
-     *
-     * @param field A hozzáadandó mező
-     */
-    public void addField(Field field) {
-        fields.add(field);
-    }
-
-    /**
      * Eltávolít egy résztvevőt a játékból
      *
      * @param participant Az eltávolítandó résztvevő
      */
     public void removeParticipant(Participant participant) {
         players.remove(participant);
-    }
-
-    /**
-     * Hozzáad egy résztvevőt a játékhoz
-     *
-     * @param player A hozzáadandó játékos
-     */
-    public void addParticipant(Player player) {
-        players.add(player);
-
-    }
-
-    /**
-     * Eltávolít egy fieldet a játékpályáról
-     *
-     * @param field Az eltávolítandó mező
-     */
-    public void removeField(Field field) {
-        fields.remove(field);
     }
 
     /**
@@ -276,17 +248,19 @@ public class Game {
             }
             AI.getInstance().round();
         }
-        Player player = players.get(currentPlayer);
-        if (player.getIsPlaying()) {
-            player.round();
-        } else {
-            removeParticipant(player);
-        }
+        if (players.size() != 0) {
+            Player player = players.get(currentPlayer);
+            if (player.getIsPlaying()) {
+                player.round();
+            } else {
+                removeParticipant(player);
+            }
 
-        asteroidDrawer.draw(player.getSettler().getLocation());
-        playerDrawer.draw(player, 0, 0);
-        if (new Random().nextFloat() < 0.13) {
-            solarFlare();
+            asteroidDrawer.draw(player.getSettler().getLocation());
+            playerDrawer.draw(player, 0, 0);
+            if (new Random().nextFloat() < 0.005f) {
+                solarFlare();
+            }
         }
         if (checkGameEnd()) {
             if (checkEnoughResources())

@@ -7,7 +7,7 @@ import projlab.skeleton.map.Asteroid;
 /**
  * A nyersanyagokat jelképező absztrakt osztály
  */
-public abstract class Resource implements Drawable {
+public abstract class Resource {
 
     /**
      * A nyersanyag drawere
@@ -20,12 +20,5 @@ public abstract class Resource implements Drawable {
      * @param a Az az aszteroida, amiben a nyersanyag van
      */
     public void reaction(Asteroid a) {
-    }
-
-    /**
-     * Rajzoló metódus
-     */
-    public void draw(){
-        //resourceDrawer.draw(this,);
     }
 }

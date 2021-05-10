@@ -37,7 +37,7 @@ public class Main extends Application {
 
     /**
      * A program belépési pontja
-     * @param args
+     * @param args A program argumentumai
      */
     public static void main(String[] args) {
     	launch(args);
