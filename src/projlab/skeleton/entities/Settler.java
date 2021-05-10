@@ -180,6 +180,7 @@ public class Settler extends MovingEntity implements MiningEntity {
     @Override
     public void die() {
         alive = false;
+
     }
 
     public boolean isAlive() {

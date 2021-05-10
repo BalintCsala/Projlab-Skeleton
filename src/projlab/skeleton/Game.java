@@ -290,7 +290,7 @@ public class Game {
 
         asteroidDrawer.draw(player.getSettler().getLocation());
         playerDrawer.draw(player, 0, 0);
-        if (new Random().nextFloat() < 0.1) {
+        if (new Random().nextFloat() < 0.13) {
             solarFlare();
         }
     }
