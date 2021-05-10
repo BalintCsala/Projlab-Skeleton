@@ -55,7 +55,7 @@ public class PlayerDrawer extends GameDrawer<Player> {
             final Resource res = s.getInventory().get(i);
             Game.resourceDrawer.draw(res, 175 + i * 60, 465);
             GameController.clickAreas.add(new ClickArea(175 + i * 60, 465, 50, 50, () -> {
-                Game.getInstance().getCurrentPlayer().getSettler().placeDownResource(res);
+                player.getSettler().placeDownResource(res);
                 Game.getInstance().round();
             }));
         }

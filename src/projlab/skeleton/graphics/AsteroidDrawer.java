@@ -5,6 +5,7 @@ import projlab.skeleton.Game;
 import projlab.skeleton.GameController;
 import projlab.skeleton.map.Asteroid;
 import projlab.skeleton.map.Field;
+import projlab.skeleton.participants.Player;
 import projlab.skeleton.utils.ClickArea;
 
 /**
@@ -66,7 +67,9 @@ public class AsteroidDrawer extends GameDrawer<Asteroid> {
             GameController.graphics.drawImage(i % 2 == 0 ? currLeftArrow : currRightArrow, arrowX, neighborY, 100, 100);
             neighbor.drawAsNeighbor(neighborX, neighborY);
             GameController.clickAreas.add(new ClickArea(arrowX, neighborY, 100, 100, () -> {
-                Game.getInstance().getCurrentPlayer().getSettler().move(neighbor);
+                Player player = Game.getInstance().getCurrentPlayer();
+                if (player != null)
+                    player.getSettler().move(neighbor);
                 Game.getInstance().round();
             }));
         }

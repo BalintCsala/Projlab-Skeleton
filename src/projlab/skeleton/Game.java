@@ -302,6 +302,8 @@ public class Game {
     }
 
     public Player getCurrentPlayer() {
+        if (currentPlayer >= players.size())
+            return null;
         return players.get(currentPlayer);
     }
 }
