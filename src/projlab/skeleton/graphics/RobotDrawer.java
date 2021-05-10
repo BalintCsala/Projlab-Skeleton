@@ -9,8 +9,14 @@ import projlab.skeleton.entities.Robot;
  */
 public class RobotDrawer extends GameDrawer<Robot> {
 
+	/**
+	 * Robot képe
+	 */
 	Image robotImage = new Image("robot.png");
 	
+    /**
+     * Kirajzol egy robotot a megadott pontra
+     */
     @Override
     public void draw(Robot robot, int x, int y) {
     	GameController.graphics.drawImage(robotImage, x, y, 64, 64);

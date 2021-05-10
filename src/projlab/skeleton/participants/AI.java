@@ -55,6 +55,11 @@ public class AI extends Participant {
     }
 
 
+    /**
+     * Hozzáad egy ufot az ufok listájához
+     * 
+     * @param Ufo a hozzáadandó ufo
+     */
     public void addUfo(Ufo ufo) {
         ufos.add(ufo);
     }

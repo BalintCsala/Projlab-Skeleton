@@ -13,27 +13,48 @@ import projlab.skeleton.utils.ClickArea;
  */
 public class AsteroidDrawer extends GameDrawer<Asteroid> {
 
+    /**
+     * A normál háttér
+     */
     Image background = new Image("background.png");
+    /**
+     * A napközeli háttér
+     */
     Image backgroundNearSun = new Image("background_nearsun.png");
+    /**
+     * A normál aszteroida képei
+     */
     Image[] normalImages = new Image[]{
             new Image("asteroid.png"),
             new Image("asteroid_dug.png"),
             new Image("asteroid_fully_dug.png")
     };
+    /**
+     * A napközeli aszteroida képei
+     */
     Image[] nearSunImages = new Image[]{
             new Image("asteroid_nearSun.png"),
             new Image("asteroid_nearSun_dug.png"),
             new Image("asteroid_nearSun_fully_dug.png")
     };
+    /**
+     * A nyilak
+     */
     Image leftArrow = new Image("arrow_left_off.png");
     Image rightArrow = new Image("arrow_right_off.png");
     Image leftArrowNearSun = new Image("arrow_nearsun_left_off.png");
     Image rightArrowNearSun = new Image("arrow_nearsun_right_off.png");
 
+    /**
+     * Kirajzol egy kisméretű aszteroidát a megadott pontra
+     */
     public void draw(Asteroid asteroid) {
         draw(asteroid, 0, 0);
     }
 
+    /**
+     * Kirajzol egy kisméretű aszteroidát a megadott pontra
+     */
     @Override
     public void draw(Asteroid asteroid, int x, int y) {
         Image[] choice;

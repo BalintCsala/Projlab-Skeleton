@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * A robot entitást jelképező
+ * A robot entitást jelképező osztály
  */
 public class Robot extends MovingEntity {
 

@@ -9,8 +9,14 @@ import projlab.skeleton.entities.Settler;
  */
 public class SettlerDrawer extends GameDrawer<Settler> {
 
+	/**
+	 * Telepes képe
+	 */
 	Image settlerImage = new Image("settler.png");
 	
+    /**
+     * Kirajzol egy telepes a megadott pontra
+     */
     @Override
     public void draw(Settler settler, int x, int y) {
     	GameController.graphics.drawImage(settlerImage, x, y, 64, 64);

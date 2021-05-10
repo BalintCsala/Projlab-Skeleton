@@ -11,11 +11,20 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * A játékot vezérlő osztály
+ *
+ */
 public class GameController implements Initializable {
 
+    /**
+     * Canvas, amire a játék objektumai vannak kirajzolva
+     */
     @FXML
     public Canvas canvas;
-
+    /**
+     * A canvashoz tartozó GraphicsContext, melynek segtségével rajzolni lehet a canvasra
+     */
     public static GraphicsContext graphics;
 
     public static final ArrayList<ClickArea> clickAreas = new ArrayList<>();
@@ -24,6 +33,9 @@ public class GameController implements Initializable {
 
     }
 
+    /**
+     * Az initialize metódus implementációja.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         graphics = canvas.getGraphicsContext2D();
@@ -41,6 +53,9 @@ public class GameController implements Initializable {
         });
     }
 
+    /**
+     * Ásás esemény.
+     */
     @FXML
     public void Dig() {
         for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {
@@ -53,6 +68,9 @@ public class GameController implements Initializable {
         Game.getInstance().round();
     }
 
+    /**
+     * Bányászás esemény.
+     */
     @FXML
     public void Mine() {
         for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {
@@ -65,6 +83,9 @@ public class GameController implements Initializable {
         Game.getInstance().round();
     }
 
+    /**
+     * Teleport építése esemény.
+     */
     @FXML
     public void BuildTeleport() {
         for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {
@@ -77,6 +98,9 @@ public class GameController implements Initializable {
         Game.getInstance().round();
     }
 
+    /**
+     * Robot építése esemény.
+     */
     @FXML
     public void BuildRobot() {
         for (int i = 0; i < Game.getInstance().getPlayers().size(); i++) {

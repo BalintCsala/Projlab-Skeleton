@@ -6,6 +6,9 @@ package projlab.skeleton.graphics;
 
 public interface Drawable {
 
+    /**
+     * Rajzoló metódus
+     */
     void draw();
 
 }

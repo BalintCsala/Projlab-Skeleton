@@ -18,6 +18,9 @@ public class ResourceDrawer extends GameDrawer<Resource> {
     Image uran = new Image("uran.png");
     Image waterice = new Image("waterice.png");
 
+    /**
+     * Rajzoló metódus
+     */
     @Override
     public void draw(Resource resource, int x, int y) {
         Image image = null;

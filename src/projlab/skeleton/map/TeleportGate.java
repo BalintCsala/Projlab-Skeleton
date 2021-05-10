@@ -11,12 +11,21 @@ public class TeleportGate extends Field {
      * A teleportkapu párja
      */
     private TeleportGate pair;
+    /**
+     * Teleportkapu aktív-e
+     */
     private boolean active = false;
+    /**
+     * Teleportkapu megkergült-e vagy sem
+     */
     private boolean crazy = false;
+    /**
+     * Teleportkapuhoz tartozó aszteroida
+     */
     private Asteroid asteroid;
 
     /**
-     * Mmegszűnik létezni a teleportkapu
+     * Megszűnik létezni a teleportkapu
      */
     public void die() {
         active = false;
@@ -112,23 +121,46 @@ public class TeleportGate extends Field {
         }
     }
 
+    /**
+     * Teleportkapu aszteroidájának beállítása
+     * 
+     * @param asteroid teleportkapu aszteroidája
+     */
     public void setAsteroid(Asteroid asteroid) {
         this.asteroid = asteroid;
     }
 
+    /**
+     * Teleportkapu aszteroidájának lekérdezése
+     * 
+     * @return teleportkapu aszteroidája
+     */
     public Asteroid getAsteroid() {
         return asteroid;
     }
 
+    /**
+     * Teleportkapu párjának lekérdezése
+     * 
+     * @return teleportkapu párja
+     */
     public TeleportGate getPair() {
         return pair;
     }
 
+    /**
+     * Rajzoló metódus
+     */
     @Override
     public void draw() {
 
     }
 
+    /**
+     * Visszaadja, hogy megkergült-e a teleportkapu
+     * 
+     * @return megkergült-e a teleportkapu vagy sem
+     */
     public boolean isCrazy() {
         return crazy;
     }

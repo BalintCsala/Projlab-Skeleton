@@ -9,6 +9,9 @@ import projlab.skeleton.map.Asteroid;
  */
 public abstract class Resource implements Drawable {
 
+    /**
+     * A nyersanyag drawere
+     */
     private ResourceDrawer resourceDrawer=new ResourceDrawer();
 
     /**
@@ -19,6 +22,9 @@ public abstract class Resource implements Drawable {
     public void reaction(Asteroid a) {
     }
 
+    /**
+     * Rajzoló metódus
+     */
     public void draw(){
         //resourceDrawer.draw(this,);
     }

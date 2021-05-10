@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Ez az osztály az Aszteroidákat testesíti meg
+ * Ez az osztÃ¡ly az AszteroidÃ¡kat testesÃ­ti meg
  */
 public class Asteroid extends Field {
     /**
-     * az aszteroidán tartózkodó entitások
+     * az aszteroidÃ¡n tartÃ³zkodÃ³ entitÃ¡sok
      */
     private final ArrayList<MovingEntity> entities = new ArrayList<>();
 
@@ -23,8 +23,8 @@ public class Asteroid extends Field {
      */
     private Resource resource;
     /**
-     * Napvihar hatása az aszteroidára, amennyiben nem lehet elbújni az aszteroidán,
-     * a rajta tartózkodó entitások meghalnak
+     * Napvihar hatÃ¡sa az aszteroidÃ¡ra, amennyiben nem lehet elbÃºjni az aszteroidÃ¡n,
+     * a rajta tartÃ³zkodÃ³ entitÃ¡sok meghalnak
      */
     private boolean nearSun;
     private int depth;
@@ -39,7 +39,7 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Override a Field solarFlare-re. Ha nem üres, akkor mindenki meghal rajta
+     * Override a Field solarFlare-re. Ha nem Ã¼res, akkor mindenki meghal rajta
      */
 
     @Override
@@ -55,8 +55,8 @@ public class Asteroid extends Field {
     }
 
     /**
-     * az aszteroida felrobban, a rajta tartózkodó entitások meghalnak,
-     * az aszteroida szomszédjai reagálnak a robbanásra és megszûntetik szomszédságukat az aszteroidával
+     * az aszteroida felrobban, a rajta tartÃ³zkodÃ³ entitÃ¡sok meghalnak,
+     * az aszteroida szomszÃ©djai reagÃ¡lnak a robbanÃ¡sra Ã©s megszÃ¼ntetik szomszÃ©dsÃ¡gukat az aszteroidÃ¡val
      */
     public void explode() {
         ArrayList<MovingEntity> temp = new ArrayList<>(entities);
@@ -71,8 +71,8 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Az aszteroida bányászása amennyiben nincs több rétege,
-     * bányászható és visszaadja az aszteroida nyersanyagát
+     * Az aszteroida bÃ¡nyÃ¡szÃ¡sa, amennyiben nincs tÃ¶bb rÃ©tege,
+     * bÃ¡nyÃ¡szhatÃ³ Ã©s visszaadja az aszteroida nyersanyagÃ¡t
      *
      * @return Resource
      */
@@ -86,8 +86,9 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Aszteroida rétegének csökkentése, amennyiben Napközelben vagyunk és a réteg 0
-     * az aszteroida nyersanyaga reagál
+     * Aszteroida rÃ©tegÃ©nek csÃ¶kkentÃ©se, amennyiben NapkÃ¶zelben vagyunk Ã©s a rÃ©teg 0,
+     * az aszteroida nyersanyaga reagÃ¡l
+     *
      */
     public void digLayer() {
         hasBeenDug = true;
@@ -102,28 +103,28 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Gyõzelem  vizsgálata aszteroidán
+     * GyÅ‘zelem vizsgÃ¡lata aszteroidÃ¡n
      *
-     * @param winBill a gyõzelemhez szükséges nyersanyagok
-     * @return visszaadja, hogy van-e elég nyersanyag az aszteroidán a gyõzelemhez
+     * @param winBill a gyÅ‘zelemhez szÃ¼ksÃ©ges nyersanyagok
+     * @return visszaadja, hogy van-e elÃ©g nyersanyag az aszteroidÃ¡n a gyÅ‘zelemhez
      */
     public boolean checkEnoughResources(BillOfResources winBill) {
         return false;
     }
 
     /**
-     * Egy entitás eltávozása az aszteroidáról
+     * Egy entitÃ¡s eltÃ¡vozÃ¡sa az aszteroidÃ¡rÃ³l
      *
-     * @param entity az eltávozó entitás
+     * @param entity az eltÃ¡vozÃ³ entitÃ¡s
      */
     public void removeEntity(MovingEntity entity) {
         entities.remove(entity);
     }
 
     /**
-     * Az aszteroidára entitás érkezik
+     * Az aszteroidÃ¡ra entitÃ¡s Ã©rkezik
      *
-     * @param entity az érkezõ entitás
+     * @param entity az Ã©rkezÅ‘ entitÃ¡s
      */
     @Override
     public void addEntity(MovingEntity entity) {
@@ -132,7 +133,7 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Visszaadja az aszteroida nyersanyagát
+     * Visszaadja az aszteroida nyersanyagÃ¡t
      *
      * @return resource az aszteroida nyersanyaga
      */
@@ -141,27 +142,27 @@ public class Asteroid extends Field {
     }
 
     /**
-     * Az aszteroida nyersanyagának beállítása
+     * Az aszteroida nyersanyagÃ¡nak beÃ¡llÃ­tÃ¡sa
      *
-     * @param res a beállítandó nyersanyag
+     * @param res a beÃ¡llÃ­tandÃ³ nyersanyag
      */
     public void setResource(Resource res) {
         resource = res;
     }
 
     /**
-     * az aszteroida rétegének visszaadása
+     * az aszteroida rÃ©tegÃ©nek visszaadÃ¡sa
      *
-     * @return az aszteroida rétege
+     * @return az aszteroida rÃ©tege
      */
     public int getDepth() {
         return depth;
     }
 
     /**
-     * Visszaadja azt, hogy az aszteroida Napközelben van-e
+     * Visszaadja azt, hogy az aszteroida NapkÃ¶zelben van-e
      *
-     * @return napközelben vagy sem
+     * @return napkÃ¶zelben vagy sem
      */
     public boolean isNearSun() {
         return nearSun;

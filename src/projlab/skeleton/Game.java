@@ -245,7 +245,7 @@ public class Game {
     }
 
     /**
-     * Hozzáad egy résztvevőt a játékjoz
+     * Hozzáad egy résztvevőt a játékhoz
      *
      * @param player A hozzáadandó játékos
      */
@@ -254,10 +254,18 @@ public class Game {
 
     }
 
+    /**
+     * Eltávolít egy fieldet a játékpályáról
+     *
+     * @param field Az eltávolítandó mező
+     */
     public void removeField(Field field) {
         fields.remove(field);
     }
 
+    /**
+     * Egy kör lejátszása.
+     */
     public void round() {
         GameController.clickAreas.clear();
         currentPlayer++;
@@ -297,6 +305,11 @@ public class Game {
         }
     }
 
+    /**
+     * Visszaadja a résztvevők listáját
+     *
+     * @return a résztvevők listája
+     */
     public ArrayList<Player> getPlayers() {
         return players;
     }

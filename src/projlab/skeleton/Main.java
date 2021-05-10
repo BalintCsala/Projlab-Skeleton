@@ -14,7 +14,9 @@ import java.io.IOException;
 public class Main extends Application {
 
     public static Stage stage;
-
+    /**
+     * Az UI létrehozása
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -33,6 +35,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * A program belépési pontja
+     * @param args
+     */
     public static void main(String[] args) {
     	launch(args);
     }

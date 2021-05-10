@@ -15,6 +15,9 @@ public class Player extends Participant {
 
     private String name;
 
+    /**
+     * A játékos éppen soron van-e
+     */
     private boolean isActive = false;
 
     public Player(String name) {
@@ -49,6 +52,9 @@ public class Player extends Participant {
         this.settler = settler;
     }
 
+    /**
+     * A játékos köre
+     */
     @Override
     public void round() {
         isActive = true;
@@ -58,14 +64,29 @@ public class Player extends Participant {
         if(!isActive) return;
     }
 
+    /**
+     * Visszaadja a játékos telepesét
+     *
+     * @return a játékos telepese
+     */
     public Settler getSettler() {
         return settler;
     }
 
+    /**
+     * Visszaadja, hogy a játékos éppen soron van-e
+     *
+     * @return a játékos éppen soron van-e
+     */
     public boolean isActive() {
         return isActive;
     }
 
+    /**
+     * Beállítja, hogy a játékos éppen soron van-e
+     *
+     * @param active a játékos éppen soron van-e
+     */
     public void setActive(boolean active) {
         isActive = active;
     }

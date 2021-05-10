@@ -43,6 +43,11 @@ public class BillOfResources {
         return res.size() == 0;
     }
 
+    /**
+     * Eltávolítja a megadott arraylistből a bill-hez szükséges nyersanyagokat
+     * 
+     * @param available az adott arraylist
+     */
     public void removeRequired(ArrayList<Resource> available) {
         for (Resource res : resources) {
             Iterator<Resource> it = available.iterator();

@@ -5,8 +5,15 @@ import projlab.skeleton.participants.AI;
 
 import java.util.Random;
 
+/**
+ * Az ufókat jelképező osztály
+ *
+ */
 public class Ufo extends MovingEntity implements MiningEntity {
 
+    /**
+     * Az ufo életben van-e vagy sem
+     */
     private boolean alive = true;
 
     /**
